@@ -1,11 +1,10 @@
 import 'dart:io';
 import 'package:pashu_swasthya/services/roboflow_service.dart';
 import 'package:pashu_swasthya/services/offline_model_service.dart';
-import 'package:pashu_swasthya/models/disease.dart';
 
-/// Unified Disease Classification Service
+/// Unified Breed Detection Service
 /// Automatically switches between Roboflow (online) and offline models
-class DiseaseService {
+class BreedDetectionService {
   final RoboflowService _roboflowService = RoboflowService();
   final OfflineModelService _offlineService = OfflineModelService();
   bool _isOfflineModelInitialized = false;
@@ -13,28 +12,28 @@ class DiseaseService {
   /// Initialize offline model (call this early in app lifecycle)
   Future<bool> initialize() async {
     try {
-      _isOfflineModelInitialized = await _offlineService.initializeDiseaseModel();
+      _isOfflineModelInitialized = await _offlineService.initializeBreedModel();
       return _isOfflineModelInitialized;
     } catch (e) {
-      print('Error initializing offline disease model: $e');
+      print('Error initializing offline breed model: $e');
       return false;
     }
   }
 
-  /// Classify disease from image
+  /// Detect breed from image
   /// Tries Roboflow first if online, falls back to offline model
-  Future<DiseasePrediction> classifyDisease(File imageFile) async {
+  Future<BreedPrediction> detectBreed(File imageFile) async {
     try {
       // Try Roboflow first if online
       final isOnline = await _roboflowService.isOnline();
       if (isOnline) {
         try {
-          final roboflowResult = await _roboflowService.classifyDisease(imageFile);
-          return DiseasePrediction(
-            diseaseName: roboflowResult.primaryClass,
+          final roboflowResult = await _roboflowService.classifyBreed(imageFile);
+          return BreedPrediction(
+            breedName: roboflowResult.primaryClass,
             confidence: roboflowResult.confidence,
             topPredictions: roboflowResult.topPredictions
-                .map((p) => PredictionItem(
+                .map((p) => BreedPredictionItem(
                       label: p.label,
                       confidence: p.confidence,
                     ))
@@ -56,12 +55,12 @@ class DiseaseService {
         throw Exception('Offline model not available');
       }
 
-      final offlineResult = await _offlineService.classifyDisease(imageFile);
-      return DiseasePrediction(
-        diseaseName: offlineResult.primaryClass,
+      final offlineResult = await _offlineService.detectBreed(imageFile);
+      return BreedPrediction(
+        breedName: offlineResult.primaryClass,
         confidence: offlineResult.confidence,
         topPredictions: offlineResult.topPredictions
-            .map((p) => PredictionItem(
+            .map((p) => BreedPredictionItem(
                   label: p.label,
                   confidence: p.confidence,
                 ))
@@ -69,7 +68,7 @@ class DiseaseService {
         isOnline: false,
       );
     } catch (e) {
-      throw Exception('Disease classification failed: $e');
+      throw Exception('Breed detection failed: $e');
     }
   }
 
@@ -80,15 +79,15 @@ class DiseaseService {
   bool get isModelLoaded => _isOfflineModelInitialized;
 }
 
-/// Disease prediction result
-class DiseasePrediction {
-  final String diseaseName;
+/// Breed prediction result
+class BreedPrediction {
+  final String breedName;
   final double confidence;
-  final List<PredictionItem> topPredictions;
+  final List<BreedPredictionItem> topPredictions;
   final bool isOnline;
 
-  DiseasePrediction({
-    required this.diseaseName,
+  BreedPrediction({
+    required this.breedName,
     required this.confidence,
     required this.topPredictions,
     required this.isOnline,
@@ -96,14 +95,14 @@ class DiseasePrediction {
 
   String get formattedResult {
     if (confidence < 50.0) {
-      return 'Unable to determine disease. Please consult a veterinarian.';
+      return 'Unable to determine breed. Please try with a clearer image.';
     }
-    return '$diseaseName (${confidence.toStringAsFixed(1)}% confidence)';
+    return '$breedName (${confidence.toStringAsFixed(1)}% confidence)';
   }
 
   String get detailedResult {
     final buffer = StringBuffer();
-    buffer.writeln('Primary Diagnosis: $diseaseName');
+    buffer.writeln('Detected Breed: $breedName');
     buffer.writeln('Confidence: ${confidence.toStringAsFixed(1)}%');
     buffer.writeln('Mode: ${isOnline ? "Online (Roboflow)" : "Offline"}');
     buffer.writeln('\nTop Predictions:');
@@ -116,12 +115,12 @@ class DiseasePrediction {
   }
 }
 
-/// Individual prediction item
-class PredictionItem {
+/// Individual breed prediction item
+class BreedPredictionItem {
   final String label;
   final double confidence;
 
-  PredictionItem({
+  BreedPredictionItem({
     required this.label,
     required this.confidence,
   });

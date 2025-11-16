@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:pashu_swasthya/screens/login_screen.dart';
 import 'package:pashu_swasthya/services/localization_service.dart';
 import 'package:pashu_swasthya/utils/app_theme.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  // Initialize Hive for offline storage
+  await Hive.initFlutter();
+  
   runApp(
     ChangeNotifierProvider(
       create: (_) => LocalizationService(),

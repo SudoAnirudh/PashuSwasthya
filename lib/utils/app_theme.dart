@@ -71,6 +71,7 @@ class AppTheme {
       ),
 
       textButtonTheme: TextButtonThemeData(
+        
         style: TextButton.styleFrom(
           foregroundColor: primaryGreen,
           textStyle: GoogleFonts.poppins(
@@ -225,16 +226,34 @@ class AppTheme {
 
   /// Get responsive padding based on screen size
   static EdgeInsets getResponsivePadding(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    if (width > 1200) {
+      return const EdgeInsets.all(40);
+    } else if (width > 600) {
+      return const EdgeInsets.all(30);
+    }
     return const EdgeInsets.all(20);
   }
 
   /// Get responsive font size
   static double getResponsiveFontSize(BuildContext context, double baseSize) {
+    final width = MediaQuery.of(context).size.width;
+    if (width > 1200) {
+      return baseSize * 1.2;
+    } else if (width > 600) {
+      return baseSize * 1.1;
+    }
     return baseSize;
   }
 
   /// Get grid cross axis count based on screen width
   static int getGridCrossAxisCount(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    if (width > 1200) {
+      return 4;
+    } else if (width > 600) {
+      return 3;
+    }
     return 2;
   }
 }

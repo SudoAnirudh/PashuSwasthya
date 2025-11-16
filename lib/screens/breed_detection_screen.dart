@@ -3,58 +3,53 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:pashu_swasthya/services/disease_service.dart';
-import 'package:pashu_swasthya/services/treatment_service.dart';
+import 'package:pashu_swasthya/services/breed_detection_service.dart';
 import 'package:pashu_swasthya/services/storage_service.dart';
 import 'package:pashu_swasthya/models/prediction_history.dart';
-import 'package:pashu_swasthya/screens/treatment_guide.dart';
 import 'package:pashu_swasthya/utils/app_theme.dart';
 import 'package:uuid/uuid.dart';
 
-class CameraDiagnosisScreen extends StatefulWidget {
-  const CameraDiagnosisScreen({super.key});
+class BreedDetectionScreen extends StatefulWidget {
+  const BreedDetectionScreen({super.key});
 
   @override
-  State<CameraDiagnosisScreen> createState() => _CameraDiagnosisScreenState();
+  State<BreedDetectionScreen> createState() => _BreedDetectionScreenState();
 }
 
-class _CameraDiagnosisScreenState extends State<CameraDiagnosisScreen> {
+class _BreedDetectionScreenState extends State<BreedDetectionScreen> {
   File? _image;
   final ImagePicker _picker = ImagePicker();
-  final DiseaseService _diseaseService = DiseaseService();
-  final TreatmentService _treatmentService = TreatmentService();
+  final BreedDetectionService _breedService = BreedDetectionService();
   final StorageService _storageService = StorageService();
 
-  String? _analysisResult;
-  String? _detectedDisease;
-  double? _confidence;
-  bool _isAnalyzing = false;
+  String? _detectionResult;
+  bool _isDetecting = false;
   bool _isModelLoaded = false;
   bool _isOnline = false;
 
   @override
   void initState() {
     super.initState();
-    _initializeModel();
+    _initializeBreedModel();
     _storageService.init();
   }
 
-  Future<void> _initializeModel() async {
+  Future<void> _initializeBreedModel() async {
     try {
-      final loaded = await _diseaseService.initialize();
+      final loaded = await _breedService.initialize();
       if (mounted) {
         setState(() {
           _isModelLoaded = loaded;
         });
       }
     } catch (e) {
-      print('Error initializing disease model: $e');
+      print('Error initializing breed detection model: $e');
     }
   }
 
   @override
   void dispose() {
-    _diseaseService.dispose();
+    _breedService.dispose();
     super.dispose();
   }
 
@@ -75,12 +70,12 @@ class _CameraDiagnosisScreenState extends State<CameraDiagnosisScreen> {
     if (pickedFile != null) {
       setState(() {
         _image = File(pickedFile.path);
-        _analysisResult = null;
+        _detectionResult = null;
       });
     }
   }
 
-  Future<void> _analyzeImage() async {
+  Future<void> _detectBreed() async {
     if (_image == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Please capture or upload image first')),
@@ -89,18 +84,18 @@ class _CameraDiagnosisScreenState extends State<CameraDiagnosisScreen> {
     }
 
     setState(() {
-      _isAnalyzing = true;
-      _analysisResult = null;
+      _isDetecting = true;
+      _detectionResult = null;
     });
 
     try {
-      final prediction = await _diseaseService.classifyDisease(_image!);
+      final prediction = await _breedService.detectBreed(_image!);
 
       // Save to prediction history
       final history = PredictionHistory(
         id: const Uuid().v4(),
-        type: 'disease',
-        result: prediction.diseaseName,
+        type: 'breed',
+        result: prediction.breedName,
         confidence: prediction.confidence,
         timestamp: DateTime.now(),
         imagePath: _image!.path,
@@ -109,19 +104,17 @@ class _CameraDiagnosisScreenState extends State<CameraDiagnosisScreen> {
 
       if (mounted) {
         setState(() {
-          _analysisResult = prediction.formattedResult;
-          _detectedDisease = prediction.diseaseName;
-          _confidence = prediction.confidence;
+          _detectionResult = prediction.formattedResult;
           _isOnline = prediction.isOnline;
-          _isAnalyzing = false;
+          _isDetecting = false;
         });
 
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
               prediction.confidence >= 50.0
-                  ? 'Analysis complete'
-                  : 'Low confidence. Please consult a veterinarian.',
+                  ? 'Breed detection complete'
+                  : 'Low confidence. Please try with a clearer image.',
             ),
             duration: const Duration(seconds: 2),
           ),
@@ -130,13 +123,13 @@ class _CameraDiagnosisScreenState extends State<CameraDiagnosisScreen> {
     } catch (e) {
       if (mounted) {
         setState(() {
-          _isAnalyzing = false;
-          _analysisResult = 'Error during analysis: $e\n\nPlease try again or consult a veterinarian.';
+          _isDetecting = false;
+          _detectionResult = 'Error during breed detection: $e\n\nPlease try again.';
         });
 
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Analysis failed: $e'),
+            content: Text('Detection failed: $e'),
             duration: const Duration(seconds: 3),
           ),
         );
@@ -152,7 +145,7 @@ class _CameraDiagnosisScreenState extends State<CameraDiagnosisScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Disease Diagnosis'),
+        title: const Text('Breed Detection'),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -177,13 +170,13 @@ class _CameraDiagnosisScreenState extends State<CameraDiagnosisScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(
-                              Icons.healing,
+                              Icons.pets,
                               size: isTablet ? 120 : 80,
                               color: AppTheme.textSecondary,
                             ),
                             const SizedBox(height: 16),
                             Text(
-                              'Upload or capture your cattle\'s photo',
+                              'Capture or upload a photo of your cattle',
                               style: GoogleFonts.poppins(
                                 fontSize: isTablet ? 18 : 14,
                                 color: AppTheme.textSecondary,
@@ -242,12 +235,12 @@ class _CameraDiagnosisScreenState extends State<CameraDiagnosisScreen> {
                 ),
                 const SizedBox(height: 30),
 
-                // Analyze Button
+                // Detect Button
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton.icon(
-                    onPressed: _isAnalyzing ? null : _analyzeImage,
-                    icon: _isAnalyzing
+                    onPressed: _isDetecting ? null : _detectBreed,
+                    icon: _isDetecting
                         ? const SizedBox(
                             width: 20,
                             height: 20,
@@ -256,16 +249,16 @@ class _CameraDiagnosisScreenState extends State<CameraDiagnosisScreen> {
                               valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                             ),
                           )
-                        : const Icon(Icons.analytics),
+                        : const Icon(Icons.search),
                     label: Text(
-                      _isAnalyzing ? 'Analyzing...' : 'Analyze Disease',
+                      _isDetecting ? 'Detecting...' : 'Detect Breed',
                       style: GoogleFonts.poppins(
                         fontSize: isTablet ? 18 : 16,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppTheme.warningOrange,
+                      backgroundColor: AppTheme.primaryGreen,
                       disabledBackgroundColor: Colors.grey,
                       padding: EdgeInsets.symmetric(
                         vertical: isTablet ? 18 : 16,
@@ -300,7 +293,7 @@ class _CameraDiagnosisScreenState extends State<CameraDiagnosisScreen> {
                   ),
 
                 // Results
-                if (_analysisResult != null) ...[
+                if (_detectionResult != null) ...[
                   const SizedBox(height: 30),
                   Container(
                     width: double.infinity,
@@ -316,14 +309,14 @@ class _CameraDiagnosisScreenState extends State<CameraDiagnosisScreen> {
                         Row(
                           children: [
                             Icon(
-                              Icons.medical_services,
+                              Icons.pets,
                               color: AppTheme.primaryGreen,
                               size: isTablet ? 32 : 24,
                             ),
                             const SizedBox(width: 12),
                             Expanded(
                               child: Text(
-                                'Diagnosis Result',
+                                'Breed Detection Result',
                                 style: GoogleFonts.poppins(
                                   fontSize: isTablet ? 24 : 20,
                                   fontWeight: FontWeight.bold,
@@ -355,78 +348,10 @@ class _CameraDiagnosisScreenState extends State<CameraDiagnosisScreen> {
                         ),
                         const SizedBox(height: 16),
                         Text(
-                          _analysisResult!,
+                          _detectionResult!,
                           style: GoogleFonts.poppins(
                             fontSize: isTablet ? 18 : 16,
                             color: AppTheme.textPrimary,
-                          ),
-                        ),
-                        if (_detectedDisease != null &&
-                            _confidence != null &&
-                            _confidence! >= 50.0) ...[
-                          const SizedBox(height: 16),
-                          SizedBox(
-                            width: double.infinity,
-                            child: ElevatedButton.icon(
-                              onPressed: () {
-                                final treatmentGuide =
-                                    _treatmentService.getTreatmentGuide(_detectedDisease!);
-                                if (treatmentGuide != null) {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (_) => TreatmentGuidesScreen(
-                                        diseaseName: _detectedDisease!,
-                                        treatmentGuide: treatmentGuide,
-                                      ),
-                                    ),
-                                  );
-                                } else {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (_) => const TreatmentGuidesScreen(),
-                                    ),
-                                  );
-                                }
-                              },
-                              icon: const Icon(Icons.book),
-                              label: const Text('View Treatment Guide'),
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: AppTheme.primaryGreen,
-                                padding: EdgeInsets.symmetric(
-                                  vertical: isTablet ? 16 : 12,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                        const SizedBox(height: 16),
-                        Container(
-                          padding: const EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                            color: AppTheme.warningOrange.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Icon(
-                                Icons.info_outline,
-                                color: AppTheme.warningOrange,
-                                size: 20,
-                              ),
-                              const SizedBox(width: 8),
-                              Expanded(
-                                child: Text(
-                                  'This is an AI-assisted diagnosis. Always consult a qualified veterinarian for confirmation.',
-                                  style: GoogleFonts.poppins(
-                                    fontSize: isTablet ? 14 : 12,
-                                    color: AppTheme.warningOrange,
-                                  ),
-                                ),
-                              ),
-                            ],
                           ),
                         ),
                       ],

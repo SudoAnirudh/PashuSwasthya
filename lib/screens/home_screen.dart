@@ -4,6 +4,7 @@ import 'package:pashu_swasthya/screens/camera_diagnosis.dart';
 import 'package:pashu_swasthya/screens/settings_screen.dart';
 import 'package:pashu_swasthya/screens/voice_input.dart';
 import 'package:pashu_swasthya/screens/treatment_guide.dart';
+import 'package:pashu_swasthya/screens/breed_detection_screen.dart';
 import 'package:pashu_swasthya/services/localization_service.dart';
 import 'package:pashu_swasthya/utils/app_theme.dart';
 import 'package:provider/provider.dart';
@@ -36,37 +37,42 @@ class _HomeScreenState extends State<HomeScreen> {
     required String title,
     required String subtitle,
     required VoidCallback onTap,
+    required BuildContext context,
   }) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isTablet = screenWidth > 600;
+    final isDesktop = screenWidth > 1200;
+
     return Card(
-      elevation: 3,
+      elevation: 4,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(20),
       ),
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(20),
         child: Padding(
-          padding: const EdgeInsets.all(20),
+          padding: EdgeInsets.all(isTablet ? 28 : 20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                padding: const EdgeInsets.all(16),
+                padding: EdgeInsets.all(isTablet ? 20 : 16),
                 decoration: BoxDecoration(
                   color: AppTheme.backgroundLight,
                   shape: BoxShape.circle,
                 ),
                 child: Icon(
                   icon,
-                  size: 32,
+                  size: isTablet ? 40 : 32,
                   color: AppTheme.primaryGreen,
                 ),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: isTablet ? 20 : 16),
               Text(
                 title,
                 style: GoogleFonts.poppins(
-                  fontSize: 16,
+                  fontSize: isTablet ? 20 : 16,
                   fontWeight: FontWeight.w600,
                   color: AppTheme.textPrimary,
                 ),
@@ -74,11 +80,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: isTablet ? 12 : 8),
               Text(
                 subtitle,
                 style: GoogleFonts.poppins(
-                  fontSize: 12,
+                  fontSize: isTablet ? 14 : 12,
                   color: AppTheme.textSecondary,
                 ),
                 textAlign: TextAlign.center,
@@ -96,81 +102,98 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildHomeContent(LocalizationService localizationService, BuildContext context) {
     final crossAxisCount = AppTheme.getGridCrossAxisCount(context);
     final padding = AppTheme.getResponsivePadding(context);
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isTablet = screenWidth > 600;
     
-    return GridView.builder(
-      padding: padding,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: crossAxisCount,
-        crossAxisSpacing: 20,
-        mainAxisSpacing: 20,
-        childAspectRatio: 0.85,
+    return Center(
+      child: ConstrainedBox(
+        constraints: BoxConstraints(maxWidth: isTablet ? 1200 : double.infinity),
+        child: GridView.builder(
+          padding: padding,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: crossAxisCount,
+            crossAxisSpacing: isTablet ? 24 : 20,
+            mainAxisSpacing: isTablet ? 24 : 20,
+            childAspectRatio: isTablet ? 0.9 : 0.85,
+          ),
+          itemCount: 4,
+          itemBuilder: (context, index) {
+            switch (index) {
+              case 0:
+                return _buildGridCard(
+                  context: context,
+                  icon: Icons.healing,
+                  title: localizationService.translate('detect_disease'),
+                  subtitle: 'Scan symptoms to identify potential illness.',
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const CameraDiagnosisScreen(),
+                      ),
+                    );
+                  },
+                );
+              case 1:
+                return _buildGridCard(
+                  context: context,
+                  icon: Icons.camera_alt,
+                  title: localizationService.translate('identify_breed'),
+                  subtitle: 'Use your camera to find out the cattle breed.',
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const BreedDetectionScreen(),
+                      ),
+                    );
+                  },
+                );
+              case 2:
+                return _buildGridCard(
+                  context: context,
+                  icon: Icons.book,
+                  title: localizationService.translate('treatment_guide'),
+                  subtitle: 'Access offline guides for common treatments.',
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const TreatmentGuidesScreen(),
+                      ),
+                    );
+                  },
+                );
+              case 3:
+                return _buildGridCard(
+                  context: context,
+                  icon: Icons.call,
+                  title: localizationService.translate('vet_help'),
+                  subtitle: 'Connect with a certified vet for expert advice.',
+                  onTap: () {
+                    // TODO: Add Vet Connect feature
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Vet Connect feature coming soon!'),
+                      ),
+                    );
+                  },
+                );
+              default:
+                return Container();
+            }
+          },
+        ),
       ),
-      itemCount: 4,
-      itemBuilder: (context, index) {
-        switch (index) {
-          case 0:
-            return _buildGridCard(
-              icon: Icons.healing,
-              title: localizationService.translate('detect_disease'),
-              subtitle: 'Scan symptoms to identify potential illness.',
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => const CameraDiagnosisScreen(),
-                  ),
-                );
-              },
-            );
-          case 1:
-            return _buildGridCard(
-              icon: Icons.camera_alt,
-              title: localizationService.translate('identify_breed'),
-              subtitle: 'Use your camera to find out the cattle breed.',
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => VoiceInputScreen(
-                      localeId: localizationService.locale.toString(),
-                    ),
-                  ),
-                );
-              },
-            );
-          case 2:
-            return _buildGridCard(
-              icon: Icons.book,
-              title: localizationService.translate('treatment_guide'),
-              subtitle: 'Access offline guides for common treatments.',
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => const TreatmentGuidesScreen(),
-                  ),
-                );
-              },
-            );
-          case 3:
-            return _buildGridCard(
-              icon: Icons.call,
-              title: localizationService.translate('vet_help'),
-              subtitle: 'Connect with a certified vet for expert advice.',
-              onTap: () {
-                // TODO: Add Vet Connect feature
-              },
-            );
-          default:
-            return Container();
-        }
-      },
     );
   }
 
   /// 🔹 Full Screen Scaffold
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isTablet = screenWidth > 600;
+    
     return Consumer<LocalizationService>(
       builder: (context, localizationService, child) {
         return Scaffold(
@@ -191,13 +214,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   'PashuSwasthya',
                   style: GoogleFonts.poppins(
                     fontWeight: FontWeight.bold,
-                    fontSize: 18,
+                    fontSize: isTablet ? 22 : 18,
                   ),
                 ),
                 Text(
-                  'Offline Mode',
+                  'Cattle Health Assistant',
                   style: GoogleFonts.poppins(
-                    fontSize: 12,
+                    fontSize: isTablet ? 14 : 12,
                     fontWeight: FontWeight.normal,
                   ),
                 ),
