@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pashu_swasthya/utils/app_theme.dart';
 import 'language_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -25,35 +26,56 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+    
     return Scaffold(
-      backgroundColor: const Color(0xFFECF8E5), // soft green background
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // App logo
-            Image.asset('assets/images/logo.png', height: 150),
-            const SizedBox(height: 20),
-            // App name
-            Text(
-              "Cattle Health Assistant",
-              style: GoogleFonts.poppins(
-                fontSize: 24,
-                fontWeight: FontWeight.w600,
-                color: const Color(0xFF1B5E20),
+      backgroundColor: Colors.white, // white background to match logo
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // App logo - centered and prominent
+              SizedBox(
+                width: screenWidth * 0.7,
+                height: screenHeight * 0.5,
+                child: Image.asset(
+                  'assets/images/logo.png',
+                  fit: BoxFit.contain,
+                  errorBuilder: (context, error, stackTrace) {
+                    // Fallback if image fails to load
+                    print('Error loading logo: $error');
+                    return Icon(
+                      Icons.pets,
+                      size: 100,
+                      color: AppTheme.primaryGreen,
+                    );
+                  },
+                  loadingBuilder: (context, child, loadingProgress) {
+                    if (loadingProgress == null) {
+                      return child;
+                    }
+                    return Center(
+                      child: CircularProgressIndicator(
+                        value: loadingProgress.expectedTotalBytes != null
+                            ? loadingProgress.cumulativeBytesLoaded /
+                                loadingProgress.expectedTotalBytes!
+                            : null,
+                        color: AppTheme.primaryGreen,
+                      ),
+                    );
+                  },
+                ),
               ),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              "AI-powered cattle care for every farmer",
-              style: GoogleFonts.poppins(fontSize: 14, color: Colors.grey[700]),
-            ),
-            const SizedBox(height: 50),
-            const CircularProgressIndicator(
-              color: Color(0xFF1B5E20),
-              strokeWidth: 2.5,
-            ),
-          ],
+              const SizedBox(height: 40),
+              // Loading indicator
+              const CircularProgressIndicator(
+                color: Color(0xFF1B5E20),
+                strokeWidth: 3.0,
+              ),
+            ],
+          ),
         ),
       ),
     );

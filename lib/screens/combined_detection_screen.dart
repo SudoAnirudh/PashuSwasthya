@@ -276,13 +276,11 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(padding),
-        child: Center(
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              maxWidth: isTablet ? 800 : double.infinity,
-            ),
-            child: _buildCurrentStep(isTablet),
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            maxWidth: isTablet ? 800 : double.infinity,
           ),
+          child: _buildCurrentStep(isTablet),
         ),
       ),
     );
@@ -317,7 +315,7 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
   // Step 1: Breed Image Input
   Widget _buildBreedImageInputStep(bool isTablet) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
       children: [
         Container(
           width: double.infinity,
@@ -331,6 +329,7 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
               _breedImage == null
                   ? Column(
                     mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       Icon(
                         Icons.pets,
@@ -338,19 +337,38 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
                         color: AppTheme.textSecondary,
                       ),
                       const SizedBox(height: 16),
-                      Text(
-                        'Upload image of your cattle for breed identification',
-                        style: GoogleFonts.poppins(
-                          fontSize: isTablet ? 18 : 14,
-                          color: AppTheme.textSecondary,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Text(
+                          'Upload image of your cattle for breed identification',
+                          style: GoogleFonts.poppins(
+                            fontSize: isTablet ? 18 : 14,
+                            color: AppTheme.textSecondary,
+                          ),
+                          textAlign: TextAlign.center,
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
                         ),
-                        textAlign: TextAlign.center,
                       ),
                     ],
                   )
                   : ClipRRect(
                     borderRadius: BorderRadius.circular(14),
-                    child: Image.file(_breedImage!, fit: BoxFit.cover),
+                    child: Image.file(
+                      _breedImage!,
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                      height: double.infinity,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Center(
+                          child: Icon(
+                            Icons.error_outline,
+                            size: 50,
+                            color: AppTheme.textSecondary,
+                          ),
+                        );
+                      },
+                    ),
                   ),
         ),
         const SizedBox(height: 30),
@@ -425,7 +443,7 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
   // Step 2: Breed Result
   Widget _buildBreedResultStep(bool isTablet) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
       children: [
         Container(
           width: double.infinity,
@@ -437,8 +455,10 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
             children: [
               Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Icon(
                     Icons.pets,
@@ -446,7 +466,7 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
                     size: isTablet ? 32 : 24,
                   ),
                   const SizedBox(width: 12),
-                  Expanded(
+                  Flexible(
                     child: Text(
                       'Breed Identified',
                       style: GoogleFonts.poppins(
@@ -466,6 +486,8 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
                   fontWeight: FontWeight.bold,
                   color: AppTheme.textPrimary,
                 ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
               ),
               const SizedBox(height: 8),
               Text(
@@ -498,7 +520,7 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
   // Step 3: Disease Image Input
   Widget _buildDiseaseImageInputStep(bool isTablet) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
       children: [
         Container(
           width: double.infinity,
@@ -512,6 +534,7 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
               _diseaseImage == null
                   ? Column(
                     mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       Icon(
                         Icons.healing,
@@ -519,19 +542,38 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
                         color: AppTheme.textSecondary,
                       ),
                       const SizedBox(height: 16),
-                      Text(
-                        'Upload image of the diseased area',
-                        style: GoogleFonts.poppins(
-                          fontSize: isTablet ? 18 : 14,
-                          color: AppTheme.textSecondary,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Text(
+                          'Upload image of the diseased area',
+                          style: GoogleFonts.poppins(
+                            fontSize: isTablet ? 18 : 14,
+                            color: AppTheme.textSecondary,
+                          ),
+                          textAlign: TextAlign.center,
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
                         ),
-                        textAlign: TextAlign.center,
                       ),
                     ],
                   )
                   : ClipRRect(
                     borderRadius: BorderRadius.circular(14),
-                    child: Image.file(_diseaseImage!, fit: BoxFit.cover),
+                    child: Image.file(
+                      _diseaseImage!,
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                      height: double.infinity,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Center(
+                          child: Icon(
+                            Icons.error_outline,
+                            size: 50,
+                            color: AppTheme.textSecondary,
+                          ),
+                        );
+                      },
+                    ),
                   ),
         ),
         const SizedBox(height: 30),
@@ -612,7 +654,8 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
     final hasDisease = diseaseStatus != 'No disease detected';
 
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         // Breed Result
         Container(
@@ -625,8 +668,10 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
             children: [
               Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Icon(
                     Icons.pets,
@@ -634,12 +679,14 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
                     size: isTablet ? 32 : 24,
                   ),
                   const SizedBox(width: 12),
-                  Text(
-                    'Breed',
-                    style: GoogleFonts.poppins(
-                      fontSize: isTablet ? 20 : 18,
-                      fontWeight: FontWeight.bold,
-                      color: AppTheme.primaryGreen,
+                  Flexible(
+                    child: Text(
+                      'Breed',
+                      style: GoogleFonts.poppins(
+                        fontSize: isTablet ? 20 : 18,
+                        fontWeight: FontWeight.bold,
+                        color: AppTheme.primaryGreen,
+                      ),
                     ),
                   ),
                 ],
@@ -652,6 +699,8 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
                   fontWeight: FontWeight.w600,
                   color: AppTheme.textPrimary,
                 ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
               ),
             ],
           ),
@@ -673,8 +722,10 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
             children: [
               Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Icon(
                     hasDisease ? Icons.healing : Icons.check_circle,
@@ -685,15 +736,17 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
                     size: isTablet ? 32 : 24,
                   ),
                   const SizedBox(width: 12),
-                  Text(
-                    'Disease Status',
-                    style: GoogleFonts.poppins(
-                      fontSize: isTablet ? 20 : 18,
-                      fontWeight: FontWeight.bold,
-                      color:
-                          hasDisease
-                              ? AppTheme.warningOrange
-                              : AppTheme.primaryGreen,
+                  Flexible(
+                    child: Text(
+                      'Disease Status',
+                      style: GoogleFonts.poppins(
+                        fontSize: isTablet ? 20 : 18,
+                        fontWeight: FontWeight.bold,
+                        color:
+                            hasDisease
+                                ? AppTheme.warningOrange
+                                : AppTheme.primaryGreen,
+                      ),
                     ),
                   ),
                 ],
@@ -706,6 +759,8 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
                   fontWeight: FontWeight.w600,
                   color: AppTheme.textPrimary,
                 ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
               ),
             ],
           ),
@@ -723,8 +778,10 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
             children: [
               Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Icon(
                     Icons.assessment,
@@ -732,12 +789,14 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
                     size: isTablet ? 32 : 24,
                   ),
                   const SizedBox(width: 12),
-                  Text(
-                    'Overall Accuracy',
-                    style: GoogleFonts.poppins(
-                      fontSize: isTablet ? 20 : 18,
-                      fontWeight: FontWeight.bold,
-                      color: AppTheme.primaryGreen,
+                  Flexible(
+                    child: Text(
+                      'Overall Accuracy',
+                      style: GoogleFonts.poppins(
+                        fontSize: isTablet ? 20 : 18,
+                        fontWeight: FontWeight.bold,
+                        color: AppTheme.primaryGreen,
+                      ),
                     ),
                   ),
                 ],
