@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pashu_swasthya/screens/camera_diagnosis.dart';
+import 'package:pashu_swasthya/screens/combined_detection_screen.dart';
 import 'package:pashu_swasthya/screens/settings_screen.dart';
 import 'package:pashu_swasthya/screens/voice_input.dart';
 import 'package:pashu_swasthya/screens/treatment_guide.dart';
-import 'package:pashu_swasthya/screens/breed_detection_screen.dart';
 import 'package:pashu_swasthya/services/localization_service.dart';
 import 'package:pashu_swasthya/utils/app_theme.dart';
 import 'package:provider/provider.dart';
@@ -17,21 +16,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _selectedIndex = 0;
-
-  final List<String> _titles = [
-    'Home',
-    'Voice Diagnose',
-    'Treatment',
-    'Profile',
-  ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   Widget _buildGridCard({
     required IconData icon,
     required String title,
@@ -41,13 +25,10 @@ class _HomeScreenState extends State<HomeScreen> {
   }) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth > 600;
-    final isDesktop = screenWidth > 1200;
 
     return Card(
       elevation: 4,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(20),
@@ -99,15 +80,20 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   /// 🔹 Home Screen Content
-  Widget _buildHomeContent(LocalizationService localizationService, BuildContext context) {
+  Widget _buildHomeContent(
+    LocalizationService localizationService,
+    BuildContext context,
+  ) {
     final crossAxisCount = AppTheme.getGridCrossAxisCount(context);
     final padding = AppTheme.getResponsivePadding(context);
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth > 600;
-    
+
     return Center(
       child: ConstrainedBox(
-        constraints: BoxConstraints(maxWidth: isTablet ? 1200 : double.infinity),
+        constraints: BoxConstraints(
+          maxWidth: isTablet ? 1200 : double.infinity,
+        ),
         child: GridView.builder(
           padding: padding,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -116,40 +102,26 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisSpacing: isTablet ? 24 : 20,
             childAspectRatio: isTablet ? 0.9 : 0.85,
           ),
-          itemCount: 4,
+          itemCount: 3,
           itemBuilder: (context, index) {
             switch (index) {
               case 0:
                 return _buildGridCard(
                   context: context,
-                  icon: Icons.healing,
-                  title: localizationService.translate('detect_disease'),
-                  subtitle: 'Scan symptoms to identify potential illness.',
+                  icon: Icons.camera_alt,
+                  title: 'Breed & Disease Detection',
+                  subtitle:
+                      'Identify breed first, then detect diseases automatically.',
                   onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => const CameraDiagnosisScreen(),
+                        builder: (_) => const CombinedDetectionScreen(),
                       ),
                     );
                   },
                 );
               case 1:
-                return _buildGridCard(
-                  context: context,
-                  icon: Icons.camera_alt,
-                  title: localizationService.translate('identify_breed'),
-                  subtitle: 'Use your camera to find out the cattle breed.',
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const BreedDetectionScreen(),
-                      ),
-                    );
-                  },
-                );
-              case 2:
                 return _buildGridCard(
                   context: context,
                   icon: Icons.book,
@@ -164,7 +136,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     );
                   },
                 );
-              case 3:
+              case 2:
                 return _buildGridCard(
                   context: context,
                   icon: Icons.call,
@@ -193,7 +165,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth > 600;
-    
+
     return Consumer<LocalizationService>(
       builder: (context, localizationService, child) {
         return Scaffold(
@@ -233,9 +205,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => VoiceInputScreen(
-                        localeId: localizationService.locale.toString(),
-                      ),
+                      builder:
+                          (_) => VoiceInputScreen(
+                            localeId: localizationService.locale.toString(),
+                          ),
                     ),
                   );
                 },
