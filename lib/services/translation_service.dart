@@ -4,14 +4,18 @@ import 'package:http/http.dart' as http;
 class TranslationService {
   final String _baseUrl = 'https://libretranslate.de/translate';
 
-  Future<String> translate(String text, String targetLanguage) async {
+  Future<String> translate(
+    String text,
+    String targetLanguage, {
+    String sourceLanguage = 'en',
+  }) async {
     try {
       final response = await http.post(
         Uri.parse(_baseUrl),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
           'q': text,
-          'source': 'en',
+          'source': sourceLanguage,
           'target': targetLanguage,
         }),
       );

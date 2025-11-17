@@ -4,6 +4,7 @@ import 'package:pashu_swasthya/services/symptom_disease_service.dart';
 import 'package:pashu_swasthya/services/treatment_service.dart';
 import 'package:pashu_swasthya/services/storage_service.dart';
 import 'package:pashu_swasthya/services/localization_service.dart';
+import 'package:pashu_swasthya/services/translation_service.dart';
 import 'package:pashu_swasthya/models/prediction_history.dart';
 import 'package:pashu_swasthya/screens/treatment_guide.dart';
 import 'package:pashu_swasthya/utils/app_theme.dart';
@@ -28,6 +29,7 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
   final SymptomDiseaseService _diseaseService = SymptomDiseaseService();
   final TreatmentService _treatmentService = TreatmentService();
   final StorageService _storageService = StorageService();
+  final TranslationService _translationService = TranslationService();
 
   bool _isListening = false;
   bool _isAnalyzing = false;
@@ -178,6 +180,9 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
   Future<DiseaseIdentification?> _analyzeSymptoms(String text) async {
     if (text.isEmpty) return null;
     
+    final normalizedText = await _prepareTextForAnalysis(text);
+    if (normalizedText.isEmpty) return null;
+
     // If already analyzing, wait a bit and try again
     if (_isAnalyzing) {
       await Future.delayed(const Duration(milliseconds: 300));
@@ -192,8 +197,8 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
     // Small delay to avoid too frequent analysis
     await Future.delayed(const Duration(milliseconds: 300));
     
-    print('🔬 Analyzing symptoms: "$text"');
-    final identification = _diseaseService.identifyDisease(text);
+    print('🔬 Analyzing symptoms: "$normalizedText"');
+    final identification = _diseaseService.identifyDisease(normalizedText);
     
     if (identification != null) {
       print('✅ Disease identified: ${identification.disease.name} (${identification.confidence.toStringAsFixed(1)}%)');
@@ -558,6 +563,31 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
     );
   }
 
+  Future<String> _prepareTextForAnalysis(String text) async {
+    final localizationService = Provider.of<LocalizationService>(context, listen: false);
+    final langCode = localizationService.locale.languageCode;
+    if (text.trim().isEmpty) return text;
+
+    // English and Hindi are already supported directly
+    const directLanguages = {'en', 'hi'};
+    if (directLanguages.contains(langCode)) {
+      return text;
+    }
+
+    try {
+      final translatedText = await _translationService.translate(
+        text,
+        'en',
+        sourceLanguage: langCode,
+      );
+      print('🌐 Translated ($langCode → en): $translatedText');
+      return translatedText;
+    } catch (e) {
+      print('⚠️ Translation failed ($langCode → en): $e');
+      return text;
+    }
+  }
+
   Widget _buildDiseaseInfo(bool isHindi) {
     if (_diseaseIdentification == null) {
       print('⚠️ _buildDiseaseInfo called but _diseaseIdentification is null');
@@ -736,4 +766,5 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
       ),
     );
   }
+
 }
