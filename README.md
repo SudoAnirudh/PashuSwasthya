@@ -87,14 +87,7 @@ Models are loaded once at screen init (`CombinedDetectionScreen`) and disposed w
 - **Speech recognition unavailable:** Ensure Google voice services (Android) or Siri (iOS) are enabled; some emulators lack microphones.
 - **LibreTranslate errors:** The fallback translation API requires internet—Malayalam speech still transcribes, but disease matching will rely on raw text if translation fails.
 
----
 
-## 🗺 Roadmap
-- [ ] Vet connect & telemedicine handoff
-- [ ] Automated push updates for ML models
-- [ ] Rich analytics dashboard for herd-level monitoring
-
----
 
 ## 🤝 Contributing
 1. Fork the repository
@@ -106,8 +99,6 @@ Models are loaded once at screen init (`CombinedDetectionScreen`) and disposed w
 ---
 
 ## 📄 License
-This project is currently private/not published to pub.dev. Add your preferred license text here (e.g., MIT, Apache 2.0) before distributing the app.
 
----
 
 Built with ❤️ for farmers and field veterinarians. Empower rural communities with accessible animal healthcare! 🐮
