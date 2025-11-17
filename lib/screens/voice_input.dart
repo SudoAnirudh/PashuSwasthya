@@ -3,6 +3,7 @@ import 'package:pashu_swasthya/models/disease.dart';
 import 'package:pashu_swasthya/services/symptom_disease_service.dart';
 import 'package:pashu_swasthya/services/treatment_service.dart';
 import 'package:pashu_swasthya/services/storage_service.dart';
+import 'package:pashu_swasthya/services/localization_service.dart';
 import 'package:pashu_swasthya/models/prediction_history.dart';
 import 'package:pashu_swasthya/screens/treatment_guide.dart';
 import 'package:pashu_swasthya/utils/app_theme.dart';
@@ -11,6 +12,7 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:uuid/uuid.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class VoiceInputScreen extends StatefulWidget {
   final String localeId;
@@ -28,9 +30,11 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
   final StorageService _storageService = StorageService();
 
   bool _isListening = false;
+  bool _isAnalyzing = false;
   String _transcribedText = '';
-  String _statusMessage = 'Tap the microphone to describe the cattle health';
+  String _statusMessage = '';
   DiseaseIdentification? _diseaseIdentification;
+  String? _currentLocaleId;
 
   @override
   void initState() {
@@ -38,34 +42,99 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
     _speech = stt.SpeechToText();
     _flutterTts = FlutterTts();
     _storageService.init();
+    _initializeTts();
+    _updateStatusMessage();
+  }
+
+  Future<void> _initializeTts() async {
+    await _flutterTts.setLanguage('en-US');
+    await _flutterTts.setSpeechRate(0.5);
+    await _flutterTts.setVolume(1.0);
+    await _flutterTts.setPitch(1.0);
+  }
+
+  void _updateStatusMessage() {
+    final localizationService = Provider.of<LocalizationService>(context, listen: false);
+    final isHindi = localizationService.locale.languageCode == 'hi';
+    
+    setState(() {
+      if (_isListening) {
+        _statusMessage = isHindi 
+            ? 'सुन रहे हैं... अपने पशु के लक्षण बताएं'
+            : 'Listening... Describe your cattle symptoms';
+      } else if (_isAnalyzing) {
+        _statusMessage = isHindi
+            ? 'विश्लेषण कर रहे हैं...'
+            : 'Analyzing symptoms...';
+      } else {
+        _statusMessage = isHindi
+            ? 'माइक्रोफोन पर टैप करें और पशु के स्वास्थ्य का वर्णन करें'
+            : 'Tap the microphone to describe the cattle health';
+      }
+    });
   }
 
   Future<void> _requestMicrophonePermission() async {
     final status = await Permission.microphone.request();
     if (status.isDenied) {
+      final localizationService = Provider.of<LocalizationService>(context, listen: false);
+      final isHindi = localizationService.locale.languageCode == 'hi';
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Microphone permission is required')),
+        SnackBar(
+          content: Text(isHindi 
+              ? 'माइक्रोफोन अनुमति आवश्यक है'
+              : 'Microphone permission is required'),
+        ),
       );
+    }
+  }
+
+  String _getSpeechLocale() {
+    final localizationService = Provider.of<LocalizationService>(context, listen: false);
+    final langCode = localizationService.locale.languageCode;
+    
+    // Map language codes to speech recognition locale IDs
+    switch (langCode) {
+      case 'hi':
+        return 'hi_IN';
+      case 'ml':
+        return 'ml_IN';
+      case 'kn':
+        return 'kn_IN';
+      case 'ta':
+        return 'ta_IN';
+      default:
+        return 'en_IN';
     }
   }
 
   Future<void> _startListening() async {
     await _requestMicrophonePermission();
     setState(() {
-      _diseaseIdentification = null;
+      // Don't clear existing results immediately - let user see them
+      // _diseaseIdentification = null;
+      _transcribedText = '';
     });
+    
+    final speechLocale = _getSpeechLocale();
+    _currentLocaleId = speechLocale;
+    
     bool available = await _speech.initialize(
       onStatus: (status) {
         if (status == 'done' || status == 'notListening') {
           setState(() {
             _isListening = false;
-            _statusMessage = 'Tap the microphone to describe the cattle health';
           });
+          _updateStatusMessage();
         }
       },
       onError: (error) {
+        final localizationService = Provider.of<LocalizationService>(context, listen: false);
+        final isHindi = localizationService.locale.languageCode == 'hi';
         setState(() {
-          _statusMessage = 'Error: ${error.errorMsg}';
+          _statusMessage = isHindi 
+              ? 'त्रुटि: ${error.errorMsg}'
+              : 'Error: ${error.errorMsg}';
           _isListening = false;
         });
       },
@@ -74,30 +143,90 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
     if (available) {
       setState(() {
         _isListening = true;
-        _statusMessage = 'Listening...';
       });
+      _updateStatusMessage();
+      
       _speech.listen(
         onResult: (result) {
           setState(() {
             _transcribedText = result.recognizedWords;
           });
+          
+          // Real-time prediction while speaking (if text is substantial)
+          // Analyze symptoms when we have enough text (debounced in _analyzeSymptoms)
+          // Lower threshold to 5 characters for faster response
+          if (result.recognizedWords.length >= 5) {
+            _analyzeSymptoms(result.recognizedWords);
+          }
         },
-        localeId: widget.localeId,
+        localeId: speechLocale,
+        listenFor: const Duration(seconds: 30),
+        pauseFor: const Duration(seconds: 3),
       );
     } else {
+      final localizationService = Provider.of<LocalizationService>(context, listen: false);
+      final isHindi = localizationService.locale.languageCode == 'hi';
       setState(() {
-        _statusMessage = 'Speech recognition not available';
+        _statusMessage = isHindi
+            ? 'भाषण पहचान उपलब्ध नहीं है'
+            : 'Speech recognition not available';
         _isListening = false;
       });
     }
+  }
+
+  Future<DiseaseIdentification?> _analyzeSymptoms(String text) async {
+    if (text.isEmpty) return null;
+    
+    // If already analyzing, wait a bit and try again
+    if (_isAnalyzing) {
+      await Future.delayed(const Duration(milliseconds: 300));
+      if (_isAnalyzing) return null; // Still analyzing, skip this call
+    }
+    
+    setState(() {
+      _isAnalyzing = true;
+    });
+    _updateStatusMessage();
+    
+    // Small delay to avoid too frequent analysis
+    await Future.delayed(const Duration(milliseconds: 300));
+    
+    print('🔬 Analyzing symptoms: "$text"');
+    final identification = _diseaseService.identifyDisease(text);
+    
+    if (identification != null) {
+      print('✅ Disease identified: ${identification.disease.name} (${identification.confidence.toStringAsFixed(1)}%)');
+      print('✅ Matched keywords: ${identification.matchedKeywords.join(", ")}');
+    } else {
+      print('❌ No disease identified');
+    }
+    
+    // Update state with the identification result
+    if (mounted) {
+      setState(() {
+        _isAnalyzing = false;
+        _diseaseIdentification = identification;
+      });
+      print('🔄 State updated. _diseaseIdentification is now: ${_diseaseIdentification != null ? _diseaseIdentification!.disease.name : "null"}');
+      _updateStatusMessage();
+    }
+    
+    return identification;
   }
 
   Future<void> _stopListening() async {
     if (!_isListening) return;
     await _speech.stop();
     
+    setState(() {
+      _isListening = false;
+      _isAnalyzing = true;
+    });
+    _updateStatusMessage();
+    
     // Identify disease from transcribed text
-    final identification = _diseaseService.identifyDisease(_transcribedText);
+    final identification = await _analyzeSymptoms(_transcribedText);
     
     // Save to prediction history if disease identified
     if (identification != null) {
@@ -113,118 +242,336 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
     }
     
     setState(() {
-      _isListening = false;
-      _statusMessage = identification != null
-          ? 'Disease identified: ${identification.disease.name}'
-          : 'Tap the microphone to describe the cattle health';
+      _isAnalyzing = false;
       _diseaseIdentification = identification;
     });
+    _updateStatusMessage();
     
     // Provide TTS feedback
     if (identification != null) {
-      await _flutterTts.speak(
-        'Disease identified: ${identification.disease.name}. Confidence: ${identification.confidence.toStringAsFixed(0)} percent.',
-      );
+      final localizationService = Provider.of<LocalizationService>(context, listen: false);
+      final isHindi = localizationService.locale.languageCode == 'hi';
+      
+      final ttsMessage = isHindi
+          ? 'रोग पहचाना गया: ${identification.disease.name}. आत्मविश्वास: ${identification.confidence.toStringAsFixed(0)} प्रतिशत।'
+          : 'Disease identified: ${identification.disease.name}. Confidence: ${identification.confidence.toStringAsFixed(0)} percent.';
+      
+      await _flutterTts.speak(ttsMessage);
     }
   }
 
   Future<void> _saveDescription() async {
     if (_transcribedText.isEmpty) return;
 
-    // TODO: Replace with actual save logic (API / local DB)
-    print('Cattle Health Description Saved: $_transcribedText');
+    // Save description to history
+    final history = PredictionHistory(
+      id: const Uuid().v4(),
+      type: 'voice_note',
+      result: 'Voice Description',
+      confidence: 0.0,
+      timestamp: DateTime.now(),
+      notes: _transcribedText,
+    );
+    await _storageService.savePrediction(history);
+
+    final localizationService = Provider.of<LocalizationService>(context, listen: false);
+    final isHindi = localizationService.locale.languageCode == 'hi';
+    
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(isHindi 
+            ? 'विवरण सफलतापूर्वक सहेजा गया'
+            : 'Description saved successfully'),
+      ),
+    );
 
     // TTS feedback
-    await _flutterTts.speak('Description saved successfully');
+    await _flutterTts.speak(isHindi 
+        ? 'विवरण सफलतापूर्वक सहेजा गया'
+        : 'Description saved successfully');
 
     setState(() {
       _transcribedText = '';
+      _diseaseIdentification = null;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Describe Cattle Health'),
-        centerTitle: true,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          children: [
-            // Status message
-            Text(_statusMessage, style: const TextStyle(fontSize: 16)),
-            const SizedBox(height: 20),
-
-            // Live transcription area
-            Expanded(
-              child: Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey.shade400),
-                  borderRadius: BorderRadius.circular(12),
-                ),
+    return Consumer<LocalizationService>(
+      builder: (context, localizationService, child) {
+        final isHindi = localizationService.locale.languageCode == 'hi';
+        
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(isHindi 
+                ? 'आवाज से रोग पहचान'
+                : 'Voice Disease Prediction'),
+            centerTitle: true,
+          ),
+          body: Column(
+            children: [
+              // Scrollable content area
+              Expanded(
                 child: SingleChildScrollView(
-                  child: Text(
-                    _transcribedText.isEmpty
-                        ? 'Your description will appear here...'
-                        : _transcribedText,
-                    style: const TextStyle(fontSize: 18),
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                // Info card
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: AppTheme.primaryGreen.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: AppTheme.primaryGreen.withOpacity(0.3)),
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(Icons.info_outline, color: AppTheme.primaryGreen),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Text(
+                          isHindi
+                              ? 'अपने पशु के लक्षण बताएं। हम स्वचालित रूप से रोग की पहचान करेंगे।'
+                              : 'Describe your cattle symptoms. We will automatically identify the disease.',
+                          style: GoogleFonts.poppins(
+                            fontSize: 14,
+                            color: AppTheme.textPrimary,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 20),
+                
+                // Status message
+                Container(
+                  padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                  decoration: BoxDecoration(
+                    color: _isListening 
+                        ? Colors.blue.withOpacity(0.1)
+                        : _isAnalyzing
+                            ? Colors.orange.withOpacity(0.1)
+                            : Colors.grey.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      if (_isListening || _isAnalyzing)
+                        SizedBox(
+                          width: 16,
+                          height: 16,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              _isListening ? Colors.blue : Colors.orange,
+                            ),
+                          ),
+                        ),
+                      if (_isListening || _isAnalyzing) const SizedBox(width: 12),
+                      Flexible(
+                        child: Text(
+                          _statusMessage,
+                          style: GoogleFonts.poppins(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: _isListening 
+                                ? Colors.blue
+                                : _isAnalyzing
+                                    ? Colors.orange
+                                    : AppTheme.textPrimary,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 20),
+
+                // Live transcription area
+                Container(
+                  width: double.infinity,
+                  constraints: const BoxConstraints(minHeight: 200),
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey.shade400),
+                    borderRadius: BorderRadius.circular(12),
+                    color: Colors.grey.shade50,
+                  ),
+                  child: _transcribedText.isEmpty
+                      ? Center(
+                          child: Text(
+                            isHindi
+                                ? 'आपका विवरण यहाँ दिखाई देगा...'
+                                : 'Your description will appear here...',
+                            style: GoogleFonts.poppins(
+                              fontSize: 16,
+                              color: Colors.grey,
+                              fontStyle: FontStyle.italic,
+                            ),
+                          ),
+                        )
+                      : Text(
+                          _transcribedText,
+                          style: GoogleFonts.poppins(
+                            fontSize: 18,
+                            color: AppTheme.textPrimary,
+                          ),
+                        ),
+                ),
+                const SizedBox(height: 20),
+                
+                // Disease result card
+                if (_diseaseIdentification != null) ...[
+                  _buildDiseaseInfo(isHindi),
+                ] else if (_transcribedText.isNotEmpty && 
+                    !_isAnalyzing && 
+                    !_isListening) ...[
+                  // Show message if no result but text exists
+                  Container(
+                    padding: const EdgeInsets.all(16),
+                    margin: const EdgeInsets.only(top: 16),
+                    decoration: BoxDecoration(
+                      color: Colors.orange.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: Colors.orange.withOpacity(0.3)),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(Icons.info_outline, color: Colors.orange),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Text(
+                            isHindi
+                                ? 'कोई रोग पहचाना नहीं गया। कृपया अधिक लक्षण बताएं।'
+                                : 'No disease identified. Please describe more symptoms.',
+                            style: GoogleFonts.poppins(
+                              fontSize: 14,
+                              color: Colors.orange.shade700,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+                    ],
                   ),
                 ),
               ),
-            ),
-            const SizedBox(height: 20),
+              // Fixed bottom section with buttons
+              Container(
+                padding: const EdgeInsets.all(20.0),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.05),
+                      blurRadius: 10,
+                      offset: const Offset(0, -5),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    // Stop Recording button (visible only while listening)
+                    if (_isListening)
+                      ElevatedButton.icon(
+                        onPressed: _stopListening,
+                        icon: const Icon(Icons.stop),
+                        label: Text(isHindi ? 'रिकॉर्डिंग रोकें' : 'Stop Recording'),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.red,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 24,
+                            vertical: 12,
+                          ),
+                        ),
+                      ),
+                    if (_isListening) const SizedBox(height: 10),
 
-            // Stop Recording button (visible only while listening)
-            if (_isListening)
-              ElevatedButton.icon(
-                onPressed: _stopListening,
-                icon: const Icon(Icons.stop),
-                label: const Text('Stop Recording'),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 24,
-                    vertical: 12,
-                  ),
+                    // Microphone, Analyze & Save buttons
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            // Mic button
+                            FloatingActionButton.extended(
+                              onPressed: _isListening ? _stopListening : _startListening,
+                              backgroundColor: _isListening ? Colors.red : AppTheme.primaryGreen,
+                              icon: Icon(_isListening ? Icons.mic_off : Icons.mic),
+                              label: Text(
+                                _isListening 
+                                    ? (isHindi ? 'रोकें' : 'Stop')
+                                    : (isHindi ? 'शुरू करें' : 'Start'),
+                                style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            const SizedBox(width: 20),
+                            // Analyze button (manual trigger)
+                            ElevatedButton.icon(
+                              onPressed: (_transcribedText.isEmpty || _isAnalyzing) 
+                                  ? null 
+                                  : () => _analyzeSymptoms(_transcribedText),
+                              icon: const Icon(Icons.search),
+                              label: Text(isHindi ? 'विश्लेषण' : 'Analyze'),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.orange,
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 20,
+                                  vertical: 12,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 10),
+                        // Save button
+                        ElevatedButton.icon(
+                          onPressed: _transcribedText.isEmpty ? null : _saveDescription,
+                          icon: const Icon(Icons.save),
+                          label: Text(isHindi ? 'सहेजें' : 'Save'),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppTheme.primaryGreen,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 12,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
-            const SizedBox(height: 10),
-
-            // Microphone & Save buttons
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // Mic button
-                FloatingActionButton(
-                  onPressed: _isListening ? _stopListening : _startListening,
-                  backgroundColor: _isListening ? Colors.red : Colors.blue,
-                  child: Icon(_isListening ? Icons.mic_off : Icons.mic),
-                ),
-                const SizedBox(width: 30),
-                // Save button
-                ElevatedButton(
-                  onPressed: _transcribedText.isEmpty ? null : _saveDescription,
-                  child: const Text('Save Description'),
-                ),
-              ],
-            ),
-            const SizedBox(height: 20),
-            if (_diseaseIdentification != null) _buildDiseaseInfo(),
-          ],
-        ),
-      ),
+            ],
+          ),
+        );
+      },
     );
   }
 
-  Widget _buildDiseaseInfo() {
-    if (_diseaseIdentification == null) return const SizedBox.shrink();
+  Widget _buildDiseaseInfo(bool isHindi) {
+    if (_diseaseIdentification == null) {
+      print('⚠️ _buildDiseaseInfo called but _diseaseIdentification is null');
+      return const SizedBox.shrink();
+    }
     
     final identification = _diseaseIdentification!;
+    print('🎨 Building disease info UI for: ${identification.disease.name}');
     final treatmentGuide = _treatmentService.getTreatmentGuide(identification.disease.name);
+    final confidenceColor = identification.confidence >= 70
+        ? Colors.green
+        : identification.confidence >= 50
+            ? Colors.orange
+            : Colors.red;
     
     return Container(
       margin: const EdgeInsets.only(top: 16),
@@ -232,56 +579,113 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
       decoration: BoxDecoration(
         color: AppTheme.backgroundLight,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: AppTheme.accentGreen),
+        border: Border.all(color: AppTheme.accentGreen, width: 2),
+        boxShadow: [
+          BoxShadow(
+            color: AppTheme.primaryGreen.withOpacity(0.1),
+            blurRadius: 8,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
           Row(
             children: [
-              Icon(Icons.medical_services, color: AppTheme.primaryGreen, size: 24),
-              const SizedBox(width: 8),
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: AppTheme.primaryGreen.withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Icon(Icons.medical_services, color: AppTheme.primaryGreen, size: 24),
+              ),
+              const SizedBox(width: 12),
               Expanded(
-                child: Text(
-                  'Identified Disease: ${identification.disease.name}',
-                  style: GoogleFonts.poppins(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: AppTheme.primaryGreen,
-                  ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      isHindi ? 'पहचाना गया रोग' : 'Identified Disease',
+                      style: GoogleFonts.poppins(
+                        fontSize: 12,
+                        color: AppTheme.textSecondary,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      identification.disease.name,
+                      style: GoogleFonts.poppins(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: AppTheme.primaryGreen,
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 12),
-          Text(
-            'Confidence: ${identification.confidence.toStringAsFixed(1)}%',
-            style: GoogleFonts.poppins(fontSize: 14, color: AppTheme.textSecondary),
+          const SizedBox(height: 16),
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: confidenceColor.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Row(
+              children: [
+                Icon(Icons.analytics, color: confidenceColor),
+                const SizedBox(width: 8),
+                Text(
+                  isHindi ? 'आत्मविश्वास: ' : 'Confidence: ',
+                  style: GoogleFonts.poppins(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                Text(
+                  '${identification.confidence.toStringAsFixed(1)}%',
+                  style: GoogleFonts.poppins(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: confidenceColor,
+                  ),
+                ),
+              ],
+            ),
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 16),
           Text(
-            'Matched Symptoms:',
+            isHindi ? 'मिले लक्षण:' : 'Matched Symptoms:',
             style: GoogleFonts.poppins(
               fontSize: 16,
               fontWeight: FontWeight.w600,
             ),
           ),
           const SizedBox(height: 8),
-          ...identification.matchedKeywords.map(
-            (keyword) => Padding(
-              padding: const EdgeInsets.only(bottom: 4.0),
-              child: Row(
-                children: [
-                  Icon(Icons.check_circle, size: 16, color: AppTheme.primaryGreen),
-                  const SizedBox(width: 8),
-                  Text(keyword, style: GoogleFonts.poppins(fontSize: 14)),
-                ],
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: identification.matchedKeywords.take(5).map(
+              (keyword) => Chip(
+                label: Text(
+                  keyword,
+                  style: GoogleFonts.poppins(fontSize: 12),
+                ),
+                avatar: Icon(Icons.check_circle, size: 16, color: AppTheme.primaryGreen),
+                backgroundColor: AppTheme.primaryGreen.withOpacity(0.1),
               ),
-            ),
+            ).toList(),
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 16),
           Text(
-            'All Symptoms:',
+            isHindi ? 'सभी लक्षण:' : 'All Symptoms:',
             style: GoogleFonts.poppins(
               fontSize: 16,
               fontWeight: FontWeight.w600,
@@ -290,8 +694,20 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
           const SizedBox(height: 8),
           ...identification.disease.symptoms.map(
             (symptom) => Padding(
-              padding: const EdgeInsets.only(bottom: 4.0),
-              child: Text('• $symptom', style: GoogleFonts.poppins(fontSize: 14)),
+              padding: const EdgeInsets.only(bottom: 6.0),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Icon(Icons.circle, size: 8, color: AppTheme.primaryGreen),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      symptom,
+                      style: GoogleFonts.poppins(fontSize: 14),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
           if (treatmentGuide != null) ...[
@@ -309,7 +725,7 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
                 );
               },
               icon: const Icon(Icons.book),
-              label: const Text('View Treatment Guide'),
+              label: Text(isHindi ? 'उपचार गाइड देखें' : 'View Treatment Guide'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppTheme.primaryGreen,
                 minimumSize: const Size(double.infinity, 48),

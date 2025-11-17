@@ -52,20 +52,6 @@ class _SplashScreenState extends State<SplashScreen> {
                       color: AppTheme.primaryGreen,
                     );
                   },
-                  loadingBuilder: (context, child, loadingProgress) {
-                    if (loadingProgress == null) {
-                      return child;
-                    }
-                    return Center(
-                      child: CircularProgressIndicator(
-                        value: loadingProgress.expectedTotalBytes != null
-                            ? loadingProgress.cumulativeBytesLoaded /
-                                loadingProgress.expectedTotalBytes!
-                            : null,
-                        color: AppTheme.primaryGreen,
-                      ),
-                    );
-                  },
                 ),
               ),
               const SizedBox(height: 40),
