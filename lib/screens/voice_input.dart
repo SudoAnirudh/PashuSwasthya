@@ -45,7 +45,11 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
     _flutterTts = FlutterTts();
     _storageService.init();
     _initializeTts();
-    _updateStatusMessage();
+    
+    // Defer status message update until after build to access context safely
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _updateStatusMessage();
+    });
   }
 
   Future<void> _initializeTts() async {
@@ -57,21 +61,14 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
 
   void _updateStatusMessage() {
     final localizationService = Provider.of<LocalizationService>(context, listen: false);
-    final isHindi = localizationService.locale.languageCode == 'hi';
     
     setState(() {
       if (_isListening) {
-        _statusMessage = isHindi 
-            ? 'सुन रहे हैं... अपने पशु के लक्षण बताएं'
-            : 'Listening... Describe your cattle symptoms';
+        _statusMessage = localizationService.translate('listening_describe_symptoms');
       } else if (_isAnalyzing) {
-        _statusMessage = isHindi
-            ? 'विश्लेषण कर रहे हैं...'
-            : 'Analyzing symptoms...';
+        _statusMessage = localizationService.translate('analyzing_symptoms');
       } else {
-        _statusMessage = isHindi
-            ? 'माइक्रोफोन पर टैप करें और पशु के स्वास्थ्य का वर्णन करें'
-            : 'Tap the microphone to describe the cattle health';
+        _statusMessage = localizationService.translate('tap_mic_describe');
       }
     });
   }
@@ -80,14 +77,13 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
     final status = await Permission.microphone.request();
     if (status.isDenied) {
       final localizationService = Provider.of<LocalizationService>(context, listen: false);
-      final isHindi = localizationService.locale.languageCode == 'hi';
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(isHindi 
-              ? 'माइक्रोफोन अनुमति आवश्यक है'
-              : 'Microphone permission is required'),
-        ),
-      );
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(localizationService.translate('microphone_permission_required')),
+          ),
+        );
+      }
     }
   }
 
@@ -132,11 +128,8 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
       },
       onError: (error) {
         final localizationService = Provider.of<LocalizationService>(context, listen: false);
-        final isHindi = localizationService.locale.languageCode == 'hi';
         setState(() {
-          _statusMessage = isHindi 
-              ? 'त्रुटि: ${error.errorMsg}'
-              : 'Error: ${error.errorMsg}';
+          _statusMessage = '${localizationService.translate('error')}: ${error.errorMsg}';
           _isListening = false;
         });
       },
@@ -167,11 +160,8 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
       );
     } else {
       final localizationService = Provider.of<LocalizationService>(context, listen: false);
-      final isHindi = localizationService.locale.languageCode == 'hi';
       setState(() {
-        _statusMessage = isHindi
-            ? 'भाषण पहचान उपलब्ध नहीं है'
-            : 'Speech recognition not available';
+        _statusMessage = localizationService.translate('speech_recognition_not_available');
         _isListening = false;
       });
     }
@@ -257,9 +247,12 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
       final localizationService = Provider.of<LocalizationService>(context, listen: false);
       final isHindi = localizationService.locale.languageCode == 'hi';
       
+      // Note: We are keeping TTS in English/Hindi mixed for now or just simple feedback
+      // Ideally TTS should also be localized but flutter_tts needs language setting
+      
       final ttsMessage = isHindi
-          ? 'रोग पहचाना गया: ${identification.disease.name}. आत्मविश्वास: ${identification.confidence.toStringAsFixed(0)} प्रतिशत।'
-          : 'Disease identified: ${identification.disease.name}. Confidence: ${identification.confidence.toStringAsFixed(0)} percent.';
+          ? 'रोग पहचाना गया: ${identification.disease.name}.'
+          : 'Disease identified: ${identification.disease.name}.';
       
       await _flutterTts.speak(ttsMessage);
     }
@@ -280,20 +273,17 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
     await _storageService.savePrediction(history);
 
     final localizationService = Provider.of<LocalizationService>(context, listen: false);
-    final isHindi = localizationService.locale.languageCode == 'hi';
     
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(isHindi 
-            ? 'विवरण सफलतापूर्वक सहेजा गया'
-            : 'Description saved successfully'),
-      ),
-    );
+    if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(localizationService.translate('description_saved')),
+        ),
+      );
+    }
 
     // TTS feedback
-    await _flutterTts.speak(isHindi 
-        ? 'विवरण सफलतापूर्वक सहेजा गया'
-        : 'Description saved successfully');
+    await _flutterTts.speak(localizationService.translate('description_saved'));
 
     setState(() {
       _transcribedText = '';
@@ -309,9 +299,7 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
         
         return Scaffold(
           appBar: AppBar(
-            title: Text(isHindi 
-                ? 'आवाज से रोग पहचान'
-                : 'Voice Disease Prediction'),
+            title: Text(localizationService.translate('voice_disease_prediction')),
             centerTitle: true,
           ),
           body: Column(
@@ -337,9 +325,7 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
                       const SizedBox(width: 12),
                       Expanded(
                         child: Text(
-                          isHindi
-                              ? 'अपने पशु के लक्षण बताएं। हम स्वचालित रूप से रोग की पहचान करेंगे।'
-                              : 'Describe your cattle symptoms. We will automatically identify the disease.',
+                          localizationService.translate('describe_symptoms_info'),
                           style: GoogleFonts.poppins(
                             fontSize: 14,
                             color: AppTheme.textPrimary,
@@ -410,9 +396,7 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
                   child: _transcribedText.isEmpty
                       ? Center(
                           child: Text(
-                            isHindi
-                                ? 'आपका विवरण यहाँ दिखाई देगा...'
-                                : 'Your description will appear here...',
+                            localizationService.translate('your_description_here'),
                             style: GoogleFonts.poppins(
                               fontSize: 16,
                               color: Colors.grey,
@@ -432,7 +416,7 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
                 
                 // Disease result card
                 if (_diseaseIdentification != null) ...[
-                  _buildDiseaseInfo(isHindi),
+                  _buildDiseaseInfo(localizationService),
                 ] else if (_transcribedText.isNotEmpty && 
                     !_isAnalyzing && 
                     !_isListening) ...[
@@ -451,9 +435,7 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
                         const SizedBox(width: 12),
                         Expanded(
                           child: Text(
-                            isHindi
-                                ? 'कोई रोग पहचाना नहीं गया। कृपया अधिक लक्षण बताएं।'
-                                : 'No disease identified. Please describe more symptoms.',
+                            localizationService.translate('no_disease_identified'),
                             style: GoogleFonts.poppins(
                               fontSize: 14,
                               color: Colors.orange.shade700,
@@ -489,7 +471,7 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
                       ElevatedButton.icon(
                         onPressed: _stopListening,
                         icon: const Icon(Icons.stop),
-                        label: Text(isHindi ? 'रिकॉर्डिंग रोकें' : 'Stop Recording'),
+                        label: Text(localizationService.translate('stop_recording')),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.red,
                           padding: const EdgeInsets.symmetric(
@@ -514,8 +496,8 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
                               icon: Icon(_isListening ? Icons.mic_off : Icons.mic),
                               label: Text(
                                 _isListening 
-                                    ? (isHindi ? 'रोकें' : 'Stop')
-                                    : (isHindi ? 'शुरू करें' : 'Start'),
+                                    ? localizationService.translate('stop')
+                                    : localizationService.translate('start'),
                                 style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
                               ),
                             ),
@@ -526,7 +508,7 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
                                   ? null 
                                   : () => _analyzeSymptoms(_transcribedText),
                               icon: const Icon(Icons.search),
-                              label: Text(isHindi ? 'विश्लेषण' : 'Analyze'),
+                              label: Text(localizationService.translate('analyze')),
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.orange,
                                 padding: const EdgeInsets.symmetric(
@@ -542,7 +524,7 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
                         ElevatedButton.icon(
                           onPressed: _transcribedText.isEmpty ? null : _saveDescription,
                           icon: const Icon(Icons.save),
-                          label: Text(isHindi ? 'सहेजें' : 'Save'),
+                          label: Text(localizationService.translate('save')),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AppTheme.primaryGreen,
                             padding: const EdgeInsets.symmetric(
@@ -588,7 +570,7 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
     }
   }
 
-  Widget _buildDiseaseInfo(bool isHindi) {
+  Widget _buildDiseaseInfo(LocalizationService localizationService) {
     if (_diseaseIdentification == null) {
       print('⚠️ _buildDiseaseInfo called but _diseaseIdentification is null');
       return const SizedBox.shrink();
@@ -639,7 +621,7 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      isHindi ? 'पहचाना गया रोग' : 'Identified Disease',
+                      localizationService.translate('identified_disease'),
                       style: GoogleFonts.poppins(
                         fontSize: 12,
                         color: AppTheme.textSecondary,
@@ -673,7 +655,7 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
                 Icon(Icons.analytics, color: confidenceColor),
                 const SizedBox(width: 8),
                 Text(
-                  isHindi ? 'आत्मविश्वास: ' : 'Confidence: ',
+                  '${localizationService.translate('confidence')}: ',
                   style: GoogleFonts.poppins(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
@@ -692,7 +674,7 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
           ),
           const SizedBox(height: 16),
           Text(
-            isHindi ? 'मिले लक्षण:' : 'Matched Symptoms:',
+            localizationService.translate('matched_symptoms'),
             style: GoogleFonts.poppins(
               fontSize: 16,
               fontWeight: FontWeight.w600,
@@ -715,7 +697,7 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
           ),
           const SizedBox(height: 16),
           Text(
-            isHindi ? 'सभी लक्षण:' : 'All Symptoms:',
+            localizationService.translate('all_symptoms'),
             style: GoogleFonts.poppins(
               fontSize: 16,
               fontWeight: FontWeight.w600,
@@ -755,7 +737,7 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
                 );
               },
               icon: const Icon(Icons.book),
-              label: Text(isHindi ? 'उपचार गाइड देखें' : 'View Treatment Guide'),
+              label: Text(localizationService.translate('view_treatment_guide')),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppTheme.primaryGreen,
                 minimumSize: const Size(double.infinity, 48),

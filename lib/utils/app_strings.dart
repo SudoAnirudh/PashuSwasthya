@@ -89,6 +89,41 @@ class AppStrings {
       'no_disease_identified': 'No disease identified. Please describe more symptoms.',
       'your_description_here': 'Your description will appear here...',
       'describe_symptoms_info': 'Describe your cattle symptoms. We will automatically identify the disease.',
+      
+      // Disease Details - FMD
+      'disease_fmd_description': 'A highly contagious viral disease affecting cloven-hoofed animals.',
+      'disease_fmd_symptoms': 'Fever (up to 106°F)|Blisters in the mouth and on the feet|Excessive drooling|Lameness and reluctance to move|Loss of appetite|Reduced milk production',
+      'disease_fmd_treatment_steps': 'Isolate the infected animal immediately|Keep the animal in a clean, dry, and comfortable environment|Provide soft, palatable feed and plenty of fresh water|Clean blisters with mild antiseptic solution (diluted iodine)|Apply antibiotic ointment to prevent secondary bacterial infections|Administer pain relief medication as prescribed by veterinarian|Monitor temperature daily|Ensure proper nutrition with vitamin supplements',
+      'disease_fmd_precautions': 'Quarantine new animals for at least 21 days|Disinfect footwear, equipment, and vehicles before entering farm|Avoid contact with other farms during outbreak|Vaccinate healthy animals as per veterinary schedule|Dispose of contaminated materials properly|Wash hands and change clothes after handling infected animals|Report to local veterinary authorities immediately',
+      'disease_fmd_first_aid': 'Separate the animal from the herd immediately|Clean affected areas with clean water and mild soap|Apply antiseptic solution to blisters|Provide soft bedding to reduce discomfort|Ensure access to clean water and soft feed|Contact veterinarian immediately for proper treatment',
+
+      // Disease Details - Mastitis
+      'disease_mast_description': 'Inflammation of the udder tissue, usually caused by bacterial infection.',
+      'disease_mast_symptoms': 'Swelling, heat, and redness of the udder|Hardness and pain in the udder|Abnormal milk appearance (watery, flakes, clots)|Reduced milk production|Fever in severe cases|Loss of appetite',
+      'disease_mast_treatment_steps': 'Milk out the affected quarter frequently (every 2-3 hours)|Apply warm compresses to the udder to reduce swelling|Administer antibiotics as prescribed by veterinarian|Use intramammary antibiotic tubes as directed|Ensure proper milking hygiene|Provide anti-inflammatory medication if needed|Continue treatment for full course (usually 5-7 days)|Monitor milk quality before resuming consumption',
+      'disease_mast_precautions': 'Maintain strict milking hygiene|Clean udder before and after milking|Use separate cloths for each animal|Disinfect milking equipment regularly|Dry off animals properly after milking|Isolate infected animals during treatment|Test milk regularly for early detection',
+      'disease_mast_first_aid': 'Stop milking the affected quarter|Apply cold compress to reduce swelling|Keep the animal in a clean, dry area|Provide plenty of fresh water|Contact veterinarian for antibiotic treatment|Do not consume milk from affected quarter',
+
+      // Disease Details - LSD
+      'disease_lsd_description': 'A viral disease transmitted by blood-feeding insects, causing skin nodules.',
+      'disease_lsd_symptoms': 'Fever (103-106°F)|Nodules or lumps on the skin (2-5 cm diameter)|Swelling of limbs and brisket|Watery eyes and nasal discharge|Reduced milk production|Loss of appetite|Difficulty in movement',
+      'disease_lsd_treatment_steps': 'Isolate infected animals immediately|Provide supportive care and good nutrition|Clean skin nodules with antiseptic solution|Apply antibiotic ointment to prevent secondary infections|Administer antibiotics for secondary bacterial infections|Provide pain relief and anti-inflammatory medication|Ensure adequate hydration|Monitor for complications',
+      'disease_lsd_precautions': 'Control insect vectors (flies, mosquitoes, ticks)|Use insect repellents and insecticides|Vaccinate healthy animals|Quarantine new animals|Maintain good hygiene and sanitation|Dispose of contaminated materials properly|Report to veterinary authorities',
+      'disease_lsd_first_aid': 'Isolate the animal from the herd|Clean skin nodules with mild antiseptic|Keep the animal in a clean, shaded area|Provide fresh water and soft feed|Contact veterinarian for proper treatment|Monitor temperature and general condition',
+
+      // Disease Details - Brucellosis
+      'disease_bruc_description': 'A bacterial disease that can cause abortion in cattle and is zoonotic.',
+      'disease_bruc_symptoms': 'Late-term abortion|Retained placenta|Reduced milk production|Infertility|Swollen testicles in bulls|Weak calves',
+      'disease_bruc_treatment_steps': 'Consult veterinarian immediately|Isolate infected animals|Test all animals in the herd|Cull or separate infected animals as per veterinary advice|Vaccinate healthy animals|Maintain strict biosecurity measures|Disinfect contaminated areas',
+      'disease_bruc_precautions': 'Test all new animals before introduction|Vaccinate heifers before first breeding|Practice good hygiene when handling aborted fetuses|Wear protective clothing|Dispose of aborted materials properly|Avoid consuming raw milk from infected animals|Report to veterinary authorities',
+      'disease_bruc_first_aid': 'Isolate the animal immediately|Wear protective clothing when handling|Dispose of aborted materials safely|Contact veterinarian for testing and treatment|Do not consume raw milk',
+
+      // Disease Details - Anthrax
+      'disease_anth_description': 'A serious bacterial disease that can be fatal and is zoonotic.',
+      'disease_anth_symptoms': 'Sudden death (often first sign)|High fever|Difficulty breathing|Swelling of neck and throat|Bloody discharge from body openings|Convulsions before death',
+      'disease_anth_treatment_steps': 'DO NOT OPEN THE CARCASS - contact authorities immediately|Isolate any sick animals|Vaccinate all healthy animals|Disinfect contaminated areas thoroughly|Follow veterinary and health department guidelines|Report to authorities immediately',
+      'disease_anth_precautions': 'Vaccinate animals annually|Avoid opening carcasses of sudden death|Dispose of carcasses properly (burning or deep burial)|Disinfect contaminated areas|Wear protective clothing|Report suspected cases immediately|Quarantine affected area',
+      'disease_anth_first_aid': 'DO NOT TOUCH OR OPEN THE CARCASS|Isolate the area immediately|Contact veterinary and health authorities|Keep people and animals away|Wait for proper disposal instructions',
     },
     'hi': {
       'app_name': 'पशु स्वास्थ्य',
@@ -179,6 +214,41 @@ class AppStrings {
       'no_disease_identified': 'कोई रोग पहचाना नहीं गया। कृपया अधिक लक्षण बताएं।',
       'your_description_here': 'आपका विवरण यहाँ दिखाई देगा...',
       'describe_symptoms_info': 'अपने पशु के लक्षण बताएं। हम स्वचालित रूप से रोग की पहचान करेंगे।',
+
+      // Disease Details - FMD
+      'disease_fmd_description': 'खुर वाले जानवरों को प्रभावित करने वाला एक अत्यधिक संक्रामक वायरल रोग।',
+      'disease_fmd_symptoms': 'तेज बुखार (106°F तक)|मुंह और पैरों में छाले|अत्यधिक लार टपकना|लंगड़ापन और चलने में अनिच्छा|भूख न लगना|दूध उत्पादन में कमी',
+      'disease_fmd_treatment_steps': 'संक्रमित जानवर को तुरंत अलग करें|जानवर को साफ, सूखे और आरामदायक वातावरण में रखें|नरम, स्वादिष्ट चारा और भरपूर ताजा पानी दें|हल्के एंटीसेप्टिक घोल (पतला आयोडीन) से छालों को साफ करें|माध्यमिक जीवाणु संक्रमण को रोकने के लिए एंटीबायोटिक मलहम लगाएं|पशु चिकित्सक द्वारा निर्धारित दर्द निवारक दवा दें|प्रतिदिन तापमान की निगरानी करें|विटामिन की खुराक के साथ उचित पोषण सुनिश्चित करें',
+      'disease_fmd_precautions': 'नए जानवरों को कम से कम 21 दिनों के लिए अलग रखें|खेत में प्रवेश करने से पहले जूते, उपकरण और वाहनों को कीटाणुरहित करें|प्रकोप के दौरान अन्य खेतों के संपर्क से बचें|पशु चिकित्सा अनुसूची के अनुसार स्वस्थ जानवरों का टीकाकरण करें|दूषित सामग्री का उचित निपटान करें|संक्रमित जानवरों को संभालने के बाद हाथ धोएं और कपड़े बदलें|स्थानीय पशु चिकित्सा अधिकारियों को तुरंत रिपोर्ट करें',
+      'disease_fmd_first_aid': 'जानवर को तुरंत झुंड से अलग करें|प्रभावित क्षेत्रों को साफ पानी और हल्के साबुन से साफ करें|छालों पर एंटीसेप्टिक घोल लगाएं|बेचैनी कम करने के लिए नरम बिस्तर प्रदान करें|साफ पानी और नरम चारे तक पहुंच सुनिश्चित करें|उचित उपचार के लिए तुरंत पशु चिकित्सक से संपर्क करें',
+
+      // Disease Details - Mastitis
+      'disease_mast_description': 'थन के ऊतकों की सूजन, आमतौर पर जीवाणु संक्रमण के कारण होती है।',
+      'disease_mast_symptoms': 'थन में सूजन, गर्मी और लालिमा|थन में कठोरता और दर्द|दूध का असामान्य दिखना (पानी जैसा, गुच्छे, थक्के)|दूध उत्पादन में कमी|गंभीर मामलों में बुखार|भूख न लगना',
+      'disease_mast_treatment_steps': 'प्रभावित थन से बार-बार दूध निकालें (हर 2-3 घंटे में)|सूजन कम करने के लिए थन पर गर्म सेक लगाएं|पशु चिकित्सक द्वारा निर्धारित एंटीबायोटिक्स दें|निर्देशानुसार इंट्रामैमरी एंटीबायोटिक ट्यूब का उपयोग करें|दूध निकालने की उचित स्वच्छता सुनिश्चित करें|यदि आवश्यक हो तो सूजन-रोधी दवा दें|पूरे कोर्स के लिए उपचार जारी रखें (आमतौर पर 5-7 दिन)|उपभोग फिर से शुरू करने से पहले दूध की गुणवत्ता की निगरानी करें',
+      'disease_mast_precautions': 'दूध निकालने की सख्त स्वच्छता बनाए रखें|दूध निकालने से पहले और बाद में थन को साफ करें|प्रत्येक जानवर के लिए अलग कपड़े का उपयोग करें|दूध निकालने के उपकरणों को नियमित रूप से कीटाणुरहित करें|दूध निकालने के बाद जानवरों को ठीक से सुखाएं|उपचार के दौरान संक्रमित जानवरों को अलग रखें|शुरुआती पहचान के लिए नियमित रूप से दूध का परीक्षण करें',
+      'disease_mast_first_aid': 'प्रभावित थन से दूध निकालना बंद करें|सूजन कम करने के लिए ठंडा सेक लगाएं|जानवर को साफ, सूखे क्षेत्र में रखें|भरपूर ताजा पानी दें|एंटीबायोटिक उपचार के लिए पशु चिकित्सक से संपर्क करें|प्रभावित थन का दूध न पिएं',
+
+      // Disease Details - LSD
+      'disease_lsd_description': 'खून चूसने वाले कीड़ों द्वारा फैलने वाला एक वायरल रोग, जिससे त्वचा पर गांठें हो जाती हैं।',
+      'disease_lsd_symptoms': 'बुखार (103-106°F)|त्वचा पर गांठें या लंप (2-5 सेमी व्यास)|अंगों और छाती में सूजन|आंखों से पानी आना और नाक बहना|दूध उत्पादन में कमी|भूख न लगना|चलने में कठिनाई',
+      'disease_lsd_treatment_steps': 'संक्रमित जानवरों को तुरंत अलग करें|सहायक देखभाल और अच्छा पोषण प्रदान करें|त्वचा की गांठों को एंटीसेप्टिक घोल से साफ करें|माध्यमिक संक्रमण को रोकने के लिए एंटीबायोटिक मलहम लगाएं|माध्यमिक जीवाणु संक्रमण के लिए एंटीबायोटिक्स दें|दर्द निवारक और सूजन-रोधी दवा दें|पर्याप्त जलयोजन सुनिश्चित करें|जटिलताओं के लिए निगरानी करें',
+      'disease_lsd_precautions': 'कीट वैक्टर (मक्खियों, मच्छरों, टिक्स) को नियंत्रित करें|कीट विकर्षक और कीटनाशकों का उपयोग करें|स्वस्थ जानवरों का टीकाकरण करें|नए जानवरों को अलग रखें|अच्छी स्वच्छता और सफाई बनाए रखें|दूषित सामग्री का उचित निपटान करें|पशु चिकित्सा अधिकारियों को रिपोर्ट करें',
+      'disease_lsd_first_aid': 'जानवर को झुंड से अलग करें|त्वचा की गांठों को हल्के एंटीसेप्टिक से साफ करें|जानवर को साफ, छायादार क्षेत्र में रखें|ताजा पानी और नरम चारा दें|उचित उपचार के लिए पशु चिकित्सक से संपर्क करें|तापमान और सामान्य स्थिति की निगरानी करें',
+
+      // Disease Details - Brucellosis
+      'disease_bruc_description': 'एक जीवाणु रोग जो मवेशियों में गर्भपात का कारण बन सकता है और जूनोटिक है।',
+      'disease_bruc_symptoms': 'देर से गर्भपात|प्लेसेंटा का रुकना|दूध उत्पादन में कमी|बांझपन|सांडों में सूजे हुए अंडकोष|कमजोर बछड़े',
+      'disease_bruc_treatment_steps': 'तुरंत पशु चिकित्सक से परामर्श करें|संक्रमित जानवरों को अलग करें|झुंड के सभी जानवरों का परीक्षण करें|पशु चिकित्सा सलाह के अनुसार संक्रमित जानवरों को मार दें या अलग करें|स्वस्थ जानवरों का टीकाकरण करें|सख्त जैव सुरक्षा उपाय बनाए रखें|दूषित क्षेत्रों को कीटाणुरहित करें',
+      'disease_bruc_precautions': 'परिचय से पहले सभी नए जानवरों का परीक्षण करें|पहले प्रजनन से पहले बछियों का टीकाकरण करें|गर्भपात वाले भ्रूण को संभालते समय अच्छी स्वच्छता का अभ्यास करें|सुरक्षात्मक कपड़े पहनें|गर्भपात सामग्री का उचित निपटान करें|संक्रमित जानवरों का कच्चा दूध पीने से बचें|पशु चिकित्सा अधिकारियों को रिपोर्ट करें',
+      'disease_bruc_first_aid': 'जानवर को तुरंत अलग करें|संभालते समय सुरक्षात्मक कपड़े पहनें|गर्भपात सामग्री का सुरक्षित रूप से निपटान करें|परीक्षण और उपचार के लिए पशु चिकित्सक से संपर्क करें|कच्चा दूध न पिएं',
+
+      // Disease Details - Anthrax
+      'disease_anth_description': 'एक गंभीर जीवाणु रोग जो घातक हो सकता है और जूनोटिक है।',
+      'disease_anth_symptoms': 'अचानक मृत्यु (अक्सर पहला संकेत)|तेज बुखार|सांस लेने में कठिनाई|गर्दन और गले में सूजन|शरीर के छिद्रों से खूनी निर्वहन|मृत्यु से पहले ऐंठन',
+      'disease_anth_treatment_steps': 'शव को न खोलें - तुरंत अधिकारियों से संपर्क करें|किसी भी बीमार जानवर को अलग करें|सभी स्वस्थ जानवरों का टीकाकरण करें|दूषित क्षेत्रों को अच्छी तरह से कीटाणुरहित करें|पशु चिकित्सा और स्वास्थ्य विभाग के दिशानिर्देशों का पालन करें|तुरंत अधिकारियों को रिपोर्ट करें',
+      'disease_anth_precautions': 'प्रतिवर्ष जानवरों का टीकाकरण करें|अचानक मृत्यु वाले शवों को खोलने से बचें|शवों का उचित निपटान करें (जलाना या गहरा दफनाना)|दूषित क्षेत्रों को कीटाणुरहित करें|सुरक्षात्मक कपड़े पहनें|संदिग्ध मामलों की तुरंत रिपोर्ट करें|प्रभावित क्षेत्र को अलग रखें',
+      'disease_anth_first_aid': 'शव को न छुएं और न ही खोलें|क्षेत्र को तुरंत अलग करें|पशु चिकित्सा और स्वास्थ्य अधिकारियों से संपर्क करें|लोगों और जानवरों को दूर रखें|उचित निपटान निर्देशों की प्रतीक्षा करें',
     },
     'ml': {
       'app_name': 'പശു ആരോഗ്യം',
@@ -269,6 +339,41 @@ class AppStrings {
       'no_disease_identified': 'രോഗമൊന്നും തിരിച്ചറിഞ്ഞില്ല. ദയവായി കൂടുതൽ ലക്ഷണങ്ങൾ വിവരിക്കുക.',
       'your_description_here': 'നിങ്ങളുടെ വിവരണം ഇവിടെ ദൃശ്യമാകും...',
       'describe_symptoms_info': 'നിങ്ങളുടെ കന്നുകാലിയുടെ ലക്ഷണങ്ങൾ വിവരിക്കുക. ഞങ്ങൾ രോഗം സ്വയമേവ തിരിച്ചറിയും.',
+
+      // Disease Details - FMD
+      'disease_fmd_description': 'കുളമ്പുള്ള മൃഗങ്ങളെ ബാധിക്കുന്ന വളരെ പകർച്ചവ്യാധിയായ വൈറൽ രോഗം.',
+      'disease_fmd_symptoms': 'കടുത്ത പനി (106°F വരെ)|വായയിലും കാലുകളിലും കുമിളകൾ|അമിതമായി ഉമിനീർ ഒലിപ്പിക്കൽ|മുടന്തും നടക്കാൻ വിമുഖതയും|വിശപ്പില്ലായ്മ|പാൽ ഉത്പാദനം കുറയുന്നു',
+      'disease_fmd_treatment_steps': 'രോഗം ബാധിച്ച മൃഗത്തെ ഉടൻ വേർതിരിക്കുക|മൃഗത്തെ വൃത്തിയുള്ളതും ഉണങ്ങിയതും സൗകര്യപ്രദവുമായ അന്തരീക്ഷത്തിൽ സൂക്ഷിക്കുക|മൃദുവായതും രുചികരവുമായ തീറ്റയും ധാരാളം ശുദ്ധജലവും നൽകുക|വീര്യം കുറഞ്ഞ ആന്റിസെപ്റ്റിക് ലായനി (നേർപ്പിച്ച അയഡിൻ) ഉപയോഗിച്ച് കുമിളകൾ വൃത്തിയാക്കുക|ദ്വിതീയ ബാക്ടീരിയ അണുബാധ തടയാൻ ആന്റിബയോട്ടിക് തൈലം പുരട്ടുക|വെറ്ററിനറി ഡോക്ടർ നിർദ്ദേശിച്ച പ്രകാരം വേദന സംഹാരികൾ നൽകുക|ദിവസവും താപനില നിരീക്ഷിക്കുക|വിറ്റാമിൻ സപ്ലിമെന്റുകൾ നൽകി ശരിയായ പോഷകാഹാരം ഉറപ്പാക്കുക',
+      'disease_fmd_precautions': 'പുതിയ മൃഗങ്ങളെ കുറഞ്ഞത് 21 ദിവസമെങ്കിലും ക്വാറന്റൈൻ ചെയ്യുക|ഫാമിൽ പ്രവേശിക്കുന്നതിന് മുമ്പ് പാദരക്ഷകൾ, ഉപകരണങ്ങൾ, വാഹനങ്ങൾ എന്നിവ അണുവിമുക്തമാക്കുക|രോഗം പടരുന്ന സമയത്ത് മറ്റ് ഫാമുകളുമായുള്ള സമ്പർക്കം ഒഴിവാക്കുക|വെറ്ററിനറി ഷെഡ്യൂൾ അനുസരിച്ച് ആരോഗ്യകരമായ മൃഗങ്ങൾക്ക് പ്രതിരോധ കുത്തിവയ്പ്പ് നൽകുക|മലിനമായ വസ്തുക്കൾ ശരിയായി സംസ്കരിക്കുക|രോഗം ബാധിച്ച മൃഗങ്ങളെ കൈകാര്യം ചെയ്ത ശേഷം കൈകൾ കഴുകുകയും വസ്ത്രങ്ങൾ മാറുകയും ചെയ്യുക|പ്രാദേശിക വെറ്ററിനറി അധികാരികളെ ഉടൻ അറിയിക്കുക',
+      'disease_fmd_first_aid': 'മൃഗത്തെ ഉടൻ തന്നെ കൂട്ടത്തിൽ നിന്ന് മാറ്റുക|ബാധിച്ച ഭാഗങ്ങൾ ശുദ്ധജലവും വീര്യം കുറഞ്ഞ സോപ്പും ഉപയോഗിച്ച് വൃത്തിയാക്കുക|കുമിളകളിൽ ആന്റിസെപ്റ്റിക് ലായനി പുരട്ടുക|അസ്വസ്ഥത കുറയ്ക്കാൻ മൃദുവായ കിടക്ക നൽകുക|ശുദ്ധജലവും മൃദുവായ തീറ്റയും ലഭ്യമാണെന്ന് ഉറപ്പാക്കുക|ശരിയായ ചികിത്സയ്ക്കായി ഉടൻ തന്നെ വെറ്ററിനറി ഡോക്ടറുമായി ബന്ധപ്പെടുക',
+
+      // Disease Details - Mastitis
+      'disease_mast_description': 'അകിടുവീക്കം, സാധാരണയായി ബാക്ടീരിയ അണുബാധ മൂലമാണ് ഉണ്ടാകുന്നത്.',
+      'disease_mast_symptoms': 'അകിടിൽ വീക്കം, ചൂട്, ചുവപ്പ്|അകിടിൽ കാഠിന്യവും വേദനയും|പാലിന്റെ അസാധാരണമായ രൂപം (വെള്ളം പോലെ, കട്ടകൾ)|പാൽ ഉത്പാദനം കുറയുന്നു|ഗുരുതരമായ കേസുകളിൽ പനി|വിശപ്പില്ലായ്മ',
+      'disease_mast_treatment_steps': 'ബാധിച്ച അകിടിൽ നിന്ന് ഇടയ്ക്കിടെ പാൽ കറക്കുക (ഓരോ 2-3 മണിക്കൂറിലും)|വീക്കം കുറയ്ക്കാൻ അകിടിൽ ചൂടുള്ള തുണി വെക്കുക|വെറ്ററിനറി ഡോക്ടർ നിർദ്ദേശിച്ച പ്രകാരം ആന്റിബയോട്ടിക്കുകൾ നൽകുക|നിർദ്ദേശാനുസരണം ഇൻട്രാമാമറി ആന്റിബയോട്ടിക് ട്യൂബുകൾ ഉപയോഗിക്കുക|ശരിയായ കറവ ശുചിത്വം ഉറപ്പാക്കുക|ആവശ്യമെങ്കിൽ ആന്റി-ഇൻഫ്ലമേറ്ററി മരുന്ന് നൽകുക|മുഴുവൻ കോഴ്സിനും ചികിത്സ തുടരുക (സാധാരണയായി 5-7 ദിവസം)|ഉപഭോഗം പുനരാരംഭിക്കുന്നതിന് മുമ്പ് പാലിന്റെ ഗുണനിലവാരം പരിശോധിക്കുക',
+      'disease_mast_precautions': 'കർശനമായ കറവ ശുചിത്വം പാലിക്കുക|കറവയ്ക്ക് മുമ്പും ശേഷവും അകിട് വൃത്തിയാക്കുക|ഓരോ മൃഗത്തിനും വെവ്വേറെ തുണികൾ ഉപയോഗിക്കുക|കറവ ഉപകരണങ്ങൾ പതിവായി അണുവിമുക്തമാക്കുക|കറവയ്ക്ക് ശേഷം മൃഗങ്ങളെ ശരിയായി ഉണക്കുക|ചികിത്സാ വേളയിൽ രോഗം ബാധിച്ച മൃഗങ്ങളെ വേർതിരിക്കുക|നേരത്തെ കണ്ടെത്തുന്നതിന് പാൽ പതിവായി പരിശോധിക്കുക',
+      'disease_mast_first_aid': 'ബാധിച്ച അകിടിൽ നിന്ന് പാൽ കറക്കുന്നത് നിർത്തുക|വീക്കം കുറയ്ക്കാൻ തണുത്ത തുണി വെക്കുക|മൃഗത്തെ വൃത്തിയുള്ളതും ഉണങ്ങിയതുമായ സ്ഥലത്ത് സൂക്ഷിക്കുക|ധാരാളം ശുദ്ധജലം നൽകുക|ആന്റിബയോട്ടിക് ചികിത്സയ്ക്കായി വെറ്ററിനറി ഡോക്ടറുമായി ബന്ധപ്പെടുക|ബാധിച്ച അകിടിൽ നിന്നുള്ള പാൽ കുടിക്കരുത്',
+
+      // Disease Details - LSD
+      'disease_lsd_description': 'രക്തം കുടിക്കുന്ന പ്രാണികൾ വഴി പകരുന്ന വൈറൽ രോഗം, ഇത് ചർമ്മത്തിൽ മുഴകൾ ഉണ്ടാക്കുന്നു.',
+      'disease_lsd_symptoms': 'പനി (103-106°F)|ചർമ്മത്തിൽ മുഴകൾ (2-5 സെ.മീ വ്യാസം)|കൈകാലുകളിലും നെഞ്ചിലും വീക്കം|കണ്ണിൽ നിന്ന് വെള്ളം വരിക, മൂക്കൊലിപ്പ്|പാൽ ഉത്പാദനം കുറയുന്നു|വിശപ്പില്ലായ്മ|നടക്കാൻ ബുദ്ധിമുട്ട്',
+      'disease_lsd_treatment_steps': 'രോഗം ബാധിച്ച മൃഗങ്ങളെ ഉടൻ വേർതിരിക്കുക|സഹായകരമായ പരിചരണവും നല്ല പോഷകാഹാരവും നൽകുക|ചർമ്മത്തിലെ മുഴകൾ ആന്റിസെപ്റ്റിക് ലായനി ഉപയോഗിച്ച് വൃത്തിയാക്കുക|ദ്വിതീയ അണുബാധ തടയാൻ ആന്റിബയോട്ടിക് തൈലം പുരട്ടുക|ദ്വിതീയ ബാക്ടീരിയ അണുബാധകൾക്ക് ആന്റിബയോട്ടിക്കുകൾ നൽകുക|വേദന സംഹാരികളും ആന്റി-ഇൻഫ്ലമേറ്ററി മരുന്നുകളും നൽകുക|ആവശ്യത്തിന് ജലാംശം ഉറപ്പാക്കുക|സങ്കീർണതകൾ നിരീക്ഷിക്കുക',
+      'disease_lsd_precautions': 'പ്രാണികളെ നിയന്ത്രിക്കുക (ഈച്ചകൾ, കൊതുകുകൾ, ചെള്ളുകൾ)|പ്രാണി അകറ്റുന്ന മരുന്നുകളും കീടനാശിനികളും ഉപയോഗിക്കുക|ആരോഗ്യമുള്ള മൃഗങ്ങൾക്ക് പ്രതിരോധ കുത്തിവയ്പ്പ് നൽകുക|പുതിയ മൃഗങ്ങളെ ക്വാറന്റൈൻ ചെയ്യുക|നല്ല ശുചിത്വം പാലിക്കുക|മലിനമായ വസ്തുക്കൾ ശരിയായി സംസ്കരിക്കുക|വെറ്ററിനറി അധികാരികളെ അറിയിക്കുക',
+      'disease_lsd_first_aid': 'മൃഗത്തെ കൂട്ടത്തിൽ നിന്ന് വേർതിരിക്കുക|ചർമ്മത്തിലെ മുഴകൾ വീര്യം കുറഞ്ഞ ആന്റിസെപ്റ്റിക് ഉപയോഗിച്ച് വൃത്തിയാക്കുക|മൃഗത്തെ വൃത്തിയുള്ളതും തണലുള്ളതുമായ സ്ഥലത്ത് സൂക്ഷിക്കുക|ശുദ്ധജലവും മൃദുവായ തീറ്റയും നൽകുക|ശരിയായ ചികിത്സയ്ക്കായി വെറ്ററിനറി ഡോക്ടറുമായി ബന്ധപ്പെടുക|താപനിലയും പൊതുവായ അവസ്ഥയും നിരീക്ഷിക്കുക',
+
+      // Disease Details - Brucellosis
+      'disease_bruc_description': 'കന്നുകാലികളിൽ ഗർഭച്ഛിദ്രത്തിന് കാരണമാകുന്ന ബാക്ടീരിയ രോഗം, ഇത് മനുഷ്യരിലേക്കും പകരാം.',
+      'disease_bruc_symptoms': 'വൈകിയുള്ള ഗർഭച്ഛിദ്രം|മറുപിള്ള വീഴാതിരിക്കുക|പാൽ ഉത്പാദനം കുറയുന്നു|വന്ധ്യത|കാളകളിൽ വൃഷണം വീർക്കുക|ദുർബലമായ കിടാക്കൾ',
+      'disease_bruc_treatment_steps': 'ഉടൻ തന്നെ വെറ്ററിനറി ഡോക്ടറുമായി ബന്ധപ്പെടുക|രോഗം ബാധിച്ച മൃഗങ്ങളെ വേർതിരിക്കുക|കൂട്ടത്തിലെ എല്ലാ മൃഗങ്ങളെയും പരിശോധിക്കുക|വെറ്ററിനറി ഉപദേശപ്രകാരം രോഗം ബാധിച്ച മൃഗങ്ങളെ ഒഴിവാക്കുകയോ വേർതിരിക്കുകയോ ചെയ്യുക|ആരോഗ്യമുള്ള മൃഗങ്ങൾക്ക് പ്രതിരോധ കുത്തിവയ്പ്പ് നൽകുക|കർശനമായ ജൈവസുരക്ഷാ നടപടികൾ പാലിക്കുക|മലിനമായ സ്ഥലങ്ങൾ അണുവിമുക്തമാക്കുക',
+      'disease_bruc_precautions': 'പുതിയ മൃഗങ്ങളെ കൊണ്ടുവരുന്നതിന് മുമ്പ് പരിശോധിക്കുക|ആദ്യ പ്രജനനത്തിന് മുമ്പ് കിടാരികൾക്ക് പ്രതിരോധ കുത്തിവയ്പ്പ് നൽകുക|ഗർഭച്ഛിദ്രം സംഭവിച്ച ഭ്രൂണങ്ങളെ കൈകാര്യം ചെയ്യുമ്പോൾ നല്ല ശുചിത്വം പാലിക്കുക|സംരക്ഷണ വസ്ത്രങ്ങൾ ധരിക്കുക|ഗർഭച്ഛിദ്രം സംഭവിച്ച വസ്തുക്കൾ ശരിയായി സംസ്കരിക്കുക|രോഗം ബാധിച്ച മൃഗങ്ങളിൽ നിന്നുള്ള പച്ചപ്പാൽ കുടിക്കുന്നത് ഒഴിവാക്കുക|വെറ്ററിനറി അധികാരികളെ അറിയിക്കുക',
+      'disease_bruc_first_aid': 'മൃഗത്തെ ഉടൻ വേർതിരിക്കുക|കൈകാര്യം ചെയ്യുമ്പോൾ സംരക്ഷണ വസ്ത്രങ്ങൾ ധരിക്കുക|ഗർഭച്ഛിദ്രം സംഭവിച്ച വസ്തുക്കൾ സുരക്ഷിതമായി സംസ്കരിക്കുക|പരിശോധനയ്ക്കും ചികിത്സയ്ക്കുമായി വെറ്ററിനറി ഡോക്ടറുമായി ബന്ധപ്പെടുക|പച്ചപ്പാൽ കുടിക്കരുത്',
+
+      // Disease Details - Anthrax
+      'disease_anth_description': 'മാരകമായേക്കാവുന്ന ഗുരുതരമായ ബാക്ടീരിയ രോഗം, ഇത് മനുഷ്യരിലേക്കും പകരാം.',
+      'disease_anth_symptoms': 'പെട്ടെന്നുള്ള മരണം (പലപ്പോഴും ആദ്യ ലക്ഷണം)|കടുത്ത പനി|ശ്വാസതടസ്സം|കഴുത്തിലും തൊണ്ടയിലും വീക്കം|ശരീരത്തിലെ ദ്വാരങ്ങളിൽ നിന്ന് രക്തസ്രാവം|മരണത്തിന് മുമ്പ് വിറയൽ',
+      'disease_anth_treatment_steps': 'ശവം തുറക്കരുത് - ഉടൻ അധികാരികളെ അറിയിക്കുക|രോഗം ബാധിച്ച മൃഗങ്ങളെ വേർതിരിക്കുക|എല്ലാ ആരോഗ്യമുള്ള മൃഗങ്ങൾക്കും പ്രതിരോധ കുത്തിവയ്പ്പ് നൽകുക|മലിനമായ സ്ഥലങ്ങൾ നന്നായി അണുവിമുക്തമാക്കുക|വെറ്ററിനറി, ആരോഗ്യ വകുപ്പ് നിർദ്ദേശങ്ങൾ പാലിക്കുക|ഉടൻ അധികാരികളെ അറിയിക്കുക',
+      'disease_anth_precautions': 'വർഷം തോറും മൃഗങ്ങൾക്ക് പ്രതിരോധ കുത്തിവയ്പ്പ് നൽകുക|പെട്ടെന്നുള്ള മരണം സംഭവിച്ച ശവങ്ങൾ തുറക്കുന്നത് ഒഴിവാക്കുക|ശവങ്ങൾ ശരിയായി സംസ്കരിക്കുക (കത്തിക്കുകയോ ആഴത്തിൽ കുഴിച്ചിടുകയോ ചെയ്യുക)|മലിനമായ സ്ഥലങ്ങൾ അണുവിമുക്തമാക്കുക|സംരക്ഷണ വസ്ത്രങ്ങൾ ധരിക്കുക|സംശയാസ്പദമായ കേസുകൾ ഉടൻ റിപ്പോർട്ട് ചെയ്യുക|ബാധിച്ച പ്രദേശം ക്വാറന്റൈൻ ചെയ്യുക',
+      'disease_anth_first_aid': 'ശവം തൊടുകയോ തുറക്കുകയോ ചെയ്യരുത്|പ്രദേശം ഉടൻ വേർതിരിക്കുക|വെറ്ററിനറി, ആരോഗ്യ അധികാരികളുമായി ബന്ധപ്പെടുക|ആളുകളെയും മൃഗങ്ങളെയും അകറ്റി നിർത്തുക|ശരിയായ സംസ്കരണ നിർദ്ദേശങ്ങൾക്കായി കാത്തിരിക്കുക',
     },
     'kn': {
       'app_name': 'ಪಶು ಸ್ವಾಸ್ಥ್ಯ',

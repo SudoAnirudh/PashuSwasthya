@@ -168,6 +168,19 @@ class _TreatmentGuidesScreenState extends State<TreatmentGuidesScreen> {
     );
   }
 
+  List<String> _getLocalizedList(String code, String section, List<String> defaultList) {
+    final localizationService = Provider.of<LocalizationService>(context, listen: false);
+    final key = 'disease_${code.toLowerCase()}_$section';
+    final localizedString = localizationService.translate(key);
+    
+    // If the key returns itself (meaning translation missing) or is empty, return default
+    if (localizedString == key || localizedString.isEmpty) {
+      return defaultList;
+    }
+    
+    return localizedString.split('|').map((e) => e.trim()).toList();
+  }
+
   Widget _buildDiseaseGuide(TreatmentGuide guide) {
     final localizationService = Provider.of<LocalizationService>(context);
     return SingleChildScrollView(
@@ -194,7 +207,10 @@ class _TreatmentGuidesScreenState extends State<TreatmentGuidesScreen> {
                   if (guide.description.isNotEmpty) ...[
                     const SizedBox(height: 8),
                     Text(
-                      guide.description,
+                      // Try to localize description too if available
+                      localizationService.translate('disease_${guide.code.toLowerCase()}_description') != 'disease_${guide.code.toLowerCase()}_description'
+                          ? localizationService.translate('disease_${guide.code.toLowerCase()}_description')
+                          : guide.description,
                       style: GoogleFonts.poppins(fontSize: 14),
                     ),
                   ],
@@ -210,28 +226,28 @@ class _TreatmentGuidesScreenState extends State<TreatmentGuidesScreen> {
           // Symptoms
           _buildTreatmentSection(
             localizationService.translate('symptoms'),
-            guide.symptoms,
+            _getLocalizedList(guide.code, 'symptoms', guide.symptoms),
             Icons.sick,
           ),
           
           // Treatment Steps
           _buildTreatmentSection(
             localizationService.translate('treatment_steps'),
-            guide.treatmentSteps,
+            _getLocalizedList(guide.code, 'treatment_steps', guide.treatmentSteps),
             Icons.medical_services,
           ),
           
           // Precautions
           _buildTreatmentSection(
             localizationService.translate('precautions'),
-            guide.precautions,
+            _getLocalizedList(guide.code, 'precautions', guide.precautions),
             Icons.shield,
           ),
           
           // First Aid
           _buildTreatmentSection(
             localizationService.translate('first_aid'),
-            guide.firstAid,
+            _getLocalizedList(guide.code, 'first_aid', guide.firstAid),
             Icons.emergency,
           ),
         ],

@@ -67,7 +67,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                     crossAxisCount: 2,
                     crossAxisSpacing: 16,
                     mainAxisSpacing: 16,
-                    childAspectRatio: 1.0,
+                    childAspectRatio: 0.75, // Even taller cards for mobile safety
                   ),
                   itemCount: languages.length,
                   itemBuilder: (context, index) {
@@ -126,53 +126,71 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
         onTap: onTap,
         borderRadius: BorderRadius.circular(16),
         child: Container(
+          padding: const EdgeInsets.all(8.0),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
             color: isSelected ? AppTheme.primaryGreen.withOpacity(0.05) : Colors.white,
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: isSelected ? AppTheme.primaryGreen.withOpacity(0.1) : Colors.grey.shade100,
-                  shape: BoxShape.circle,
-                ),
-                child: Text(
-                  language['code']!.toUpperCase(),
-                  style: GoogleFonts.poppins(
-                    fontWeight: FontWeight.bold,
-                    color: isSelected ? AppTheme.primaryGreen : Colors.grey.shade600,
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              return SingleChildScrollView(
+                physics: const NeverScrollableScrollPhysics(),
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: isSelected ? AppTheme.primaryGreen.withOpacity(0.1) : Colors.grey.shade100,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Text(
+                          language['code']!.toUpperCase(),
+                          style: GoogleFonts.poppins(
+                            fontWeight: FontWeight.bold,
+                            color: isSelected ? AppTheme.primaryGreen : Colors.grey.shade600,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                          language['name']!,
+                          style: GoogleFonts.poppins(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: isSelected ? AppTheme.primaryGreen : AppTheme.textPrimary,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                          language['native']!,
+                          style: GoogleFonts.poppins(
+                            fontSize: 14,
+                            color: AppTheme.textSecondary,
+                          ),
+                        ),
+                      ),
+                      if (isSelected) ...[
+                        const SizedBox(height: 8),
+                        Icon(
+                          Icons.check_circle,
+                          color: AppTheme.primaryGreen,
+                          size: 20,
+                        ),
+                      ],
+                    ],
                   ),
                 ),
-              ),
-              const SizedBox(height: 12),
-              Text(
-                language['name']!,
-                style: GoogleFonts.poppins(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: isSelected ? AppTheme.primaryGreen : AppTheme.textPrimary,
-                ),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                language['native']!,
-                style: GoogleFonts.poppins(
-                  fontSize: 14,
-                  color: AppTheme.textSecondary,
-                ),
-              ),
-              if (isSelected) ...[
-                const SizedBox(height: 8),
-                Icon(
-                  Icons.check_circle,
-                  color: AppTheme.primaryGreen,
-                  size: 20,
-                ),
-              ],
-            ],
+              );
+            },
           ),
         ),
       ),
