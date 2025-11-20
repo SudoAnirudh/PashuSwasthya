@@ -4,6 +4,8 @@ import 'package:pashu_swasthya/models/treatment_guide.dart';
 import 'package:pashu_swasthya/services/treatment_service.dart';
 import 'package:pashu_swasthya/utils/app_theme.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:pashu_swasthya/services/localization_service.dart';
 
 class TreatmentGuidesScreen extends StatefulWidget {
   final String? diseaseName;
@@ -33,6 +35,23 @@ class _TreatmentGuidesScreenState extends State<TreatmentGuidesScreen> {
     }
   }
 
+  String _getDiseaseName(TreatmentGuide guide, LocalizationService localizationService) {
+    switch (guide.code) {
+      case 'FMD':
+        return localizationService.translate('disease_fmd');
+      case 'MAST':
+        return localizationService.translate('disease_mastitis');
+      case 'LSD':
+        return localizationService.translate('disease_lsd');
+      case 'BRUC':
+        return localizationService.translate('disease_brucellosis');
+      case 'ANTH':
+        return localizationService.translate('disease_anthrax');
+      default:
+        return guide.diseaseName;
+    }
+  }
+
   Future<void> _callEmergencyContact(String contact) async {
     // Extract phone number from contact string
     final phoneRegex = RegExp(r'[\d+\-\(\)\s]+');
@@ -45,7 +64,7 @@ class _TreatmentGuidesScreenState extends State<TreatmentGuidesScreen> {
           await launchUrl(uri);
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Cannot make call: $phoneNumber')),
+            SnackBar(content: Text('${Provider.of<LocalizationService>(context, listen: false).translate('cannot_make_call')}: $phoneNumber')),
           );
         }
       }
@@ -92,6 +111,7 @@ class _TreatmentGuidesScreenState extends State<TreatmentGuidesScreen> {
   }
 
   Widget _buildEmergencySection(TreatmentGuide guide) {
+    final localizationService = Provider.of<LocalizationService>(context);
     if (!guide.isSevere || guide.emergencyContacts.isEmpty) {
       return const SizedBox.shrink();
     }
@@ -112,7 +132,7 @@ class _TreatmentGuidesScreenState extends State<TreatmentGuidesScreen> {
               Icon(Icons.warning, color: Colors.red.shade700, size: 28),
               const SizedBox(width: 8),
               Text(
-                'EMERGENCY - Severe Disease Detected',
+                localizationService.translate('emergency_severe_disease'),
                 style: GoogleFonts.poppins(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -123,7 +143,7 @@ class _TreatmentGuidesScreenState extends State<TreatmentGuidesScreen> {
           ),
           const SizedBox(height: 16),
           Text(
-            'Contact a veterinarian immediately:',
+            localizationService.translate('contact_vet_immediately'),
             style: GoogleFonts.poppins(
               fontSize: 14,
               fontWeight: FontWeight.w600,
@@ -149,6 +169,7 @@ class _TreatmentGuidesScreenState extends State<TreatmentGuidesScreen> {
   }
 
   Widget _buildDiseaseGuide(TreatmentGuide guide) {
+    final localizationService = Provider.of<LocalizationService>(context);
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -163,7 +184,7 @@ class _TreatmentGuidesScreenState extends State<TreatmentGuidesScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    guide.diseaseName,
+                    _getDiseaseName(guide, localizationService),
                     style: GoogleFonts.poppins(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -188,28 +209,28 @@ class _TreatmentGuidesScreenState extends State<TreatmentGuidesScreen> {
           
           // Symptoms
           _buildTreatmentSection(
-            'Symptoms',
+            localizationService.translate('symptoms'),
             guide.symptoms,
             Icons.sick,
           ),
           
           // Treatment Steps
           _buildTreatmentSection(
-            'Treatment Steps',
+            localizationService.translate('treatment_steps'),
             guide.treatmentSteps,
             Icons.medical_services,
           ),
           
           // Precautions
           _buildTreatmentSection(
-            'Precautions',
+            localizationService.translate('precautions'),
             guide.precautions,
             Icons.shield,
           ),
           
           // First Aid
           _buildTreatmentSection(
-            'First Aid',
+            localizationService.translate('first_aid'),
             guide.firstAid,
             Icons.emergency,
           ),
@@ -222,7 +243,11 @@ class _TreatmentGuidesScreenState extends State<TreatmentGuidesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_selectedGuide != null ? _selectedGuide!.diseaseName : 'Treatment Guides'),
+  Widget build(BuildContext context) {
+    final localizationService = Provider.of<LocalizationService>(context);
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(_selectedGuide != null ? _getDiseaseName(_selectedGuide!, localizationService) : localizationService.translate('treatment_guides')),
         centerTitle: true,
       ),
       body: _selectedGuide != null
@@ -232,6 +257,7 @@ class _TreatmentGuidesScreenState extends State<TreatmentGuidesScreen> {
   }
 
   Widget _buildDiseaseList() {
+    final localizationService = Provider.of<LocalizationService>(context);
     final allGuides = _treatmentService.getAllTreatmentGuides();
     
     return ListView.builder(
@@ -247,7 +273,7 @@ class _TreatmentGuidesScreenState extends State<TreatmentGuidesScreen> {
               color: guide.isSevere ? Colors.red : AppTheme.primaryGreen,
             ),
             title: Text(
-              guide.diseaseName,
+              _getDiseaseName(guide, localizationService),
               style: GoogleFonts.poppins(fontWeight: FontWeight.w600),
             ),
             subtitle: Text(guide.description.isEmpty ? guide.code : guide.description),

@@ -11,6 +11,8 @@ import 'package:pashu_swasthya/models/prediction_history.dart';
 import 'package:pashu_swasthya/screens/treatment_guide.dart';
 import 'package:pashu_swasthya/utils/app_theme.dart';
 import 'package:uuid/uuid.dart';
+import 'package:provider/provider.dart';
+import 'package:pashu_swasthya/services/localization_service.dart';
 
 enum DetectionStep {
   breedImageInput,
@@ -74,7 +76,7 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
     if (status.isDenied) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Camera permission is required')),
+          SnackBar(content: Text(Provider.of<LocalizationService>(context, listen: false).translate('camera_permission_required'))),
         );
       }
     }
@@ -103,7 +105,7 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
   Future<void> _detectBreed() async {
     if (_breedImage == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please capture or upload image first')),
+        SnackBar(content: Text(Provider.of<LocalizationService>(context, listen: false).translate('please_capture_image'))),
       );
       return;
     }
@@ -141,7 +143,7 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
 
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Breed detection failed: $e'),
+            content: Text('${Provider.of<LocalizationService>(context, listen: false).translate('breed_detection_failed')}: $e'),
             duration: const Duration(seconds: 3),
           ),
         );
@@ -152,7 +154,7 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
   Future<void> _detectDisease() async {
     if (_diseaseImage == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please capture or upload image first')),
+        SnackBar(content: Text(Provider.of<LocalizationService>(context, listen: false).translate('please_capture_image'))),
       );
       return;
     }
@@ -190,7 +192,7 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
 
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Disease detection failed: $e'),
+            content: Text('${Provider.of<LocalizationService>(context, listen: false).translate('disease_detection_failed')}: $e'),
             duration: const Duration(seconds: 3),
           ),
         );
@@ -222,7 +224,7 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
     // Check if the disease is "Healthy" or confidence is too low
     if (_diseaseResult!.diseaseName.toLowerCase() == 'healthy' ||
         _diseaseResult!.confidence < 50.0) {
-      return 'No disease detected';
+      return 'no_disease_detected';
     }
 
     return _diseaseResult!.diseaseName;
@@ -251,7 +253,7 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(_getAppBarTitle()),
+        title: Text(_getAppBarTitle(context)),
         centerTitle: true,
         leading:
             _currentStep != DetectionStep.breedImageInput
@@ -286,16 +288,17 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
     );
   }
 
-  String _getAppBarTitle() {
+  String _getAppBarTitle(BuildContext context) {
+    final localizationService = Provider.of<LocalizationService>(context);
     switch (_currentStep) {
       case DetectionStep.breedImageInput:
-        return 'Breed Detection';
+        return localizationService.translate('breed_detection');
       case DetectionStep.breedResult:
-        return 'Breed Result';
+        return localizationService.translate('breed_result');
       case DetectionStep.diseaseImageInput:
-        return 'Disease Detection';
+        return localizationService.translate('disease_detection');
       case DetectionStep.finalResult:
-        return 'Detection Results';
+        return localizationService.translate('detection_results');
     }
   }
 
@@ -314,6 +317,7 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
 
   // Step 1: Breed Image Input
   Widget _buildBreedImageInputStep(bool isTablet) {
+    final localizationService = Provider.of<LocalizationService>(context);
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -340,7 +344,7 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         child: Text(
-                          'Upload image of your cattle for breed identification',
+                          localizationService.translate('upload_cattle_image'),
                           style: GoogleFonts.poppins(
                             fontSize: isTablet ? 18 : 14,
                             color: AppTheme.textSecondary,
@@ -379,7 +383,7 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
               child: ElevatedButton.icon(
                 icon: const Icon(Icons.camera_alt),
                 label: Text(
-                  'Camera',
+                  localizationService.translate('camera'),
                   style: GoogleFonts.poppins(fontSize: isTablet ? 16 : 14),
                 ),
                 onPressed: () => _pickBreedImage(ImageSource.camera),
@@ -393,7 +397,7 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
               child: ElevatedButton.icon(
                 icon: const Icon(Icons.photo_library),
                 label: Text(
-                  'Gallery',
+                  localizationService.translate('gallery'),
                   style: GoogleFonts.poppins(fontSize: isTablet ? 16 : 14),
                 ),
                 style: ElevatedButton.styleFrom(
@@ -423,7 +427,7 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
                     )
                     : const Icon(Icons.search),
             label: Text(
-              _isDetectingBreed ? 'Detecting...' : 'Detect Breed',
+              _isDetectingBreed ? localizationService.translate('detecting') : localizationService.translate('detect_breed'),
               style: GoogleFonts.poppins(
                 fontSize: isTablet ? 18 : 16,
                 fontWeight: FontWeight.w600,
@@ -442,6 +446,7 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
 
   // Step 2: Breed Result
   Widget _buildBreedResultStep(bool isTablet) {
+    final localizationService = Provider.of<LocalizationService>(context);
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -468,7 +473,7 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
                   const SizedBox(width: 12),
                   Flexible(
                     child: Text(
-                      'Breed Identified',
+                      localizationService.translate('breed_identified'),
                       style: GoogleFonts.poppins(
                         fontSize: isTablet ? 24 : 20,
                         fontWeight: FontWeight.bold,
@@ -491,7 +496,7 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
               ),
               const SizedBox(height: 8),
               Text(
-                'Confidence: ${_breedResult?.confidence.toStringAsFixed(1) ?? '0.0'}%',
+                '${localizationService.translate('confidence')}: ${_breedResult?.confidence.toStringAsFixed(1) ?? '0.0'}%',
                 style: GoogleFonts.poppins(
                   fontSize: isTablet ? 16 : 14,
                   color: AppTheme.textSecondary,
@@ -506,7 +511,7 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
           child: ElevatedButton.icon(
             onPressed: _proceedToDiseaseInput,
             icon: const Icon(Icons.arrow_forward),
-            label: const Text('Continue to Disease Detection'),
+            label: Text(localizationService.translate('continue_disease_detection')),
             style: ElevatedButton.styleFrom(
               backgroundColor: AppTheme.warningOrange,
               padding: EdgeInsets.symmetric(vertical: isTablet ? 18 : 16),
@@ -519,6 +524,7 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
 
   // Step 3: Disease Image Input
   Widget _buildDiseaseImageInputStep(bool isTablet) {
+    final localizationService = Provider.of<LocalizationService>(context);
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -545,7 +551,7 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         child: Text(
-                          'Upload image of the diseased area',
+                          localizationService.translate('upload_disease_image'),
                           style: GoogleFonts.poppins(
                             fontSize: isTablet ? 18 : 14,
                             color: AppTheme.textSecondary,
@@ -584,7 +590,7 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
               child: ElevatedButton.icon(
                 icon: const Icon(Icons.camera_alt),
                 label: Text(
-                  'Camera',
+                  localizationService.translate('camera'),
                   style: GoogleFonts.poppins(fontSize: isTablet ? 16 : 14),
                 ),
                 onPressed: () => _pickDiseaseImage(ImageSource.camera),
@@ -598,7 +604,7 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
               child: ElevatedButton.icon(
                 icon: const Icon(Icons.photo_library),
                 label: Text(
-                  'Gallery',
+                  localizationService.translate('gallery'),
                   style: GoogleFonts.poppins(fontSize: isTablet ? 16 : 14),
                 ),
                 style: ElevatedButton.styleFrom(
@@ -630,7 +636,7 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
                     )
                     : const Icon(Icons.analytics),
             label: Text(
-              _isDetectingDisease ? 'Analyzing...' : 'Analyze Disease',
+              _isDetectingDisease ? localizationService.translate('analyzing') : localizationService.translate('analyze_disease'),
               style: GoogleFonts.poppins(
                 fontSize: isTablet ? 18 : 16,
                 fontWeight: FontWeight.w600,
@@ -649,9 +655,10 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
 
   // Step 4: Final Results
   Widget _buildFinalResultStep(bool isTablet) {
+    final localizationService = Provider.of<LocalizationService>(context);
     final diseaseStatus = _getDiseaseStatus();
     final overallAccuracy = _getOverallAccuracy();
-    final hasDisease = diseaseStatus != 'No disease detected';
+    final hasDisease = diseaseStatus != 'no_disease_detected';
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -681,7 +688,7 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
                   const SizedBox(width: 12),
                   Flexible(
                     child: Text(
-                      'Breed',
+                      localizationService.translate('breed_identified'), // Using breed_identified as 'Breed' label too or add new key
                       style: GoogleFonts.poppins(
                         fontSize: isTablet ? 20 : 18,
                         fontWeight: FontWeight.bold,
@@ -738,7 +745,7 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
                   const SizedBox(width: 12),
                   Flexible(
                     child: Text(
-                      'Disease Status',
+                      localizationService.translate('disease_status'),
                       style: GoogleFonts.poppins(
                         fontSize: isTablet ? 20 : 18,
                         fontWeight: FontWeight.bold,
@@ -753,7 +760,7 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
               ),
               const SizedBox(height: 12),
               Text(
-                diseaseStatus,
+                diseaseStatus == 'no_disease_detected' ? localizationService.translate('no_disease_detected') : diseaseStatus,
                 style: GoogleFonts.poppins(
                   fontSize: isTablet ? 24 : 20,
                   fontWeight: FontWeight.w600,
@@ -791,7 +798,7 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
                   const SizedBox(width: 12),
                   Flexible(
                     child: Text(
-                      'Overall Accuracy',
+                      localizationService.translate('overall_accuracy'),
                       style: GoogleFonts.poppins(
                         fontSize: isTablet ? 20 : 18,
                         fontWeight: FontWeight.bold,

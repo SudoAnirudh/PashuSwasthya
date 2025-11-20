@@ -15,9 +15,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final localizationService = Provider.of<LocalizationService>(context);
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Settings'),
+        title: Text(localizationService.translate('settings')),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -25,17 +27,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildSectionTitle('General'),
+            _buildSectionTitle(localizationService.translate('general')),
             const SizedBox(height: 10),
             _buildSettingsTile(
               icon: Icons.language,
-              title: 'Language',
-              trailing: 'English',
-              onTap: () {},
+              title: localizationService.translate('language'),
+              trailing: _getLanguageName(localizationService.locale.languageCode),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const LanguageSelectionScreen(),
+                  ),
+                );
+              },
             ),
             _buildSettingsTile(
               icon: Icons.notifications,
-              title: 'Notifications',
+              title: localizationService.translate('notifications'),
               trailingWidget: Switch(
                 value: _notificationsEnabled,
                 onChanged: (value) {
@@ -48,21 +57,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             _buildSettingsTile(
               icon: Icons.account_circle,
-              title: 'Account',
+              title: localizationService.translate('account'),
               onTap: () {},
             ),
             const SizedBox(height: 30),
-            _buildSectionTitle('Data & Offline'),
+            _buildSectionTitle(localizationService.translate('data_offline')),
             const SizedBox(height: 10),
             _buildSettingsTile(
               icon: Icons.sync,
-              title: 'Offline Data Update',
-              subtitle: 'Last sync: 2 hours ago',
+              title: localizationService.translate('offline_data_update'),
+              subtitle: 'Last sync: 2 hours ago', // TODO: Localize time
               onTap: () {},
             ),
             _buildSettingsTile(
               icon: Icons.save,
-              title: 'Save User Info',
+              title: localizationService.translate('save_user_info'),
               trailingWidget: Switch(
                 value: _saveUserInfo,
                 onChanged: (value) {
@@ -75,26 +84,41 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             _buildSettingsTile(
               icon: Icons.delete,
-              title: 'Clear Cache',
-              onTap: _showClearCacheDialog,
+              title: localizationService.translate('clear_cache'),
+              onTap: () => _showClearCacheDialog(localizationService),
             ),
             const SizedBox(height: 30),
-            _buildSectionTitle('About'),
+            _buildSectionTitle(localizationService.translate('about')),
             const SizedBox(height: 10),
             _buildSettingsTile(
               icon: Icons.info,
-              title: 'About PashuSwasthya',
+              title: '${localizationService.translate('about')} PashuSwasthya',
               onTap: () {},
             ),
             _buildSettingsTile(
               icon: Icons.help,
-              title: 'Help & Support',
+              title: localizationService.translate('help_support'),
               onTap: () {},
             ),
           ],
         ),
       ),
     );
+  }
+
+  String _getLanguageName(String code) {
+    switch (code) {
+      case 'hi':
+        return 'हिन्दी';
+      case 'ml':
+        return 'മലയാളം';
+      case 'kn':
+        return 'ಕನ್ನಡ';
+      case 'ta':
+        return 'தமிழ்';
+      default:
+        return 'English';
+    }
   }
 
   Widget _buildSettingsTile({
@@ -143,23 +167,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  void _showClearCacheDialog() {
+  void _showClearCacheDialog(LocalizationService localizationService) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Clear Cache'),
-        content: const Text('Are you sure you want to clear the cache?'),
+        title: Text(localizationService.translate('clear_cache')),
+        content: Text(localizationService.translate('are_you_sure_clear_cache')),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
+            child: Text(localizationService.translate('cancel')),
           ),
           TextButton(
             onPressed: () {
               // TODO: Implement cache clearing logic
               Navigator.pop(context);
             },
-            child: const Text('Clear'),
+            child: Text(localizationService.translate('clear')),
           ),
         ],
       ),

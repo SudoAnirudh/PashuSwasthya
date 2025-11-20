@@ -109,9 +109,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 return _buildGridCard(
                   context: context,
                   icon: Icons.camera_alt,
-                  title: 'Breed & Disease Detection',
+                  title: localizationService.translate('breed_disease_detection'),
                   subtitle:
-                      'Identify breed first, then detect diseases automatically.',
+                      localizationService.translate('breed_disease_subtitle'),
                   onTap: () {
                     Navigator.push(
                       context,
@@ -126,7 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   context: context,
                   icon: Icons.book,
                   title: localizationService.translate('treatment_guide'),
-                  subtitle: 'Access offline guides for common treatments.',
+                  subtitle: localizationService.translate('treatment_guide_subtitle'),
                   onTap: () {
                     Navigator.push(
                       context,
@@ -141,12 +141,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   context: context,
                   icon: Icons.call,
                   title: localizationService.translate('vet_help'),
-                  subtitle: 'Connect with a certified vet for expert advice.',
+                  subtitle: localizationService.translate('vet_help_subtitle'),
                   onTap: () {
                     // TODO: Add Vet Connect feature
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
-                        content: Text('Vet Connect feature coming soon!'),
+                        content: Text(localizationService.translate('vet_connect_coming_soon')),
                       ),
                     );
                   },
@@ -183,14 +183,14 @@ class _HomeScreenState extends State<HomeScreen> {
             title: Column(
               children: [
                 Text(
-                  'PashuSwasthya',
+                  localizationService.translate('app_name'),
                   style: GoogleFonts.poppins(
                     fontWeight: FontWeight.bold,
                     fontSize: isTablet ? 22 : 18,
                   ),
                 ),
                 Text(
-                  'Cattle Health Assistant',
+                  localizationService.translate('app_subtitle'),
                   style: GoogleFonts.poppins(
                     fontSize: isTablet ? 14 : 12,
                     fontWeight: FontWeight.normal,

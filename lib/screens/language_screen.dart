@@ -15,7 +15,7 @@ class LanguageSelectionScreen extends StatefulWidget {
 
 class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
   int _currentPage = 0;
-  String? selectedLanguage = 'en';
+  // We don't need local selectedLanguage state anymore as we'll use the service
 
   final List<Map<String, String>> languages = [
     {'name': 'English', 'native': 'English', 'code': 'en'},
@@ -25,28 +25,49 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
     {'name': 'Tamil', 'native': 'தமிழ்', 'code': 'ta'},
   ];
 
+  @override
+  void initState() {
+    super.initState();
+    // Initialize page controller to current locale if possible
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final localizationService = Provider.of<LocalizationService>(context, listen: false);
+      final currentCode = localizationService.locale.languageCode;
+      final index = languages.indexWhere((lang) => lang['code'] == currentCode);
+      if (index != -1) {
+        setState(() {
+          _currentPage = index;
+        });
+        // If using a PageController, we would jumpToPage here
+      }
+    });
+  }
+
   void _continue() {
-    if (selectedLanguage == null) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text('Please select a language')));
-    } else {
-      Provider.of<LocalizationService>(context, listen: false).setLocale(
-        Locale(selectedLanguage!),
-      );
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => const HomeScreen()),
-      );
-    }
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (_) => const HomeScreen()),
+    );
+  }
+
+  void _onLanguageChanged(int index) {
+    setState(() {
+      _currentPage = index;
+    });
+    final code = languages[index]['code']!;
+    Provider.of<LocalizationService>(context, listen: false).setLocale(Locale(code));
   }
 
   @override
   Widget build(BuildContext context) {
+    final localizationService = Provider.of<LocalizationService>(context);
+    
+    // Ensure PageController is synced with current page
+    final PageController pageController = PageController(initialPage: _currentPage);
+
     return Scaffold(
       backgroundColor: AppTheme.backgroundWhite,
       appBar: AppBar(
-        title: const Text('Select Language'),
+        title: Text(localizationService.translate('select_language')),
       ),
       body: SafeArea(
         child: Padding(
@@ -55,7 +76,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
-                'Choose Your Language',
+                localizationService.translate('choose_language'),
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.displaySmall?.copyWith(
                   color: AppTheme.primaryGreen,
@@ -64,17 +85,13 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
               const SizedBox(height: 30),
               Expanded(
                 child: PageView.builder(
+                  controller: pageController,
                   itemCount: languages.length,
-                  onPageChanged: (index) {
-                    setState(() {
-                      _currentPage = index;
-                      selectedLanguage = languages[index]['code'];
-                    });
-                  },
+                  onPageChanged: _onLanguageChanged,
                   itemBuilder: (context, index) {
                     return _buildLanguageCard(
                       language: languages[index],
-                      isSelected: selectedLanguage == languages[index]['code'],
+                      isSelected: index == _currentPage,
                     );
                   },
                 ),
@@ -89,7 +106,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
               const SizedBox(height: 30),
               ElevatedButton(
                 onPressed: _continue,
-                child: const Text('Continue'),
+                child: Text(localizationService.translate('continue_btn')),
               ),
             ],
           ),
@@ -111,24 +128,32 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
           width: 2,
         ),
       ),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              language['name']!,
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                color: isSelected ? AppTheme.primaryGreen : AppTheme.textPrimary,
+      child: InkWell(
+        onTap: () {
+           // Find index of this language
+           final index = languages.indexOf(language);
+           _onLanguageChanged(index);
+        },
+        borderRadius: BorderRadius.circular(16),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                language['name']!,
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  color: isSelected ? AppTheme.primaryGreen : AppTheme.textPrimary,
+                ),
               ),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              language['native']!,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: AppTheme.textSecondary,
+              const SizedBox(height: 8),
+              Text(
+                language['native']!,
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: AppTheme.textSecondary,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
