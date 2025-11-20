@@ -41,7 +41,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 width: screenWidth * 0.7,
                 height: screenHeight * 0.5,
                 child: Image.asset(
-                  'assets/images/logo.png',
+                  'assets/images/cow_logo.png',
                   fit: BoxFit.contain,
                   errorBuilder: (context, error, stackTrace) {
                     // Fallback if image fails to load

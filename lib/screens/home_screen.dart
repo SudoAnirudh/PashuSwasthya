@@ -145,7 +145,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {
                     // TODO: Add Vet Connect feature
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
+                      SnackBar(
                         content: Text(localizationService.translate('vet_connect_coming_soon')),
                       ),
                     );

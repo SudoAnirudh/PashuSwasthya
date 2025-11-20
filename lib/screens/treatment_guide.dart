@@ -241,9 +241,6 @@ class _TreatmentGuidesScreenState extends State<TreatmentGuidesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-  Widget build(BuildContext context) {
     final localizationService = Provider.of<LocalizationService>(context);
     return Scaffold(
       appBar: AppBar(

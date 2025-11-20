@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pashu_swasthya/utils/app_theme.dart';
+import 'package:provider/provider.dart';
+import 'package:pashu_swasthya/services/localization_service.dart';
+import 'package:pashu_swasthya/screens/language_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
