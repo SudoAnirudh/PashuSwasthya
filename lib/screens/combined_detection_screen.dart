@@ -13,6 +13,7 @@ import 'package:pashu_swasthya/utils/app_theme.dart';
 import 'package:uuid/uuid.dart';
 import 'package:provider/provider.dart';
 import 'package:pashu_swasthya/services/localization_service.dart';
+import 'package:pashu_swasthya/screens/navigation_screen.dart';
 
 enum DetectionStep {
   breedImageInput,
@@ -76,7 +77,14 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
     if (status.isDenied) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(Provider.of<LocalizationService>(context, listen: false).translate('camera_permission_required'))),
+          SnackBar(
+            content: Text(
+              Provider.of<LocalizationService>(
+                context,
+                listen: false,
+              ).translate('camera_permission_required'),
+            ),
+          ),
         );
       }
     }
@@ -105,7 +113,14 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
   Future<void> _detectBreed() async {
     if (_breedImage == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(Provider.of<LocalizationService>(context, listen: false).translate('please_capture_image'))),
+        SnackBar(
+          content: Text(
+            Provider.of<LocalizationService>(
+              context,
+              listen: false,
+            ).translate('please_capture_image'),
+          ),
+        ),
       );
       return;
     }
@@ -143,7 +158,9 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
 
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('${Provider.of<LocalizationService>(context, listen: false).translate('breed_detection_failed')}: $e'),
+            content: Text(
+              '${Provider.of<LocalizationService>(context, listen: false).translate('breed_detection_failed')}: $e',
+            ),
             duration: const Duration(seconds: 3),
           ),
         );
@@ -154,7 +171,14 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
   Future<void> _detectDisease() async {
     if (_diseaseImage == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(Provider.of<LocalizationService>(context, listen: false).translate('please_capture_image'))),
+        SnackBar(
+          content: Text(
+            Provider.of<LocalizationService>(
+              context,
+              listen: false,
+            ).translate('please_capture_image'),
+          ),
+        ),
       );
       return;
     }
@@ -192,7 +216,9 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
 
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('${Provider.of<LocalizationService>(context, listen: false).translate('disease_detection_failed')}: $e'),
+            content: Text(
+              '${Provider.of<LocalizationService>(context, listen: false).translate('disease_detection_failed')}: $e',
+            ),
             duration: const Duration(seconds: 3),
           ),
         );
@@ -253,37 +279,59 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(_getAppBarTitle(context)),
         centerTitle: true,
-        leading:
-            _currentStep != DetectionStep.breedImageInput
-                ? IconButton(
-                  icon: const Icon(Icons.arrow_back),
-                  onPressed: () {
-                    if (_currentStep == DetectionStep.finalResult) {
-                      _startOver();
-                    } else if (_currentStep ==
-                        DetectionStep.diseaseImageInput) {
-                      setState(() {
-                        _currentStep = DetectionStep.breedResult;
-                      });
-                    } else if (_currentStep == DetectionStep.breedResult) {
-                      setState(() {
-                        _currentStep = DetectionStep.breedImageInput;
-                      });
-                    }
-                  },
-                )
-                : null,
+        elevation: 0,
+        toolbarHeight: 70,
+        backgroundColor: Colors.transparent,
+        iconTheme: const IconThemeData(color: Colors.white),
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color(0xFF6A9C89), Color(0xFFC1D8C3)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
+        title: Text(
+          _getAppBarTitle(context),
+          style: GoogleFonts.poppins(
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+            color: Colors.white,
+          ),
+        ),
       ),
+
       body: SingleChildScrollView(
         padding: EdgeInsets.all(padding),
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-            maxWidth: isTablet ? 800 : double.infinity,
+        child: _buildCurrentStep(isTablet),
+      ),
+
+      // ✅ BOTTOM NAV BAR (Same as home page but unselected)
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: 1, // SAFE index, prevents crash
+        selectedItemColor: Colors.grey,
+        unselectedItemColor: Colors.grey,
+        type: BottomNavigationBarType.fixed,
+
+        onTap: (index) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (_) => NavigationScreen(initialIndex: index),
+            ),
+          );
+        },
+
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.mic), label: "Voice"),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: "Settings",
           ),
-          child: _buildCurrentStep(isTablet),
-        ),
+        ],
       ),
     );
   }
@@ -388,6 +436,7 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
                 ),
                 onPressed: () => _pickBreedImage(ImageSource.camera),
                 style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFF316E57),
                   padding: EdgeInsets.symmetric(vertical: isTablet ? 16 : 12),
                 ),
               ),
@@ -401,7 +450,7 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
                   style: GoogleFonts.poppins(fontSize: isTablet ? 16 : 14),
                 ),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppTheme.primaryGreenLight,
+                  backgroundColor: Color(0xFF316E57),
                   padding: EdgeInsets.symmetric(vertical: isTablet ? 16 : 12),
                 ),
                 onPressed: () => _pickBreedImage(ImageSource.gallery),
@@ -427,14 +476,16 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
                     )
                     : const Icon(Icons.search),
             label: Text(
-              _isDetectingBreed ? localizationService.translate('detecting') : localizationService.translate('detect_breed'),
+              _isDetectingBreed
+                  ? localizationService.translate('detecting')
+                  : localizationService.translate('detect_breed'),
               style: GoogleFonts.poppins(
                 fontSize: isTablet ? 18 : 16,
                 fontWeight: FontWeight.w600,
               ),
             ),
             style: ElevatedButton.styleFrom(
-              backgroundColor: AppTheme.primaryGreen,
+              backgroundColor: AppTheme.warningOrange,
               disabledBackgroundColor: Colors.grey,
               padding: EdgeInsets.symmetric(vertical: isTablet ? 18 : 16),
             ),
@@ -456,7 +507,7 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
           decoration: BoxDecoration(
             color: AppTheme.backgroundLight,
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: AppTheme.primaryGreen, width: 2),
+            border: Border.all(color: Color(0xFF6A9C89), width: 2),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -477,7 +528,7 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
                       style: GoogleFonts.poppins(
                         fontSize: isTablet ? 24 : 20,
                         fontWeight: FontWeight.bold,
-                        color: AppTheme.primaryGreen,
+                        color: Color(0xFF6A9C89),
                       ),
                     ),
                   ),
@@ -511,7 +562,9 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
           child: ElevatedButton.icon(
             onPressed: _proceedToDiseaseInput,
             icon: const Icon(Icons.arrow_forward),
-            label: Text(localizationService.translate('continue_disease_detection')),
+            label: Text(
+              localizationService.translate('continue_disease_detection'),
+            ),
             style: ElevatedButton.styleFrom(
               backgroundColor: AppTheme.warningOrange,
               padding: EdgeInsets.symmetric(vertical: isTablet ? 18 : 16),
@@ -595,6 +648,7 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
                 ),
                 onPressed: () => _pickDiseaseImage(ImageSource.camera),
                 style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFF316E57),
                   padding: EdgeInsets.symmetric(vertical: isTablet ? 16 : 12),
                 ),
               ),
@@ -608,7 +662,7 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
                   style: GoogleFonts.poppins(fontSize: isTablet ? 16 : 14),
                 ),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppTheme.primaryGreenLight,
+                  backgroundColor: Color(0xFF316E57),
                   padding: EdgeInsets.symmetric(vertical: isTablet ? 16 : 12),
                 ),
                 onPressed: () => _pickDiseaseImage(ImageSource.gallery),
@@ -636,7 +690,9 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
                     )
                     : const Icon(Icons.analytics),
             label: Text(
-              _isDetectingDisease ? localizationService.translate('analyzing') : localizationService.translate('analyze_disease'),
+              _isDetectingDisease
+                  ? localizationService.translate('analyzing')
+                  : localizationService.translate('analyze_disease'),
               style: GoogleFonts.poppins(
                 fontSize: isTablet ? 18 : 16,
                 fontWeight: FontWeight.w600,
@@ -682,17 +738,19 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
                 children: [
                   Icon(
                     Icons.pets,
-                    color: AppTheme.primaryGreen,
+                    color: Color(0xFF6A9C89),
                     size: isTablet ? 32 : 24,
                   ),
                   const SizedBox(width: 12),
                   Flexible(
                     child: Text(
-                      localizationService.translate('breed_identified'), // Using breed_identified as 'Breed' label too or add new key
+                      localizationService.translate(
+                        'breed_identified',
+                      ), // Using breed_identified as 'Breed' label too or add new key
                       style: GoogleFonts.poppins(
                         fontSize: isTablet ? 20 : 18,
                         fontWeight: FontWeight.bold,
-                        color: AppTheme.primaryGreen,
+                        color: Color(0xFF6A9C89),
                       ),
                     ),
                   ),
@@ -760,7 +818,9 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
               ),
               const SizedBox(height: 12),
               Text(
-                diseaseStatus == 'no_disease_detected' ? localizationService.translate('no_disease_detected') : diseaseStatus,
+                diseaseStatus == 'no_disease_detected'
+                    ? localizationService.translate('no_disease_detected')
+                    : diseaseStatus,
                 style: GoogleFonts.poppins(
                   fontSize: isTablet ? 24 : 20,
                   fontWeight: FontWeight.w600,
@@ -792,7 +852,7 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
                 children: [
                   Icon(
                     Icons.assessment,
-                    color: AppTheme.primaryGreen,
+                    color: Color(0xFF6A9C89),
                     size: isTablet ? 32 : 24,
                   ),
                   const SizedBox(width: 12),
@@ -802,7 +862,7 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
                       style: GoogleFonts.poppins(
                         fontSize: isTablet ? 20 : 18,
                         fontWeight: FontWeight.bold,
-                        color: AppTheme.primaryGreen,
+                        color: Color(0xFF6A9C89),
                       ),
                     ),
                   ),
@@ -855,7 +915,7 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> {
               icon: const Icon(Icons.book),
               label: const Text('View Treatment Guide'),
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppTheme.primaryGreen,
+                backgroundColor: Color(0xFF316E57),
                 padding: EdgeInsets.symmetric(vertical: isTablet ? 16 : 12),
               ),
             ),

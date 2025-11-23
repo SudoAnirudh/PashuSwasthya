@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:pashu_swasthya/services/localization_service.dart';
 import 'package:pashu_swasthya/utils/app_theme.dart';
 import 'package:provider/provider.dart';
-import 'home_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pashu_swasthya/screens/navigation_screen.dart';
 
 class LanguageSelectionScreen extends StatefulWidget {
   const LanguageSelectionScreen({super.key});
@@ -25,12 +25,13 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
   void _continue() {
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (_) => const HomeScreen()),
+      MaterialPageRoute(builder: (_) => const NavigationScreen()),
     );
   }
 
   void _onLanguageSelected(String code) {
-    Provider.of<LocalizationService>(context, listen: false).setLocale(Locale(code));
+    Provider.of<LocalizationService>(context, listen: false)
+        .setLocale(Locale(code));
   }
 
   @override
@@ -40,48 +41,104 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
 
     return Scaffold(
       backgroundColor: AppTheme.backgroundWhite,
-      appBar: AppBar(
-        title: Text(localizationService.translate('select_language')),
-        centerTitle: true,
-      ),
       body: SafeArea(
         child: Padding(
           padding: AppTheme.getResponsivePadding(context),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const SizedBox(height: 20),
+
+              const SizedBox(height: 10),
+
+              /// ✅ Main Title (Now this is your only header)
               Text(
                 localizationService.translate('choose_language'),
                 textAlign: TextAlign.center,
                 style: GoogleFonts.poppins(
                   fontSize: 24,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w600,
                   color: AppTheme.primaryGreen,
                 ),
               ),
-              const SizedBox(height: 30),
+
+              const SizedBox(height: 65),
+
+              /// ✅ Language List
               Expanded(
-                child: GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 16,
-                    mainAxisSpacing: 16,
-                    childAspectRatio: 0.75, // Even taller cards for mobile safety
-                  ),
+                child: ListView.separated(
                   itemCount: languages.length,
+                  separatorBuilder: (_, __) => const SizedBox(height: 12),
                   itemBuilder: (context, index) {
                     final language = languages[index];
                     final isSelected = language['code'] == currentCode;
-                    return _buildLanguageCard(
-                      language: language,
-                      isSelected: isSelected,
-                      onTap: () => _onLanguageSelected(language['code']!),
+
+                    return ListTile(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                        side: BorderSide(
+                          color: isSelected
+                              ? AppTheme.primaryGreen
+                              : Colors.grey.shade200,
+                          width: 1.5,
+                        ),
+                      ),
+                      tileColor: isSelected
+                          ? AppTheme.primaryGreen.withOpacity(0.06)
+                          : Colors.white,
+                      leading: CircleAvatar(
+                        radius: 22,
+                        backgroundColor: isSelected
+                            ? AppTheme.primaryGreen.withOpacity(0.15)
+                            : Colors.grey.shade100,
+                        child: Text(
+                          language['code']!.toUpperCase(),
+                          style: GoogleFonts.poppins(
+                            fontWeight: FontWeight.bold,
+                            color: isSelected
+                                ? AppTheme.primaryGreen
+                                : Colors.grey.shade700,
+                          ),
+                        ),
+                      ),
+                      title: Text(
+                        language['name']!,
+                        style: GoogleFonts.poppins(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: isSelected
+                              ? AppTheme.primaryGreen
+                              : AppTheme.textPrimary,
+                        ),
+                      ),
+                      subtitle: Text(
+                        language['native']!,
+                        style: GoogleFonts.poppins(
+                          fontSize: 14,
+                          color: AppTheme.textSecondary,
+                        ),
+                      ),
+                      trailing: isSelected
+                          ? const Icon(
+                              Icons.check_circle,
+                              color: AppTheme.primaryGreen,
+                            )
+                          : const Icon(
+                              Icons.arrow_forward_ios,
+                              size: 16,
+                              color: Colors.grey,
+                            ),
+                      onTap: () {
+                        _onLanguageSelected(language['code']!);
+                        setState(() {});
+                      },
                     );
                   },
                 ),
               ),
+
               const SizedBox(height: 20),
+
+              /// ✅ Continue Button
               ElevatedButton(
                 onPressed: _continue,
                 style: ElevatedButton.styleFrom(
@@ -100,97 +157,9 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                   ),
                 ),
               ),
+
               const SizedBox(height: 20),
             ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildLanguageCard({
-    required Map<String, String> language,
-    required bool isSelected,
-    required VoidCallback onTap,
-  }) {
-    return Card(
-      elevation: isSelected ? 4 : 1,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-        side: BorderSide(
-          color: isSelected ? AppTheme.primaryGreen : Colors.transparent,
-          width: 2,
-        ),
-      ),
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(16),
-        child: Container(
-          padding: const EdgeInsets.all(8.0),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            color: isSelected ? AppTheme.primaryGreen.withOpacity(0.05) : Colors.white,
-          ),
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              return SingleChildScrollView(
-                physics: const NeverScrollableScrollPhysics(),
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(minHeight: constraints.maxHeight),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          color: isSelected ? AppTheme.primaryGreen.withOpacity(0.1) : Colors.grey.shade100,
-                          shape: BoxShape.circle,
-                        ),
-                        child: Text(
-                          language['code']!.toUpperCase(),
-                          style: GoogleFonts.poppins(
-                            fontWeight: FontWeight.bold,
-                            color: isSelected ? AppTheme.primaryGreen : Colors.grey.shade600,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 12),
-                      FittedBox(
-                        fit: BoxFit.scaleDown,
-                        child: Text(
-                          language['name']!,
-                          style: GoogleFonts.poppins(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: isSelected ? AppTheme.primaryGreen : AppTheme.textPrimary,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      FittedBox(
-                        fit: BoxFit.scaleDown,
-                        child: Text(
-                          language['native']!,
-                          style: GoogleFonts.poppins(
-                            fontSize: 14,
-                            color: AppTheme.textSecondary,
-                          ),
-                        ),
-                      ),
-                      if (isSelected) ...[
-                        const SizedBox(height: 8),
-                        Icon(
-                          Icons.check_circle,
-                          color: AppTheme.primaryGreen,
-                          size: 20,
-                        ),
-                      ],
-                    ],
-                  ),
-                ),
-              );
-            },
           ),
         ),
       ),

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pashu_swasthya/screens/combined_detection_screen.dart';
-import 'package:pashu_swasthya/screens/settings_screen.dart';
-import 'package:pashu_swasthya/screens/voice_input.dart';
 import 'package:pashu_swasthya/screens/treatment_guide.dart';
 import 'package:pashu_swasthya/services/localization_service.dart';
 import 'package:pashu_swasthya/utils/app_theme.dart';
@@ -16,102 +14,163 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  Widget _buildGridCard({
+  /// 🌊 Wavy Welcome Header (No Image)
+  Widget _buildWelcomeHeader(BuildContext context) {
+    final isTablet = MediaQuery.of(context).size.width > 600;
+    final appBarHeight = AppBar().preferredSize.height;
+    final topPadding = MediaQuery.of(context).padding.top;
+
+    return ClipPath(
+      clipper: WaveClipper(),
+      child: Container(
+        width: double.infinity,
+        height: isTablet ? 250 : 220,
+        padding: EdgeInsets.only(
+          left: 20,
+          right: 20,
+          top: topPadding + appBarHeight + 20, // Fixes spacing
+        ),
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Color(0xFF6A9C89), Color(0xFFC1D8C3)],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "👋 Welcome!",
+              style: GoogleFonts.poppins(
+                fontSize: isTablet ? 26 : 22,
+                fontWeight: FontWeight.w600,
+                color: Colors.white,
+              ),
+            ),
+
+            const SizedBox(height: 6),
+
+            Text(
+              "Let’s take care of your cattle’s health today.",
+              style: GoogleFonts.poppins(
+                fontSize: isTablet ? 15 : 13,
+                color: Colors.white.withOpacity(0.9),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// ✅ Full Width Card
+  Widget _buildFullWidthCard({
     required IconData icon,
     required String title,
     required String subtitle,
     required VoidCallback onTap,
     required BuildContext context,
   }) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final isTablet = screenWidth > 600;
+    final isTablet = MediaQuery.of(context).size.width > 600;
 
-    return Card(
-      elevation: 4,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(20),
-        child: Padding(
-          padding: EdgeInsets.all(isTablet ? 28 : 20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                padding: EdgeInsets.all(isTablet ? 20 : 16),
-                decoration: BoxDecoration(
-                  color: AppTheme.backgroundLight,
-                  shape: BoxShape.circle,
+    return SizedBox(
+      width: double.infinity,
+      height: isTablet ? 180 : 150,
+      child: Card(
+        elevation: 4,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(20),
+          child: Padding(
+            padding: EdgeInsets.all(isTablet ? 28 : 20),
+            child: Row(
+              children: [
+                Container(
+                  padding: EdgeInsets.all(isTablet ? 20 : 16),
+                  decoration: BoxDecoration(
+                    color: AppTheme.backgroundLight,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    icon,
+                    size: isTablet ? 42 : 32,
+                    color: Color(0xFF6A9C89),
+                  ),
                 ),
-                child: Icon(
-                  icon,
-                  size: isTablet ? 40 : 32,
+
+                const SizedBox(width: 20),
+
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        title,
+                        style: GoogleFonts.poppins(
+                          fontSize: isTablet ? 20 : 16,
+                          fontWeight: FontWeight.w600,
+                          color: AppTheme.textPrimary,
+                        ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        subtitle,
+                        style: GoogleFonts.poppins(
+                          fontSize: isTablet ? 14 : 12,
+                          color: AppTheme.textSecondary,
+                        ),
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
+                ),
+
+                Icon(
+                  Icons.arrow_forward_ios,
+                  size: isTablet ? 20 : 16,
                   color: AppTheme.primaryGreen,
                 ),
-              ),
-              SizedBox(height: isTablet ? 20 : 16),
-              Text(
-                title,
-                style: GoogleFonts.poppins(
-                  fontSize: isTablet ? 20 : 16,
-                  fontWeight: FontWeight.w600,
-                  color: AppTheme.textPrimary,
-                ),
-                textAlign: TextAlign.center,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-              SizedBox(height: isTablet ? 12 : 8),
-              Text(
-                subtitle,
-                style: GoogleFonts.poppins(
-                  fontSize: isTablet ? 14 : 12,
-                  color: AppTheme.textSecondary,
-                ),
-                textAlign: TextAlign.center,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 
-  /// 🔹 Home Screen Content
+  /// ✅ Home Body
   Widget _buildHomeContent(
     LocalizationService localizationService,
     BuildContext context,
   ) {
-    final crossAxisCount = AppTheme.getGridCrossAxisCount(context);
     final padding = AppTheme.getResponsivePadding(context);
-    final screenWidth = MediaQuery.of(context).size.width;
-    final isTablet = screenWidth > 600;
 
-    return Center(
-      child: ConstrainedBox(
-        constraints: BoxConstraints(
-          maxWidth: isTablet ? 1200 : double.infinity,
-        ),
-        child: GridView.builder(
-          padding: padding,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: crossAxisCount,
-            crossAxisSpacing: isTablet ? 24 : 20,
-            mainAxisSpacing: isTablet ? 24 : 20,
-            childAspectRatio: isTablet ? 0.9 : 0.85,
-          ),
-          itemCount: 3,
-          itemBuilder: (context, index) {
-            switch (index) {
-              case 0:
-                return _buildGridCard(
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          _buildWelcomeHeader(context),
+
+          Padding(
+            padding: padding,
+            child: Column(
+              children: [
+                const SizedBox(height: 20),
+
+                _buildFullWidthCard(
                   context: context,
                   icon: Icons.camera_alt,
-                  title: localizationService.translate('breed_disease_detection'),
-                  subtitle:
-                      localizationService.translate('breed_disease_subtitle'),
+                  title: localizationService.translate(
+                    'breed_disease_detection',
+                  ),
+                  subtitle: localizationService.translate(
+                    'breed_disease_subtitle',
+                  ),
                   onTap: () {
                     Navigator.push(
                       context,
@@ -120,13 +179,17 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     );
                   },
-                );
-              case 1:
-                return _buildGridCard(
+                ),
+
+                const SizedBox(height: 20),
+
+                _buildFullWidthCard(
                   context: context,
                   icon: Icons.book,
                   title: localizationService.translate('treatment_guide'),
-                  subtitle: localizationService.translate('treatment_guide_subtitle'),
+                  subtitle: localizationService.translate(
+                    'treatment_guide_subtitle',
+                  ),
                   onTap: () {
                     Navigator.push(
                       context,
@@ -135,51 +198,53 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     );
                   },
-                );
-              case 2:
-                return _buildGridCard(
+                ),
+
+                const SizedBox(height: 20),
+
+                _buildFullWidthCard(
                   context: context,
                   icon: Icons.call,
                   title: localizationService.translate('vet_help'),
                   subtitle: localizationService.translate('vet_help_subtitle'),
                   onTap: () {
-                    // TODO: Add Vet Connect feature
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text(localizationService.translate('vet_connect_coming_soon')),
+                        content: Text(
+                          localizationService.translate(
+                            'vet_connect_coming_soon',
+                          ),
+                        ),
                       ),
                     );
                   },
-                );
-              default:
-                return Container();
-            }
-          },
-        ),
+                ),
+
+                const SizedBox(height: 80),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
 
-  /// 🔹 Full Screen Scaffold
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final isTablet = screenWidth > 600;
+    final isTablet = MediaQuery.of(context).size.width > 600;
 
     return Consumer<LocalizationService>(
       builder: (context, localizationService, child) {
         return Scaffold(
           backgroundColor: AppTheme.backgroundWhite,
+
+          /// ✅ This removes the gap under AppBar
+          extendBodyBehindAppBar: true,
+
           appBar: AppBar(
-            leading: IconButton(
-              icon: const Icon(Icons.menu),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const SettingsScreen()),
-                );
-              },
-            ),
+            backgroundColor: Colors.transparent, // Overlay look
+            elevation: 0,
+            centerTitle: true,
             title: Column(
               children: [
                 Text(
@@ -187,37 +252,55 @@ class _HomeScreenState extends State<HomeScreen> {
                   style: GoogleFonts.poppins(
                     fontWeight: FontWeight.bold,
                     fontSize: isTablet ? 22 : 18,
+                    color: Colors.white,
                   ),
                 ),
                 Text(
                   localizationService.translate('app_subtitle'),
                   style: GoogleFonts.poppins(
                     fontSize: isTablet ? 14 : 12,
-                    fontWeight: FontWeight.normal,
+                    color: Colors.white.withOpacity(0.9),
                   ),
                 ),
               ],
             ),
-            actions: [
-              IconButton(
-                icon: const Icon(Icons.mic),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder:
-                          (_) => VoiceInputScreen(
-                            localeId: localizationService.locale.toString(),
-                          ),
-                    ),
-                  );
-                },
-              ),
-            ],
           ),
+
           body: _buildHomeContent(localizationService, context),
         );
       },
     );
   }
+}
+
+/// 🌊 Wave Clipper
+class WaveClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    final path = Path();
+
+    path.lineTo(0, size.height - 30);
+
+    path.quadraticBezierTo(
+      size.width * 0.25,
+      size.height,
+      size.width * 0.5,
+      size.height - 35,
+    );
+
+    path.quadraticBezierTo(
+      size.width * 0.75,
+      size.height - 60,
+      size.width,
+      size.height - 40,
+    );
+
+    path.lineTo(size.width, 0);
+    path.close();
+
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) => false;
 }
