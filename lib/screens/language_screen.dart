@@ -30,8 +30,10 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
   }
 
   void _onLanguageSelected(String code) {
-    Provider.of<LocalizationService>(context, listen: false)
-        .setLocale(Locale(code));
+    Provider.of<LocalizationService>(
+      context,
+      listen: false,
+    ).setLocale(Locale(code));
   }
 
   @override
@@ -47,7 +49,6 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-
               const SizedBox(height: 10),
 
               /// ✅ Main Title (Now this is your only header)
@@ -57,7 +58,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                 style: GoogleFonts.poppins(
                   fontSize: 24,
                   fontWeight: FontWeight.w600,
-                  color: AppTheme.primaryGreen,
+                  color: Color(0xFF6A9C89),
                 ),
               ),
 
@@ -76,27 +77,31 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16),
                         side: BorderSide(
-                          color: isSelected
-                              ? AppTheme.primaryGreen
-                              : Colors.grey.shade200,
+                          color:
+                              isSelected
+                                  ? AppTheme.primaryGreen
+                                  : Colors.grey.shade200,
                           width: 1.5,
                         ),
                       ),
-                      tileColor: isSelected
-                          ? AppTheme.primaryGreen.withOpacity(0.06)
-                          : Colors.white,
+                      tileColor:
+                          isSelected
+                              ? AppTheme.primaryGreen.withOpacity(0.06)
+                              : Colors.white,
                       leading: CircleAvatar(
                         radius: 22,
-                        backgroundColor: isSelected
-                            ? AppTheme.primaryGreen.withOpacity(0.15)
-                            : Colors.grey.shade100,
+                        backgroundColor:
+                            isSelected
+                                ? AppTheme.primaryGreen.withOpacity(0.15)
+                                : Colors.grey.shade100,
                         child: Text(
                           language['code']!.toUpperCase(),
                           style: GoogleFonts.poppins(
                             fontWeight: FontWeight.bold,
-                            color: isSelected
-                                ? AppTheme.primaryGreen
-                                : Colors.grey.shade700,
+                            color:
+                                isSelected
+                                    ? AppTheme.primaryGreen
+                                    : Colors.grey.shade700,
                           ),
                         ),
                       ),
@@ -105,9 +110,10 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                         style: GoogleFonts.poppins(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
-                          color: isSelected
-                              ? AppTheme.primaryGreen
-                              : AppTheme.textPrimary,
+                          color:
+                              isSelected
+                                  ? AppTheme.primaryGreen
+                                  : AppTheme.textPrimary,
                         ),
                       ),
                       subtitle: Text(
@@ -117,16 +123,17 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                           color: AppTheme.textSecondary,
                         ),
                       ),
-                      trailing: isSelected
-                          ? const Icon(
-                              Icons.check_circle,
-                              color: AppTheme.primaryGreen,
-                            )
-                          : const Icon(
-                              Icons.arrow_forward_ios,
-                              size: 16,
-                              color: Colors.grey,
-                            ),
+                      trailing:
+                          isSelected
+                              ? const Icon(
+                                Icons.check_circle,
+                                color: AppTheme.primaryGreen,
+                              )
+                              : const Icon(
+                                Icons.arrow_forward_ios,
+                                size: 16,
+                                color: Colors.grey,
+                              ),
                       onTap: () {
                         _onLanguageSelected(language['code']!);
                         setState(() {});
@@ -143,7 +150,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                 onPressed: _continue,
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 16),
-                  backgroundColor: AppTheme.primaryGreen,
+                  backgroundColor: Color(0xFF6A9C89),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
