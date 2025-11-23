@@ -21,10 +21,39 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final localizationService = Provider.of<LocalizationService>(context);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(localizationService.translate('settings')),
-        centerTitle: true,
+     appBar: AppBar(
+  centerTitle: false,
+  elevation: 0,
+  toolbarHeight: 70,
+  backgroundColor: Colors.transparent,
+
+  flexibleSpace: Container(
+    decoration: const BoxDecoration(
+      gradient: LinearGradient(
+        colors: [
+          Color(0xFF6A9C89), // same as home
+          Color(0xFFC1D8C3), // same as home
+        ],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
       ),
+    ),
+  ),
+
+  title: Text(
+    localizationService.translate('settings'),
+    style: GoogleFonts.poppins(
+      fontSize: 20,
+      fontWeight: FontWeight.w600,
+      color: Colors.white,
+    ),
+  ),
+
+  iconTheme: const IconThemeData(
+    color: Colors.white, // back button color
+  ),
+),
+
       body: SingleChildScrollView(
         padding: AppTheme.getResponsivePadding(context),
         child: Column(
@@ -95,7 +124,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             const SizedBox(height: 10),
             _buildSettingsTile(
               icon: Icons.info,
-              title: '${localizationService.translate('about')} PashuSwasthya',
+              title: '${localizationService.translate('about')} ',
               onTap: () {},
             ),
             _buildSettingsTile(
@@ -135,7 +164,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Card(
       margin: const EdgeInsets.symmetric(vertical: 8),
       child: ListTile(
-        leading: Icon(icon, color: AppTheme.primaryGreen),
+        leading: Icon(icon, color: Color(0xFF6A9C89)),
         title: Text(
           title,
           style: Theme.of(context).textTheme.titleMedium,

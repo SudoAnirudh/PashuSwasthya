@@ -298,10 +298,40 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
         final isHindi = localizationService.locale.languageCode == 'hi';
         
         return Scaffold(
-          appBar: AppBar(
-            title: Text(localizationService.translate('voice_disease_prediction')),
-            centerTitle: true,
-          ),
+     appBar: AppBar(
+  centerTitle: true,
+  elevation: 0,
+  toolbarHeight: 70,
+  backgroundColor: Colors.transparent,
+
+  flexibleSpace: Container(
+    decoration: const BoxDecoration(
+      gradient: LinearGradient(
+        colors: [
+          Color(0xFF6A9C89), 
+          Color(0xFFC1D8C3), 
+        ],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+      ),
+    ),
+  ),
+
+  title: Text(
+    localizationService.translate('voice_disease_prediction'),
+    style: GoogleFonts.poppins(
+      fontSize: 20,
+      fontWeight: FontWeight.w600,
+      color: Colors.white,  // Stands out on this gradient
+    ),
+  ),
+
+  iconTheme: const IconThemeData(
+    color: Colors.white, // Back arrow visibility
+  ),
+),
+
+
           body: Column(
             children: [
               // Scrollable content area
@@ -492,7 +522,7 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
                             // Mic button
                             FloatingActionButton.extended(
                               onPressed: _isListening ? _stopListening : _startListening,
-                              backgroundColor: _isListening ? Colors.red : AppTheme.primaryGreen,
+                              backgroundColor: _isListening ? Colors.red :  Color(0xFF6A9C89),
                               icon: Icon(_isListening ? Icons.mic_off : Icons.mic),
                               label: Text(
                                 _isListening 
@@ -690,7 +720,7 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
                   keyword,
                   style: GoogleFonts.poppins(fontSize: 12),
                 ),
-                avatar: Icon(Icons.check_circle, size: 16, color: AppTheme.primaryGreen),
+                avatar: Icon(Icons.check_circle, size: 16, color: Color(0xFF6A9C89)),
                 backgroundColor: AppTheme.primaryGreen.withOpacity(0.1),
               ),
             ).toList(),
