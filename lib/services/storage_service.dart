@@ -1,70 +1,55 @@
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:pashu_swasthya/models/prediction_history.dart';
+import 'package:pashu_swasthya/services/database_helper.dart';
 
 class StorageService {
-  static const String _historyBoxName = 'prediction_history';
-  static const String _settingsBoxName = 'app_settings';
-  
-  Box? _historyBox;
-  Box? _settingsBox;
+  final DatabaseHelper _dbHelper = DatabaseHelper();
   bool _initialized = false;
 
   Future<void> init() async {
     if (_initialized) return;
-    
-    // Open boxes (Hive.initFlutter() is called in main.dart)
-    _historyBox = await Hive.openBox(_historyBoxName);
-    _settingsBox = await Hive.openBox(_settingsBoxName);
+    // DatabaseHelper initializes itself lazily, so we just mark as initialized
     _initialized = true;
   }
 
   // Prediction History Methods
   Future<void> savePrediction(PredictionHistory prediction) async {
-    if (!_initialized) await init();
-    await _historyBox!.put(prediction.id, prediction.toMap());
+    await _dbHelper.insertPrediction(prediction);
   }
 
   Future<List<PredictionHistory>> getPredictionHistory() async {
-    if (!_initialized) await init();
-    final maps = _historyBox!.values.toList();
-    return maps.map((map) => PredictionHistory.fromMap(Map<String, dynamic>.from(map as Map))).toList()
-      ..sort((a, b) => b.timestamp.compareTo(a.timestamp));
+    return await _dbHelper.getPredictionHistory();
   }
 
   Future<void> deletePrediction(String id) async {
-    if (!_initialized) await init();
-    await _historyBox!.delete(id);
+    await _dbHelper.deletePrediction(id);
   }
 
   Future<void> clearHistory() async {
-    if (!_initialized) await init();
-    await _historyBox!.clear();
+    await _dbHelper.clearHistory();
   }
 
   // Settings Methods
   Future<void> saveLanguagePreference(String languageCode) async {
-    if (!_initialized) await init();
-    await _settingsBox!.put('language', languageCode);
+    await _dbHelper.saveSetting('language', languageCode);
   }
 
   Future<String?> getLanguagePreference() async {
-    if (!_initialized) await init();
-    return _settingsBox!.get('language') as String?;
+    return await _dbHelper.getSetting('language');
   }
 
   Future<void> saveUserPreference(String key, dynamic value) async {
-    if (!_initialized) await init();
-    await _settingsBox!.put(key, value);
+    await _dbHelper.saveSetting(key, value.toString());
   }
 
-  dynamic getUserPreference(String key) {
-    if (!_initialized) return null;
-    return _settingsBox!.get(key);
+  Future<dynamic> getUserPreference(String key) async {
+    // Note: This returns a Future now, unlike the synchronous Hive version.
+    // Callers might need to await this.
+    // Also, it returns String, so callers expecting other types might need to parse.
+    return await _dbHelper.getSetting(key);
   }
 
   void dispose() {
-    _historyBox?.close();
-    _settingsBox?.close();
+    // No specific dispose needed for SQLite helper as it manages its own connection
     _initialized = false;
   }
 }

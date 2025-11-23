@@ -4,6 +4,7 @@ import 'package:pashu_swasthya/utils/app_theme.dart';
 import 'package:provider/provider.dart';
 import 'package:pashu_swasthya/services/localization_service.dart';
 import 'package:pashu_swasthya/screens/language_screen.dart';
+import 'package:pashu_swasthya/screens/history_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -61,6 +62,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
           children: [
             _buildSectionTitle(localizationService.translate('general')),
             const SizedBox(height: 10),
+            _buildSettingsTile(
+              icon: Icons.history,
+              title: localizationService.translate('history'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const HistoryScreen(),
+                  ),
+                );
+              },
+            ),
             _buildSettingsTile(
               icon: Icons.language,
               title: localizationService.translate('language'),

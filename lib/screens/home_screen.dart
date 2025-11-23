@@ -4,6 +4,7 @@ import 'package:pashu_swasthya/screens/combined_detection_screen.dart';
 import 'package:pashu_swasthya/screens/treatment_guide.dart';
 import 'package:pashu_swasthya/services/localization_service.dart';
 import 'package:pashu_swasthya/utils/app_theme.dart';
+import 'package:pashu_swasthya/services/database_helper.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -14,6 +15,23 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  String? _userName;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserData();
+  }
+
+  Future<void> _loadUserData() async {
+    final userDetails = await DatabaseHelper().getUserDetails();
+    if (mounted) {
+      setState(() {
+        _userName = userDetails['user_name'];
+      });
+    }
+  }
+
   /// 🌊 Wavy Welcome Header (No Image)
   Widget _buildWelcomeHeader(BuildContext context) {
     final isTablet = MediaQuery.of(context).size.width > 600;
@@ -41,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "👋 Welcome!",
+              _userName != null ? "👋 Welcome, $_userName!" : "👋 Welcome!",
               style: GoogleFonts.poppins(
                 fontSize: isTablet ? 26 : 22,
                 fontWeight: FontWeight.w600,

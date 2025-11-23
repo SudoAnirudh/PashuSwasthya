@@ -2,6 +2,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pashu_swasthya/utils/app_theme.dart';
+import 'package:pashu_swasthya/services/database_helper.dart';
+import 'package:pashu_swasthya/screens/navigation_screen.dart';
 import 'language_screen.dart';
 
 
@@ -16,13 +18,28 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    // Navigate to Home after 3 seconds
-    Timer(const Duration(seconds: 3), () {
+    _checkLoginStatus();
+  }
+
+  Future<void> _checkLoginStatus() async {
+    // Wait for at least 3 seconds for splash effect
+    await Future.delayed(const Duration(seconds: 3));
+    
+    final isLoggedIn = await DatabaseHelper().isUserLoggedIn();
+    
+    if (!mounted) return;
+
+    if (isLoggedIn) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const NavigationScreen()),
+      );
+    } else {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (_) => const LanguageSelectionScreen()),
       );
-    });
+    }
   }
 
   @override

@@ -3,7 +3,7 @@ import 'package:pashu_swasthya/services/localization_service.dart';
 import 'package:pashu_swasthya/utils/app_theme.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pashu_swasthya/screens/navigation_screen.dart';
+import 'package:pashu_swasthya/screens/login_screen.dart';
 
 class LanguageSelectionScreen extends StatefulWidget {
   const LanguageSelectionScreen({super.key});
@@ -25,7 +25,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
   void _continue() {
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (_) => const NavigationScreen()),
+      MaterialPageRoute(builder: (_) => const LoginScreen()),
     );
   }
 
