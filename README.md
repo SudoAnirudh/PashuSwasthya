@@ -1,7 +1,7 @@
 # PashuSwasthya 🐄💚  
 **An offline‑ready, multilingual cattle health assistant built with Flutter.**
 
-![PashuSwasthya Logo](logo.png)
+![PashuSwasthya Logo](assets/images/logo.png)
 
 ---
 

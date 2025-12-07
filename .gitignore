@@ -43,3 +43,13 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Build logs
+build_log*.txt
+
+# Large model files and dev artifacts
+Model/
+*.h5
+*.keras
+*.ipynb
+

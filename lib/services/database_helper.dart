@@ -22,7 +22,7 @@ class DatabaseHelper {
 
     return await openDatabase(
       path,
-      version: 4,
+      version: 5,
       onCreate: _onCreate,
       onUpgrade: _onUpgrade,
     );
@@ -94,6 +94,20 @@ class DatabaseHelper {
         // Columns might already exist if dev environment was messy, ignore
         print('Error adding columns: $e');
       }
+    }
+
+    if (oldVersion < 5) {
+      // Fix for user data not saving: Recreate user_session table to ensure schema is correct
+      await db.execute('DROP TABLE IF EXISTS user_session');
+      await db.execute('''
+        CREATE TABLE user_session (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          mobile_number TEXT NOT NULL,
+          user_name TEXT,
+          user_place TEXT,
+          is_logged_in INTEGER NOT NULL
+        )
+      ''');
     }
   }
 
