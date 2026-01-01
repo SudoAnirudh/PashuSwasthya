@@ -6,7 +6,8 @@ class AppStrings {
       'breed_disease_detection': 'Scan Cattle',
       'breed_disease_subtitle': 'Breed and health insights.',
       'treatment_guide': 'Treatment Guide',
-      'treatment_guide_subtitle': 'Access offline guides for common treatments.',
+      'treatment_guide_subtitle':
+          'Access offline guides for common treatments.',
       'vet_help': 'Vet Help',
       'vet_help_subtitle': 'Connect with a certified vet for expert advice.',
       'vet_connect_coming_soon': 'Vet Connect feature coming soon!',
@@ -41,7 +42,8 @@ class AppStrings {
       'breed_result': 'Breed Result',
       'disease_detection': 'Disease Detection',
       'detection_results': 'Detection Results',
-      'upload_cattle_image': 'Upload image of your cattle for breed identification',
+      'upload_cattle_image':
+          'Upload image of your cattle for breed identification',
       'detect_breed': 'Detect Breed',
       'detecting': 'Detecting...',
       'breed_identified': 'Breed Identified',
@@ -73,7 +75,8 @@ class AppStrings {
       'disease_brucellosis': 'Brucellosis',
       'disease_anthrax': 'Anthrax',
       'voice_disease_prediction': 'Voice Disease Prediction',
-      'listening_describe_symptoms': 'Listening... Describe your cattle symptoms',
+      'listening_describe_symptoms':
+          'Listening... Describe your cattle symptoms',
       'analyzing_symptoms': 'Analyzing symptoms...',
       'tap_mic_describe': 'Tap the microphone to describe the cattle health',
       'microphone_permission_required': 'Microphone permission is required',
@@ -88,44 +91,91 @@ class AppStrings {
       'start': 'Start',
       'save': 'Save',
       'description_saved': 'Description saved successfully',
-      'no_disease_identified': 'No disease identified. Please describe more symptoms.',
+      'no_disease_identified':
+          'No disease identified. Please describe more symptoms.',
       'your_description_here': 'Your description will appear here...',
-      'describe_symptoms_info': 'Describe your cattle symptoms. We will automatically identify the disease.',
-      
+      'describe_symptoms_info':
+          'Describe your cattle symptoms. We will automatically identify the disease.',
+
       // Disease Details - FMD
-      'disease_fmd_description': 'A highly contagious viral disease affecting cloven-hoofed animals.',
-      'disease_fmd_symptoms': 'Fever (up to 106°F)|Blisters in the mouth and on the feet|Excessive drooling|Lameness and reluctance to move|Loss of appetite|Reduced milk production',
-      'disease_fmd_treatment_steps': 'Isolate the infected animal immediately|Keep the animal in a clean, dry, and comfortable environment|Provide soft, palatable feed and plenty of fresh water|Clean blisters with mild antiseptic solution (diluted iodine)|Apply antibiotic ointment to prevent secondary bacterial infections|Administer pain relief medication as prescribed by veterinarian|Monitor temperature daily|Ensure proper nutrition with vitamin supplements',
-      'disease_fmd_precautions': 'Quarantine new animals for at least 21 days|Disinfect footwear, equipment, and vehicles before entering farm|Avoid contact with other farms during outbreak|Vaccinate healthy animals as per veterinary schedule|Dispose of contaminated materials properly|Wash hands and change clothes after handling infected animals|Report to local veterinary authorities immediately',
-      'disease_fmd_first_aid': 'Separate the animal from the herd immediately|Clean affected areas with clean water and mild soap|Apply antiseptic solution to blisters|Provide soft bedding to reduce discomfort|Ensure access to clean water and soft feed|Contact veterinarian immediately for proper treatment',
+      'disease_fmd_description':
+          'A highly contagious viral disease affecting cloven-hoofed animals.',
+      'disease_fmd_symptoms':
+          'Fever (up to 106°F)|Blisters in the mouth and on the feet|Excessive drooling|Lameness and reluctance to move|Loss of appetite|Reduced milk production',
+      'disease_fmd_treatment_steps':
+          'Isolate the infected animal immediately|Keep the animal in a clean, dry, and comfortable environment|Provide soft, palatable feed and plenty of fresh water|Clean blisters with mild antiseptic solution (diluted iodine)|Apply antibiotic ointment to prevent secondary bacterial infections|Administer pain relief medication as prescribed by veterinarian|Monitor temperature daily|Ensure proper nutrition with vitamin supplements',
+      'disease_fmd_precautions':
+          'Quarantine new animals for at least 21 days|Disinfect footwear, equipment, and vehicles before entering farm|Avoid contact with other farms during outbreak|Vaccinate healthy animals as per veterinary schedule|Dispose of contaminated materials properly|Wash hands and change clothes after handling infected animals|Report to local veterinary authorities immediately',
+      'disease_fmd_first_aid':
+          'Separate the animal from the herd immediately|Clean affected areas with clean water and mild soap|Apply antiseptic solution to blisters|Provide soft bedding to reduce discomfort|Ensure access to clean water and soft feed|Contact veterinarian immediately for proper treatment',
 
       // Disease Details - Mastitis
-      'disease_mast_description': 'Inflammation of the udder tissue, usually caused by bacterial infection.',
-      'disease_mast_symptoms': 'Swelling, heat, and redness of the udder|Hardness and pain in the udder|Abnormal milk appearance (watery, flakes, clots)|Reduced milk production|Fever in severe cases|Loss of appetite',
-      'disease_mast_treatment_steps': 'Milk out the affected quarter frequently (every 2-3 hours)|Apply warm compresses to the udder to reduce swelling|Administer antibiotics as prescribed by veterinarian|Use intramammary antibiotic tubes as directed|Ensure proper milking hygiene|Provide anti-inflammatory medication if needed|Continue treatment for full course (usually 5-7 days)|Monitor milk quality before resuming consumption',
-      'disease_mast_precautions': 'Maintain strict milking hygiene|Clean udder before and after milking|Use separate cloths for each animal|Disinfect milking equipment regularly|Dry off animals properly after milking|Isolate infected animals during treatment|Test milk regularly for early detection',
-      'disease_mast_first_aid': 'Stop milking the affected quarter|Apply cold compress to reduce swelling|Keep the animal in a clean, dry area|Provide plenty of fresh water|Contact veterinarian for antibiotic treatment|Do not consume milk from affected quarter',
+      'disease_mast_description':
+          'Inflammation of the udder tissue, usually caused by bacterial infection.',
+      'disease_mast_symptoms':
+          'Swelling, heat, and redness of the udder|Hardness and pain in the udder|Abnormal milk appearance (watery, flakes, clots)|Reduced milk production|Fever in severe cases|Loss of appetite',
+      'disease_mast_treatment_steps':
+          'Milk out the affected quarter frequently (every 2-3 hours)|Apply warm compresses to the udder to reduce swelling|Administer antibiotics as prescribed by veterinarian|Use intramammary antibiotic tubes as directed|Ensure proper milking hygiene|Provide anti-inflammatory medication if needed|Continue treatment for full course (usually 5-7 days)|Monitor milk quality before resuming consumption',
+      'disease_mast_precautions':
+          'Maintain strict milking hygiene|Clean udder before and after milking|Use separate cloths for each animal|Disinfect milking equipment regularly|Dry off animals properly after milking|Isolate infected animals during treatment|Test milk regularly for early detection',
+      'disease_mast_first_aid':
+          'Stop milking the affected quarter|Apply cold compress to reduce swelling|Keep the animal in a clean, dry area|Provide plenty of fresh water|Contact veterinarian for antibiotic treatment|Do not consume milk from affected quarter',
 
       // Disease Details - LSD
-      'disease_lsd_description': 'A viral disease transmitted by blood-feeding insects, causing skin nodules.',
-      'disease_lsd_symptoms': 'Fever (103-106°F)|Nodules or lumps on the skin (2-5 cm diameter)|Swelling of limbs and brisket|Watery eyes and nasal discharge|Reduced milk production|Loss of appetite|Difficulty in movement',
-      'disease_lsd_treatment_steps': 'Isolate infected animals immediately|Provide supportive care and good nutrition|Clean skin nodules with antiseptic solution|Apply antibiotic ointment to prevent secondary infections|Administer antibiotics for secondary bacterial infections|Provide pain relief and anti-inflammatory medication|Ensure adequate hydration|Monitor for complications',
-      'disease_lsd_precautions': 'Control insect vectors (flies, mosquitoes, ticks)|Use insect repellents and insecticides|Vaccinate healthy animals|Quarantine new animals|Maintain good hygiene and sanitation|Dispose of contaminated materials properly|Report to veterinary authorities',
-      'disease_lsd_first_aid': 'Isolate the animal from the herd|Clean skin nodules with mild antiseptic|Keep the animal in a clean, shaded area|Provide fresh water and soft feed|Contact veterinarian for proper treatment|Monitor temperature and general condition',
+      'disease_lsd_description':
+          'A viral disease transmitted by blood-feeding insects, causing skin nodules.',
+      'disease_lsd_symptoms':
+          'Fever (103-106°F)|Nodules or lumps on the skin (2-5 cm diameter)|Swelling of limbs and brisket|Watery eyes and nasal discharge|Reduced milk production|Loss of appetite|Difficulty in movement',
+      'disease_lsd_treatment_steps':
+          'Isolate infected animals immediately|Provide supportive care and good nutrition|Clean skin nodules with antiseptic solution|Apply antibiotic ointment to prevent secondary infections|Administer antibiotics for secondary bacterial infections|Provide pain relief and anti-inflammatory medication|Ensure adequate hydration|Monitor for complications',
+      'disease_lsd_precautions':
+          'Control insect vectors (flies, mosquitoes, ticks)|Use insect repellents and insecticides|Vaccinate healthy animals|Quarantine new animals|Maintain good hygiene and sanitation|Dispose of contaminated materials properly|Report to veterinary authorities',
+      'disease_lsd_first_aid':
+          'Isolate the animal from the herd|Clean skin nodules with mild antiseptic|Keep the animal in a clean, shaded area|Provide fresh water and soft feed|Contact veterinarian for proper treatment|Monitor temperature and general condition',
 
       // Disease Details - Brucellosis
-      'disease_bruc_description': 'A bacterial disease that can cause abortion in cattle and is zoonotic.',
-      'disease_bruc_symptoms': 'Late-term abortion|Retained placenta|Reduced milk production|Infertility|Swollen testicles in bulls|Weak calves',
-      'disease_bruc_treatment_steps': 'Consult veterinarian immediately|Isolate infected animals|Test all animals in the herd|Cull or separate infected animals as per veterinary advice|Vaccinate healthy animals|Maintain strict biosecurity measures|Disinfect contaminated areas',
-      'disease_bruc_precautions': 'Test all new animals before introduction|Vaccinate heifers before first breeding|Practice good hygiene when handling aborted fetuses|Wear protective clothing|Dispose of aborted materials properly|Avoid consuming raw milk from infected animals|Report to veterinary authorities',
-      'disease_bruc_first_aid': 'Isolate the animal immediately|Wear protective clothing when handling|Dispose of aborted materials safely|Contact veterinarian for testing and treatment|Do not consume raw milk',
+      'disease_bruc_description':
+          'A bacterial disease that can cause abortion in cattle and is zoonotic.',
+      'disease_bruc_symptoms':
+          'Late-term abortion|Retained placenta|Reduced milk production|Infertility|Swollen testicles in bulls|Weak calves',
+      'disease_bruc_treatment_steps':
+          'Consult veterinarian immediately|Isolate infected animals|Test all animals in the herd|Cull or separate infected animals as per veterinary advice|Vaccinate healthy animals|Maintain strict biosecurity measures|Disinfect contaminated areas',
+      'disease_bruc_precautions':
+          'Test all new animals before introduction|Vaccinate heifers before first breeding|Practice good hygiene when handling aborted fetuses|Wear protective clothing|Dispose of aborted materials properly|Avoid consuming raw milk from infected animals|Report to veterinary authorities',
+      'disease_bruc_first_aid':
+          'Isolate the animal immediately|Wear protective clothing when handling|Dispose of aborted materials safely|Contact veterinarian for testing and treatment|Do not consume raw milk',
 
       // Disease Details - Anthrax
-      'disease_anth_description': 'A serious bacterial disease that can be fatal and is zoonotic.',
-      'disease_anth_symptoms': 'Sudden death (often first sign)|High fever|Difficulty breathing|Swelling of neck and throat|Bloody discharge from body openings|Convulsions before death',
-      'disease_anth_treatment_steps': 'DO NOT OPEN THE CARCASS - contact authorities immediately|Isolate any sick animals|Vaccinate all healthy animals|Disinfect contaminated areas thoroughly|Follow veterinary and health department guidelines|Report to authorities immediately',
-      'disease_anth_precautions': 'Vaccinate animals annually|Avoid opening carcasses of sudden death|Dispose of carcasses properly (burning or deep burial)|Disinfect contaminated areas|Wear protective clothing|Report suspected cases immediately|Quarantine affected area',
-      'disease_anth_first_aid': 'DO NOT TOUCH OR OPEN THE CARCASS|Isolate the area immediately|Contact veterinary and health authorities|Keep people and animals away|Wait for proper disposal instructions',
+      'disease_anth_description':
+          'A serious bacterial disease that can be fatal and is zoonotic.',
+      'disease_anth_symptoms':
+          'Sudden death (often first sign)|High fever|Difficulty breathing|Swelling of neck and throat|Bloody discharge from body openings|Convulsions before death',
+      'disease_anth_treatment_steps':
+          'DO NOT OPEN THE CARCASS - contact authorities immediately|Isolate any sick animals|Vaccinate all healthy animals|Disinfect contaminated areas thoroughly|Follow veterinary and health department guidelines|Report to authorities immediately',
+      'disease_anth_precautions':
+          'Vaccinate animals annually|Avoid opening carcasses of sudden death|Dispose of carcasses properly (burning or deep burial)|Disinfect contaminated areas|Wear protective clothing|Report suspected cases immediately|Quarantine affected area',
+      'disease_anth_first_aid':
+          'DO NOT TOUCH OR OPEN THE CARCASS|Isolate the area immediately|Contact veterinary and health authorities|Keep people and animals away|Wait for proper disposal instructions',
+      'dev1_name': 'Anirudh',
+      'dev1_role': 'Project Lead',
+      'dev1_contact': 'anirudh@pashuswasthya.ai',
+      'dev2_name': 'Team Member 2',
+      'dev2_role': 'Developer',
+      'dev2_contact': 'member2@pashuswasthya.ai',
+      'dev3_name': 'Team Member 3',
+      'dev3_role': 'Designer',
+      'dev3_contact': 'member3@pashuswasthya.ai',
+      'dev4_name': 'Team Member 4',
+      'dev4_role': 'Quality Assurance',
+      'dev4_contact': 'member4@pashuswasthya.ai',
+      'about_project_title': 'About the Project',
+      'about_project_description':
+          'PashuSwasthya is an offline‑ready, multilingual cattle health assistant built to empower field veterinarians and farmers with AI-assisted breed & disease insights.',
+      'developers_title': 'Developed By',
+      'developer_names': 'Anirudh & Team',
+      'contact_title': 'Contact Details',
+      'contact_email': 'support@pashuswasthya.ai',
+      'app_version': 'Version 1.0.0',
     },
     'hi': {
       'app_name': 'पशु स्वास्थ्य',
@@ -135,7 +185,8 @@ class AppStrings {
       'treatment_guide': 'उपचार गाइड',
       'treatment_guide_subtitle': 'सामान्य उपचारों के लिए ऑफ़लाइन गाइड देखें।',
       'vet_help': 'पशु चिकित्सक सहायता',
-      'vet_help_subtitle': 'विशेषज्ञ सलाह के लिए प्रमाणित पशु चिकित्सक से जुड़ें।',
+      'vet_help_subtitle':
+          'विशेषज्ञ सलाह के लिए प्रमाणित पशु चिकित्सक से जुड़ें।',
       'vet_connect_coming_soon': 'वेट कनेक्ट सुविधा जल्द आ रही है!',
       'settings': 'सेटिंग्स',
       'language': 'भाषा',
@@ -168,7 +219,8 @@ class AppStrings {
       'breed_result': 'नस्ल परिणाम',
       'disease_detection': 'रोग पहचान',
       'detection_results': 'पहचान परिणाम',
-      'upload_cattle_image': 'नस्ल की पहचान के लिए अपने मवेशी की छवि अपलोड करें',
+      'upload_cattle_image':
+          'नस्ल की पहचान के लिए अपने मवेशी की छवि अपलोड करें',
       'detect_breed': 'नस्ल पहचानें',
       'detecting': 'पहचान की जा रही है...',
       'breed_identified': 'पहचानी गई नस्ल',
@@ -202,7 +254,8 @@ class AppStrings {
       'voice_disease_prediction': 'आवाज से रोग पहचान',
       'listening_describe_symptoms': 'सुन रहे हैं... अपने पशु के लक्षण बताएं',
       'analyzing_symptoms': 'विश्लेषण कर रहे हैं...',
-      'tap_mic_describe': 'माइक्रोफोन पर टैप करें और पशु के स्वास्थ्य का वर्णन करें',
+      'tap_mic_describe':
+          'माइक्रोफोन पर टैप करें और पशु के स्वास्थ्य का वर्णन करें',
       'microphone_permission_required': 'माइक्रोफोन अनुमति आवश्यक है',
       'error': 'त्रुटि',
       'speech_recognition_not_available': 'भाषण पहचान उपलब्ध नहीं है',
@@ -215,54 +268,104 @@ class AppStrings {
       'start': 'शुरू करें',
       'save': 'सहेजें',
       'description_saved': 'विवरण सफलतापूर्वक सहेजा गया',
-      'no_disease_identified': 'कोई रोग पहचाना नहीं गया। कृपया अधिक लक्षण बताएं।',
+      'no_disease_identified':
+          'कोई रोग पहचाना नहीं गया। कृपया अधिक लक्षण बताएं।',
       'your_description_here': 'आपका विवरण यहाँ दिखाई देगा...',
-      'describe_symptoms_info': 'अपने पशु के लक्षण बताएं। हम स्वचालित रूप से रोग की पहचान करेंगे।',
+      'describe_symptoms_info':
+          'अपने पशु के लक्षण बताएं। हम स्वचालित रूप से रोग की पहचान करेंगे।',
 
       // Disease Details - FMD
-      'disease_fmd_description': 'खुर वाले जानवरों को प्रभावित करने वाला एक अत्यधिक संक्रामक वायरल रोग।',
-      'disease_fmd_symptoms': 'तेज बुखार (106°F तक)|मुंह और पैरों में छाले|अत्यधिक लार टपकना|लंगड़ापन और चलने में अनिच्छा|भूख न लगना|दूध उत्पादन में कमी',
-      'disease_fmd_treatment_steps': 'संक्रमित जानवर को तुरंत अलग करें|जानवर को साफ, सूखे और आरामदायक वातावरण में रखें|नरम, स्वादिष्ट चारा और भरपूर ताजा पानी दें|हल्के एंटीसेप्टिक घोल (पतला आयोडीन) से छालों को साफ करें|माध्यमिक जीवाणु संक्रमण को रोकने के लिए एंटीबायोटिक मलहम लगाएं|पशु चिकित्सक द्वारा निर्धारित दर्द निवारक दवा दें|प्रतिदिन तापमान की निगरानी करें|विटामिन की खुराक के साथ उचित पोषण सुनिश्चित करें',
-      'disease_fmd_precautions': 'नए जानवरों को कम से कम 21 दिनों के लिए अलग रखें|खेत में प्रवेश करने से पहले जूते, उपकरण और वाहनों को कीटाणुरहित करें|प्रकोप के दौरान अन्य खेतों के संपर्क से बचें|पशु चिकित्सा अनुसूची के अनुसार स्वस्थ जानवरों का टीकाकरण करें|दूषित सामग्री का उचित निपटान करें|संक्रमित जानवरों को संभालने के बाद हाथ धोएं और कपड़े बदलें|स्थानीय पशु चिकित्सा अधिकारियों को तुरंत रिपोर्ट करें',
-      'disease_fmd_first_aid': 'जानवर को तुरंत झुंड से अलग करें|प्रभावित क्षेत्रों को साफ पानी और हल्के साबुन से साफ करें|छालों पर एंटीसेप्टिक घोल लगाएं|बेचैनी कम करने के लिए नरम बिस्तर प्रदान करें|साफ पानी और नरम चारे तक पहुंच सुनिश्चित करें|उचित उपचार के लिए तुरंत पशु चिकित्सक से संपर्क करें',
+      'disease_fmd_description':
+          'खुर वाले जानवरों को प्रभावित करने वाला एक अत्यधिक संक्रामक वायरल रोग।',
+      'disease_fmd_symptoms':
+          'तेज बुखार (106°F तक)|मुंह और पैरों में छाले|अत्यधिक लार टपकना|लंगड़ापन और चलने में अनिच्छा|भूख न लगना|दूध उत्पादन में कमी',
+      'disease_fmd_treatment_steps':
+          'संक्रमित जानवर को तुरंत अलग करें|जानवर को साफ, सूखे और आरामदायक वातावरण में रखें|नरम, स्वादिष्ट चारा और भरपूर ताजा पानी दें|हल्के एंटीसेप्टिक घोल (पतला आयोडीन) से छालों को साफ करें|माध्यमिक जीवाणु संक्रमण को रोकने के लिए एंटीबायोटिक मलहम लगाएं|पशु चिकित्सक द्वारा निर्धारित दर्द निवारक दवा दें|प्रतिदिन तापमान की निगरानी करें|विटामिन की खुराक के साथ उचित पोषण सुनिश्चित करें',
+      'disease_fmd_precautions':
+          'नए जानवरों को कम से कम 21 दिनों के लिए अलग रखें|खेत में प्रवेश करने से पहले जूते, उपकरण और वाहनों को कीटाणुरहित करें|प्रकोप के दौरान अन्य खेतों के संपर्क से बचें|पशु चिकित्सा अनुसूची के अनुसार स्वस्थ जानवरों का टीकाकरण करें|दूषित सामग्री का उचित निपटान करें|संक्रमित जानवरों को संभालने के बाद हाथ धोएं और कपड़े बदलें|स्थानीय पशु चिकित्सा अधिकारियों को तुरंत रिपोर्ट करें',
+      'disease_fmd_first_aid':
+          'जानवर को तुरंत झुंड से अलग करें|प्रभावित क्षेत्रों को साफ पानी और हल्के साबुन से साफ करें|छालों पर एंटीसेप्टिक घोल लगाएं|बेचैनी कम करने के लिए नरम बिस्तर प्रदान करें|साफ पानी और नरम चारे तक पहुंच सुनिश्चित करें|उचित उपचार के लिए तुरंत पशु चिकित्सक से संपर्क करें',
 
       // Disease Details - Mastitis
-      'disease_mast_description': 'थन के ऊतकों की सूजन, आमतौर पर जीवाणु संक्रमण के कारण होती है।',
-      'disease_mast_symptoms': 'थन में सूजन, गर्मी और लालिमा|थन में कठोरता और दर्द|दूध का असामान्य दिखना (पानी जैसा, गुच्छे, थक्के)|दूध उत्पादन में कमी|गंभीर मामलों में बुखार|भूख न लगना',
-      'disease_mast_treatment_steps': 'प्रभावित थन से बार-बार दूध निकालें (हर 2-3 घंटे में)|सूजन कम करने के लिए थन पर गर्म सेक लगाएं|पशु चिकित्सक द्वारा निर्धारित एंटीबायोटिक्स दें|निर्देशानुसार इंट्रामैमरी एंटीबायोटिक ट्यूब का उपयोग करें|दूध निकालने की उचित स्वच्छता सुनिश्चित करें|यदि आवश्यक हो तो सूजन-रोधी दवा दें|पूरे कोर्स के लिए उपचार जारी रखें (आमतौर पर 5-7 दिन)|उपभोग फिर से शुरू करने से पहले दूध की गुणवत्ता की निगरानी करें',
-      'disease_mast_precautions': 'दूध निकालने की सख्त स्वच्छता बनाए रखें|दूध निकालने से पहले और बाद में थन को साफ करें|प्रत्येक जानवर के लिए अलग कपड़े का उपयोग करें|दूध निकालने के उपकरणों को नियमित रूप से कीटाणुरहित करें|दूध निकालने के बाद जानवरों को ठीक से सुखाएं|उपचार के दौरान संक्रमित जानवरों को अलग रखें|शुरुआती पहचान के लिए नियमित रूप से दूध का परीक्षण करें',
-      'disease_mast_first_aid': 'प्रभावित थन से दूध निकालना बंद करें|सूजन कम करने के लिए ठंडा सेक लगाएं|जानवर को साफ, सूखे क्षेत्र में रखें|भरपूर ताजा पानी दें|एंटीबायोटिक उपचार के लिए पशु चिकित्सक से संपर्क करें|प्रभावित थन का दूध न पिएं',
+      'disease_mast_description':
+          'थन के ऊतकों की सूजन, आमतौर पर जीवाणु संक्रमण के कारण होती है।',
+      'disease_mast_symptoms':
+          'थन में सूजन, गर्मी और लालिमा|थन में कठोरता और दर्द|दूध का असामान्य दिखना (पानी जैसा, गुच्छे, थक्के)|दूध उत्पादन में कमी|गंभीर मामलों में बुखार|भूख न लगना',
+      'disease_mast_treatment_steps':
+          'प्रभावित थन से बार-बार दूध निकालें (हर 2-3 घंटे में)|सूजन कम करने के लिए थन पर गर्म सेक लगाएं|पशु चिकित्सक द्वारा निर्धारित एंटीबायोटिक्स दें|निर्देशानुसार इंट्रामैमरी एंटीबायोटिक ट्यूब का उपयोग करें|दूध निकालने की उचित स्वच्छता सुनिश्चित करें|यदि आवश्यक हो तो सूजन-रोधी दवा दें|पूरे कोर्स के लिए उपचार जारी रखें (आमतौर पर 5-7 दिन)|उपभोग फिर से शुरू करने से पहले दूध की गुणवत्ता की निगरानी करें',
+      'disease_mast_precautions':
+          'दूध निकालने की सख्त स्वच्छता बनाए रखें|दूध निकालने से पहले और बाद में थन को साफ करें|प्रत्येक जानवर के लिए अलग कपड़े का उपयोग करें|दूध निकालने के उपकरणों को नियमित रूप से कीटाणुरहित करें|दूध निकालने के बाद जानवरों को ठीक से सुखाएं|उपचार के दौरान संक्रमित जानवरों को अलग रखें|शुरुआती पहचान के लिए नियमित रूप से दूध का परीक्षण करें',
+      'disease_mast_first_aid':
+          'प्रभावित थन से दूध निकालना बंद करें|सूजन कम करने के लिए ठंडा सेक लगाएं|जानवर को साफ, सूखे क्षेत्र में रखें|भरपूर ताजा पानी दें|एंटीबायोटिक उपचार के लिए पशु चिकित्सक से संपर्क करें|प्रभावित थन का दूध न पिएं',
 
       // Disease Details - LSD
-      'disease_lsd_description': 'खून चूसने वाले कीड़ों द्वारा फैलने वाला एक वायरल रोग, जिससे त्वचा पर गांठें हो जाती हैं।',
-      'disease_lsd_symptoms': 'बुखार (103-106°F)|त्वचा पर गांठें या लंप (2-5 सेमी व्यास)|अंगों और छाती में सूजन|आंखों से पानी आना और नाक बहना|दूध उत्पादन में कमी|भूख न लगना|चलने में कठिनाई',
-      'disease_lsd_treatment_steps': 'संक्रमित जानवरों को तुरंत अलग करें|सहायक देखभाल और अच्छा पोषण प्रदान करें|त्वचा की गांठों को एंटीसेप्टिक घोल से साफ करें|माध्यमिक संक्रमण को रोकने के लिए एंटीबायोटिक मलहम लगाएं|माध्यमिक जीवाणु संक्रमण के लिए एंटीबायोटिक्स दें|दर्द निवारक और सूजन-रोधी दवा दें|पर्याप्त जलयोजन सुनिश्चित करें|जटिलताओं के लिए निगरानी करें',
-      'disease_lsd_precautions': 'कीट वैक्टर (मक्खियों, मच्छरों, टिक्स) को नियंत्रित करें|कीट विकर्षक और कीटनाशकों का उपयोग करें|स्वस्थ जानवरों का टीकाकरण करें|नए जानवरों को अलग रखें|अच्छी स्वच्छता और सफाई बनाए रखें|दूषित सामग्री का उचित निपटान करें|पशु चिकित्सा अधिकारियों को रिपोर्ट करें',
-      'disease_lsd_first_aid': 'जानवर को झुंड से अलग करें|त्वचा की गांठों को हल्के एंटीसेप्टिक से साफ करें|जानवर को साफ, छायादार क्षेत्र में रखें|ताजा पानी और नरम चारा दें|उचित उपचार के लिए पशु चिकित्सक से संपर्क करें|तापमान और सामान्य स्थिति की निगरानी करें',
+      'disease_lsd_description':
+          'खून चूसने वाले कीड़ों द्वारा फैलने वाला एक वायरल रोग, जिससे त्वचा पर गांठें हो जाती हैं।',
+      'disease_lsd_symptoms':
+          'बुखार (103-106°F)|त्वचा पर गांठें या लंप (2-5 सेमी व्यास)|अंगों और छाती में सूजन|आंखों से पानी आना और नाक बहना|दूध उत्पादन में कमी|भूख न लगना|चलने में कठिनाई',
+      'disease_lsd_treatment_steps':
+          'संक्रमित जानवरों को तुरंत अलग करें|सहायक देखभाल और अच्छा पोषण प्रदान करें|त्वचा की गांठों को एंटीसेप्टिक घोल से साफ करें|माध्यमिक संक्रमण को रोकने के लिए एंटीबायोटिक मलहम लगाएं|माध्यमिक जीवाणु संक्रमण के लिए एंटीबायोटिक्स दें|दर्द निवारक और सूजन-रोधी दवा दें|पर्याप्त जलयोजन सुनिश्चित करें|जटिलताओं के लिए निगरानी करें',
+      'disease_lsd_precautions':
+          'कीट वैक्टर (मक्खियों, मच्छरों, टिक्स) को नियंत्रित करें|कीट विकर्षक और कीटनाशकों का उपयोग करें|स्वस्थ जानवरों का टीकाकरण करें|नए जानवरों को अलग रखें|अच्छी स्वच्छता और सफाई बनाए रखें|दूषित सामग्री का उचित निपटान करें|पशु चिकित्सा अधिकारियों को रिपोर्ट करें',
+      'disease_lsd_first_aid':
+          'जानवर को झुंड से अलग करें|त्वचा की गांठों को हल्के एंटीसेप्टिक से साफ करें|जानवर को साफ, छायादार क्षेत्र में रखें|ताजा पानी और नरम चारा दें|उचित उपचार के लिए पशु चिकित्सक से संपर्क करें|तापमान और सामान्य स्थिति की निगरानी करें',
 
       // Disease Details - Brucellosis
-      'disease_bruc_description': 'एक जीवाणु रोग जो मवेशियों में गर्भपात का कारण बन सकता है और जूनोटिक है।',
-      'disease_bruc_symptoms': 'देर से गर्भपात|प्लेसेंटा का रुकना|दूध उत्पादन में कमी|बांझपन|सांडों में सूजे हुए अंडकोष|कमजोर बछड़े',
-      'disease_bruc_treatment_steps': 'तुरंत पशु चिकित्सक से परामर्श करें|संक्रमित जानवरों को अलग करें|झुंड के सभी जानवरों का परीक्षण करें|पशु चिकित्सा सलाह के अनुसार संक्रमित जानवरों को मार दें या अलग करें|स्वस्थ जानवरों का टीकाकरण करें|सख्त जैव सुरक्षा उपाय बनाए रखें|दूषित क्षेत्रों को कीटाणुरहित करें',
-      'disease_bruc_precautions': 'परिचय से पहले सभी नए जानवरों का परीक्षण करें|पहले प्रजनन से पहले बछियों का टीकाकरण करें|गर्भपात वाले भ्रूण को संभालते समय अच्छी स्वच्छता का अभ्यास करें|सुरक्षात्मक कपड़े पहनें|गर्भपात सामग्री का उचित निपटान करें|संक्रमित जानवरों का कच्चा दूध पीने से बचें|पशु चिकित्सा अधिकारियों को रिपोर्ट करें',
-      'disease_bruc_first_aid': 'जानवर को तुरंत अलग करें|संभालते समय सुरक्षात्मक कपड़े पहनें|गर्भपात सामग्री का सुरक्षित रूप से निपटान करें|परीक्षण और उपचार के लिए पशु चिकित्सक से संपर्क करें|कच्चा दूध न पिएं',
+      'disease_bruc_description':
+          'एक जीवाणु रोग जो मवेशियों में गर्भपात का कारण बन सकता है और जूनोटिक है।',
+      'disease_bruc_symptoms':
+          'देर से गर्भपात|प्लेसेंटा का रुकना|दूध उत्पादन में कमी|बांझपन|सांडों में सूजे हुए अंडकोष|कमजोर बछड़े',
+      'disease_bruc_treatment_steps':
+          'तुरंत पशु चिकित्सक से परामर्श करें|संक्रमित जानवरों को अलग करें|झुंड के सभी जानवरों का परीक्षण करें|पशु चिकित्सा सलाह के अनुसार संक्रमित जानवरों को मार दें या अलग करें|स्वस्थ जानवरों का टीकाकरण करें|सख्त जैव सुरक्षा उपाय बनाए रखें|दूषित क्षेत्रों को कीटाणुरहित करें',
+      'disease_bruc_precautions':
+          'परिचय से पहले सभी नए जानवरों का परीक्षण करें|पहले प्रजनन से पहले बछियों का टीकाकरण करें|गर्भपात वाले भ्रूण को संभालते समय अच्छी स्वच्छता का अभ्यास करें|सुरक्षात्मक कपड़े पहनें|गर्भपात सामग्री का उचित निपटान करें|संक्रमित जानवरों का कच्चा दूध पीने से बचें|पशु चिकित्सा अधिकारियों को रिपोर्ट करें',
+      'disease_bruc_first_aid':
+          'जानवर को तुरंत अलग करें|संभालते समय सुरक्षात्मक कपड़े पहनें|गर्भपात सामग्री का सुरक्षित रूप से निपटान करें|परीक्षण और उपचार के लिए पशु चिकित्सक से संपर्क करें|कच्चा दूध न पिएं',
 
       // Disease Details - Anthrax
-      'disease_anth_description': 'एक गंभीर जीवाणु रोग जो घातक हो सकता है और जूनोटिक है।',
-      'disease_anth_symptoms': 'अचानक मृत्यु (अक्सर पहला संकेत)|तेज बुखार|सांस लेने में कठिनाई|गर्दन और गले में सूजन|शरीर के छिद्रों से खूनी निर्वहन|मृत्यु से पहले ऐंठन',
-      'disease_anth_treatment_steps': 'शव को न खोलें - तुरंत अधिकारियों से संपर्क करें|किसी भी बीमार जानवर को अलग करें|सभी स्वस्थ जानवरों का टीकाकरण करें|दूषित क्षेत्रों को अच्छी तरह से कीटाणुरहित करें|पशु चिकित्सा और स्वास्थ्य विभाग के दिशानिर्देशों का पालन करें|तुरंत अधिकारियों को रिपोर्ट करें',
-      'disease_anth_precautions': 'प्रतिवर्ष जानवरों का टीकाकरण करें|अचानक मृत्यु वाले शवों को खोलने से बचें|शवों का उचित निपटान करें (जलाना या गहरा दफनाना)|दूषित क्षेत्रों को कीटाणुरहित करें|सुरक्षात्मक कपड़े पहनें|संदिग्ध मामलों की तुरंत रिपोर्ट करें|प्रभावित क्षेत्र को अलग रखें',
-      'disease_anth_first_aid': 'शव को न छुएं और न ही खोलें|क्षेत्र को तुरंत अलग करें|पशु चिकित्सा और स्वास्थ्य अधिकारियों से संपर्क करें|लोगों और जानवरों को दूर रखें|उचित निपटान निर्देशों की प्रतीक्षा करें',
+      'disease_anth_description':
+          'एक गंभीर जीवाणु रोग जो घातक हो सकता है और जूनोटिक है।',
+      'disease_anth_symptoms':
+          'अचानक मृत्यु (अक्सर पहला संकेत)|तेज बुखार|सांस लेने में कठिनाई|गर्दन और गले में सूजन|शरीर के छिद्रों से खूनी निर्वहन|मृत्यु से पहले ऐंठन',
+      'disease_anth_treatment_steps':
+          'शव को न खोलें - तुरंत अधिकारियों से संपर्क करें|किसी भी बीमार जानवर को अलग करें|सभी स्वस्थ जानवरों का टीकाकरण करें|दूषित क्षेत्रों को अच्छी तरह से कीटाणुरहित करें|पशु चिकित्सा और स्वास्थ्य विभाग के दिशानिर्देशों का पालन करें|तुरंत अधिकारियों को रिपोर्ट करें',
+      'disease_anth_precautions':
+          'प्रतिवर्ष जानवरों का टीकाकरण करें|अचानक मृत्यु वाले शवों को खोलने से बचें|शवों का उचित निपटान करें (जलाना या गहरा दफनाना)|दूषित क्षेत्रों को कीटाणुरहित करें|सुरक्षात्मक कपड़े पहनें|संदिग्ध मामलों की तुरंत रिपोर्ट करें|प्रभावित क्षेत्र को अलग रखें',
+      'disease_anth_first_aid':
+          'शव को न छुएं और न ही खोलें|क्षेत्र को तुरंत अलग करें|पशु चिकित्सा और स्वास्थ्य अधिकारियों से संपर्क करें|लोगों और जानवरों को दूर रखें|उचित निपटान निर्देशों की प्रतीक्षा करें',
+      'dev1_name': 'अनिरुद्ध',
+      'dev1_role': 'परियोजना प्रमुख',
+      'dev1_contact': 'anirudh@pashuswasthya.ai',
+      'dev2_name': 'टीम सदस्य 2',
+      'dev2_role': 'डेवलपर',
+      'dev2_contact': 'member2@pashuswasthya.ai',
+      'dev3_name': 'टीम सदस्य 3',
+      'dev3_role': 'डिजाइनर',
+      'dev3_contact': 'member3@pashuswasthya.ai',
+      'dev4_name': 'टीम सदस्य 4',
+      'dev4_role': 'गुणवत्ता आश्वासन',
+      'dev4_contact': 'member4@pashuswasthya.ai',
+      'about_project_title': 'परियोजना के बारे में',
+      'about_project_description':
+          'पशु स्वास्थ्य एक ऑफ़लाइन-तैयार, बहुभाषी पशु स्वास्थ्य सहायक है जिसे एआई-सहायता प्राप्त नस्ल और रोग अंतर्दृष्टि के साथ क्षेत्र के पशु चिकित्सकों और किसानों को सशक्त बनाने के लिए बनाया गया है।',
+      'developers_title': 'इनके द्वारा विकसित',
+      'developer_names': 'अनिरुद्ध और टीम',
+      'contact_title': 'संपर्क विवरण',
+      'contact_email': 'support@pashuswasthya.ai',
+      'app_version': 'संस्करण 1.0.0',
     },
     'ml': {
       'app_name': 'പശു ആരോഗ്യം',
       'app_subtitle': 'കന്നുകാലി ആരോഗ്യ സഹായി',
       'breed_disease_detection': 'കന്നുകാലിയെ സ്കാൻ ചെയ്യുക',
-      'breed_disease_subtitle': 'ഇനത്തെയും ആരോഗ്യത്തെയും കുറിച്ചുള്ള ഉൾക്കാഴ്ചകൾ.',
+      'breed_disease_subtitle':
+          'ഇനത്തെയും ആരോഗ്യത്തെയും കുറിച്ചുള്ള ഉൾക്കാഴ്ചകൾ.',
       'treatment_guide': 'ചികിത്സാ സഹായി',
-      'treatment_guide_subtitle': 'സാധാരണ ചികിത്സകൾക്കായി ഓഫ്‌ലൈൻ സഹായി ഉപയോഗിക്കുക.',
+      'treatment_guide_subtitle':
+          'സാധാരണ ചികിത്സകൾക്കായി ഓഫ്‌ലൈൻ സഹായി ഉപയോഗിക്കുക.',
       'vet_help': 'മൃഗഡോക്ടറുടെ സഹായം',
-      'vet_help_subtitle': 'വിദഗ്ദ്ധ ഉപദേശത്തിനായി ഒരു വെറ്ററിനറി ഡോക്ടറുമായി ബന്ധപ്പെടുക.',
+      'vet_help_subtitle':
+          'വിദഗ്ദ്ധ ഉപദേശത്തിനായി ഒരു വെറ്ററിനറി ഡോക്ടറുമായി ബന്ധപ്പെടുക.',
       'vet_connect_coming_soon': 'വെറ്റ് കണക്റ്റ് ഫീച്ചർ ഉടൻ വരുന്നു!',
       'settings': 'ക്രമീകരണങ്ങൾ',
       'language': 'ഭാഷ',
@@ -295,7 +398,8 @@ class AppStrings {
       'breed_result': 'ഇനം ഫലം',
       'disease_detection': 'രോഗ നിർണ്ണയം',
       'detection_results': 'കണ്ടെത്തൽ ഫലങ്ങൾ',
-      'upload_cattle_image': 'ഇനം തിരിച്ചറിയുന്നതിനായി നിങ്ങളുടെ കന്നുകാലിയുടെ ചിത്രം അപ്‌ലോഡ് ചെയ്യുക',
+      'upload_cattle_image':
+          'ഇനം തിരിച്ചറിയുന്നതിനായി നിങ്ങളുടെ കന്നുകാലിയുടെ ചിത്രം അപ്‌ലോഡ് ചെയ്യുക',
       'detect_breed': 'ഇനം കണ്ടെത്തുക',
       'detecting': 'കണ്ടെത്തുന്നു...',
       'breed_identified': 'തിരിച്ചറിഞ്ഞ ഇനം',
@@ -310,7 +414,8 @@ class AppStrings {
       'view_treatment': 'ചികിത്സ കാണുക',
       'start_new_detection': 'പുതിയ കണ്ടെത്തൽ ആരംഭിക്കുക',
       'camera_permission_required': 'ക്യാമറ അനുമതി ആവശ്യമാണ്',
-      'please_capture_image': 'ദയവായി ആദ്യം ചിത്രം എടുക്കുകയോ അപ്‌ലോഡ് ചെയ്യുകയോ ചെയ്യുക',
+      'please_capture_image':
+          'ദയവായി ആദ്യം ചിത്രം എടുക്കുകയോ അപ്‌ലോഡ് ചെയ്യുകയോ ചെയ്യുക',
       'breed_detection_failed': 'ഇനം കണ്ടെത്തൽ പരാജയപ്പെട്ടു',
       'disease_detection_failed': 'രോഗ നിർണ്ണയം പരാജയപ്പെട്ടു',
       'treatment_guides': 'ചികിത്സാ സഹായി',
@@ -319,7 +424,8 @@ class AppStrings {
       'precautions': 'മുൻകരുതലുകൾ',
       'first_aid': 'പ്രഥമശുശ്രൂഷ',
       'emergency_severe_disease': 'അടിയന്തരാവസ്ഥ - ഗുരുതരമായ രോഗം കണ്ടെത്തി',
-      'contact_vet_immediately': 'ഉടൻ തന്നെ വെറ്ററിനറി ഡോക്ടറുമായി ബന്ധപ്പെടുക:',
+      'contact_vet_immediately':
+          'ഉടൻ തന്നെ വെറ്ററിനറി ഡോക്ടറുമായി ബന്ധപ്പെടുക:',
       'cannot_make_call': 'കോൾ ചെയ്യാൻ കഴിയില്ല',
       'disease_fmd': 'കുളമ്പുരോഗം',
       'disease_mastitis': 'അകിടുവീക്കം',
@@ -327,9 +433,11 @@ class AppStrings {
       'disease_brucellosis': 'ബ്രൂസല്ലോസിസ്',
       'disease_anthrax': 'ആന്ത്രാക്സ്',
       'voice_disease_prediction': 'ശബ്ദത്തിലൂടെ രോഗ നിർണ്ണയം',
-      'listening_describe_symptoms': 'ശ്രദ്ധിക്കുന്നു... നിങ്ങളുടെ കന്നുകാലിയുടെ ലക്ഷണങ്ങൾ വിവരിക്കുക',
+      'listening_describe_symptoms':
+          'ശ്രദ്ധിക്കുന്നു... നിങ്ങളുടെ കന്നുകാലിയുടെ ലക്ഷണങ്ങൾ വിവരിക്കുക',
       'analyzing_symptoms': 'ലക്ഷണങ്ങൾ വിശകലനം ചെയ്യുന്നു...',
-      'tap_mic_describe': 'കന്നുകാലിയുടെ ആരോഗ്യം വിവരിക്കാൻ മൈക്രോഫോണിൽ ടാപ്പുചെയ്യുക',
+      'tap_mic_describe':
+          'കന്നുകാലിയുടെ ആരോഗ്യം വിവരിക്കാൻ മൈക്രോഫോണിൽ ടാപ്പുചെയ്യുക',
       'microphone_permission_required': 'മൈക്രോഫോൺ അനുമതി ആവശ്യമാണ്',
       'error': 'പിശക്',
       'speech_recognition_not_available': 'സംഭാഷണ തിരിച്ചറിയൽ ലഭ്യമല്ല',
@@ -342,52 +450,81 @@ class AppStrings {
       'start': 'ആരംഭിക്കുക',
       'save': 'സംരക്ഷിക്കുക',
       'description_saved': 'വിവരണം വിജയകരമായി സംരക്ഷിച്ചു',
-      'no_disease_identified': 'രോഗമൊന്നും തിരിച്ചറിഞ്ഞില്ല. ദയവായി കൂടുതൽ ലക്ഷണങ്ങൾ വിവരിക്കുക.',
+      'no_disease_identified':
+          'രോഗമൊന്നും തിരിച്ചറിഞ്ഞില്ല. ദയവായി കൂടുതൽ ലക്ഷണങ്ങൾ വിവരിക്കുക.',
       'your_description_here': 'നിങ്ങളുടെ വിവരണം ഇവിടെ ദൃശ്യമാകും...',
-      'describe_symptoms_info': 'നിങ്ങളുടെ കന്നുകാലിയുടെ ലക്ഷണങ്ങൾ വിവരിക്കുക. ഞങ്ങൾ രോഗം സ്വയമേവ തിരിച്ചറിയും.',
+      'describe_symptoms_info':
+          'നിങ്ങളുടെ കന്നുകാലിയുടെ ലക്ഷണങ്ങൾ വിവരിക്കുക. ഞങ്ങൾ രോഗം സ്വയമേവ തിരിച്ചറിയും.',
 
       // Disease Details - FMD
-      'disease_fmd_description': 'കുളമ്പുള്ള മൃഗങ്ങളെ ബാധിക്കുന്ന വളരെ പകർച്ചവ്യാധിയായ വൈറൽ രോഗം.',
-      'disease_fmd_symptoms': 'കടുത്ത പനി (106°F വരെ)|വായയിലും കാലുകളിലും കുമിളകൾ|അമിതമായി ഉമിനീർ ഒലിപ്പിക്കൽ|മുടന്തും നടക്കാൻ വിമുഖതയും|വിശപ്പില്ലായ്മ|പാൽ ഉത്പാദനം കുറയുന്നു',
-      'disease_fmd_treatment_steps': 'രോഗം ബാധിച്ച മൃഗത്തെ ഉടൻ വേർതിരിക്കുക|മൃഗത്തെ വൃത്തിയുള്ളതും ഉണങ്ങിയതും സൗകര്യപ്രദവുമായ അന്തരീക്ഷത്തിൽ സൂക്ഷിക്കുക|മൃദുവായതും രുചികരവുമായ തീറ്റയും ധാരാളം ശുദ്ധജലവും നൽകുക|വീര്യം കുറഞ്ഞ ആന്റിസെപ്റ്റിക് ലായനി (നേർപ്പിച്ച അയഡിൻ) ഉപയോഗിച്ച് കുമിളകൾ വൃത്തിയാക്കുക|ദ്വിതീയ ബാക്ടീരിയ അണുബാധ തടയാൻ ആന്റിബയോട്ടിക് തൈലം പുരട്ടുക|വെറ്ററിനറി ഡോക്ടർ നിർദ്ദേശിച്ച പ്രകാരം വേദന സംഹാരികൾ നൽകുക|ദിവസവും താപനില നിരീക്ഷിക്കുക|വിറ്റാമിൻ സപ്ലിമെന്റുകൾ നൽകി ശരിയായ പോഷകാഹാരം ഉറപ്പാക്കുക',
-      'disease_fmd_precautions': 'പുതിയ മൃഗങ്ങളെ കുറഞ്ഞത് 21 ദിവസമെങ്കിലും ക്വാറന്റൈൻ ചെയ്യുക|ഫാമിൽ പ്രവേശിക്കുന്നതിന് മുമ്പ് പാദരക്ഷകൾ, ഉപകരണങ്ങൾ, വാഹനങ്ങൾ എന്നിവ അണുവിമുക്തമാക്കുക|രോഗം പടരുന്ന സമയത്ത് മറ്റ് ഫാമുകളുമായുള്ള സമ്പർക്കം ഒഴിവാക്കുക|വെറ്ററിനറി ഷെഡ്യൂൾ അനുസരിച്ച് ആരോഗ്യകരമായ മൃഗങ്ങൾക്ക് പ്രതിരോധ കുത്തിവയ്പ്പ് നൽകുക|മലിനമായ വസ്തുക്കൾ ശരിയായി സംസ്കരിക്കുക|രോഗം ബാധിച്ച മൃഗങ്ങളെ കൈകാര്യം ചെയ്ത ശേഷം കൈകൾ കഴുകുകയും വസ്ത്രങ്ങൾ മാറുകയും ചെയ്യുക|പ്രാദേശിക വെറ്ററിനറി അധികാരികളെ ഉടൻ അറിയിക്കുക',
-      'disease_fmd_first_aid': 'മൃഗത്തെ ഉടൻ തന്നെ കൂട്ടത്തിൽ നിന്ന് മാറ്റുക|ബാധിച്ച ഭാഗങ്ങൾ ശുദ്ധജലവും വീര്യം കുറഞ്ഞ സോപ്പും ഉപയോഗിച്ച് വൃത്തിയാക്കുക|കുമിളകളിൽ ആന്റിസെപ്റ്റിക് ലായനി പുരട്ടുക|അസ്വസ്ഥത കുറയ്ക്കാൻ മൃദുവായ കിടക്ക നൽകുക|ശുദ്ധജലവും മൃദുവായ തീറ്റയും ലഭ്യമാണെന്ന് ഉറപ്പാക്കുക|ശരിയായ ചികിത്സയ്ക്കായി ഉടൻ തന്നെ വെറ്ററിനറി ഡോക്ടറുമായി ബന്ധപ്പെടുക',
+      'disease_fmd_description':
+          'കുളമ്പുള്ള മൃഗങ്ങളെ ബാധിക്കുന്ന വളരെ പകർച്ചവ്യാധിയായ വൈറൽ രോഗം.',
+      'disease_fmd_symptoms':
+          'കടുത്ത പനി (106°F വരെ)|വായയിലും കാലുകളിലും കുമിളകൾ|അമിതമായി ഉമിനീർ ഒലിപ്പിക്കൽ|മുടന്തും നടക്കാൻ വിമുഖതയും|വിശപ്പില്ലായ്മ|പാൽ ഉത്പാദനം കുറയുന്നു',
+      'disease_fmd_treatment_steps':
+          'രോഗം ബാധിച്ച മൃഗത്തെ ഉടൻ വേർതിരിക്കുക|മൃഗത്തെ വൃത്തിയുള്ളതും ഉണങ്ങിയതും സൗകര്യപ്രദവുമായ അന്തരീക്ഷത്തിൽ സൂക്ഷിക്കുക|മൃദുവായതും രുചികരവുമായ തീറ്റയും ധാരാളം ശുദ്ധജലവും നൽകുക|വീര്യം കുറഞ്ഞ ആന്റിസെപ്റ്റിക് ലായനി (നേർപ്പിച്ച അയഡിൻ) ഉപയോഗിച്ച് കുമിളകൾ വൃത്തിയാക്കുക|ദ്വിതീയ ബാക്ടീരിയ അണുബാധ തടയാൻ ആന്റിബയോട്ടിക് തൈലം പുരട്ടുക|വെറ്ററിനറി ഡോക്ടർ നിർദ്ദേശിച്ച പ്രകാരം വേദന സംഹാരികൾ നൽകുക|ദിവസവും താപനില നിരീക്ഷിക്കുക|വിറ്റാമിൻ സപ്ലിമെന്റുകൾ നൽകി ശരിയായ പോഷകാഹാരം ഉറപ്പാക്കുക',
+      'disease_fmd_precautions':
+          'പുതിയ മൃഗങ്ങളെ കുറഞ്ഞത് 21 ദിവസമെങ്കിലും ക്വാറന്റൈൻ ചെയ്യുക|ഫാമിൽ പ്രവേശിക്കുന്നതിന് മുമ്പ് പാദരക്ഷകൾ, ഉപകരണങ്ങൾ, വാഹനങ്ങൾ എന്നിവ അണുവിമുക്തമാക്കുക|രോഗം പടരുന്ന സമയത്ത് മറ്റ് ഫാമുകളുമായുള്ള സമ്പർക്കം ഒഴിവാക്കുക|വെറ്ററിനറി ഷെഡ്യൂൾ അനുസരിച്ച് ആരോഗ്യകരമായ മൃഗങ്ങൾക്ക് പ്രതിരോധ കുത്തിവയ്പ്പ് നൽകുക|മലിനമായ വസ്തുക്കൾ ശരിയായി സംസ്കരിക്കുക|രോഗം ബാധിച്ച മൃഗങ്ങളെ കൈകാര്യം ചെയ്ത ശേഷം കൈകൾ കഴുകുകയും വസ്ത്രങ്ങൾ മാറുകയും ചെയ്യുക|പ്രാദേശിക വെറ്ററിനറി അധികാരികളെ ഉടൻ അറിയിക്കുക',
+      'disease_fmd_first_aid':
+          'മൃഗത്തെ ഉടൻ തന്നെ കൂട്ടത്തിൽ നിന്ന് മാറ്റുക|ബാധിച്ച ഭാഗങ്ങൾ ശുദ്ധജലവും വീര്യം കുറഞ്ഞ സോപ്പും ഉപയോഗിച്ച് വൃത്തിയാക്കുക|കുമിളകളിൽ ആന്റിസെപ്റ്റിക് ലായനി പുരട്ടുക|അസ്വസ്ഥത കുറയ്ക്കാൻ മൃദുവായ കിടക്ക നൽകുക|ശുദ്ധജലവും മൃദുവായ തീറ്റയും ലഭ്യമാണെന്ന് ഉറപ്പാക്കുക|ശരിയായ ചികിത്സയ്ക്കായി ഉടൻ തന്നെ വെറ്ററിനറി ഡോക്ടറുമായി ബന്ധപ്പെടുക',
 
       // Disease Details - Mastitis
-      'disease_mast_description': 'അകിടുവീക്കം, സാധാരണയായി ബാക്ടീരിയ അണുബാധ മൂലമാണ് ഉണ്ടാകുന്നത്.',
-      'disease_mast_symptoms': 'അകിടിൽ വീക്കം, ചൂട്, ചുവപ്പ്|അകിടിൽ കാഠിന്യവും വേദനയും|പാലിന്റെ അസാധാരണമായ രൂപം (വെള്ളം പോലെ, കട്ടകൾ)|പാൽ ഉത്പാദനം കുറയുന്നു|ഗുരുതരമായ കേസുകളിൽ പനി|വിശപ്പില്ലായ്മ',
-      'disease_mast_treatment_steps': 'ബാധിച്ച അകിടിൽ നിന്ന് ഇടയ്ക്കിടെ പാൽ കറക്കുക (ഓരോ 2-3 മണിക്കൂറിലും)|വീക്കം കുറയ്ക്കാൻ അകിടിൽ ചൂടുള്ള തുണി വെക്കുക|വെറ്ററിനറി ഡോക്ടർ നിർദ്ദേശിച്ച പ്രകാരം ആന്റിബയോട്ടിക്കുകൾ നൽകുക|നിർദ്ദേശാനുസരണം ഇൻട്രാമാമറി ആന്റിബയോട്ടിക് ട്യൂബുകൾ ഉപയോഗിക്കുക|ശരിയായ കറവ ശുചിത്വം ഉറപ്പാക്കുക|ആവശ്യമെങ്കിൽ ആന്റി-ഇൻഫ്ലമേറ്ററി മരുന്ന് നൽകുക|മുഴുവൻ കോഴ്സിനും ചികിത്സ തുടരുക (സാധാരണയായി 5-7 ദിവസം)|ഉപഭോഗം പുനരാരംഭിക്കുന്നതിന് മുമ്പ് പാലിന്റെ ഗുണനിലവാരം പരിശോധിക്കുക',
-      'disease_mast_precautions': 'കർശനമായ കറവ ശുചിത്വം പാലിക്കുക|കറവയ്ക്ക് മുമ്പും ശേഷവും അകിട് വൃത്തിയാക്കുക|ഓരോ മൃഗത്തിനും വെവ്വേറെ തുണികൾ ഉപയോഗിക്കുക|കറവ ഉപകരണങ്ങൾ പതിവായി അണുവിമുക്തമാക്കുക|കറവയ്ക്ക് ശേഷം മൃഗങ്ങളെ ശരിയായി ഉണക്കുക|ചികിത്സാ വേളയിൽ രോഗം ബാധിച്ച മൃഗങ്ങളെ വേർതിരിക്കുക|നേരത്തെ കണ്ടെത്തുന്നതിന് പാൽ പതിവായി പരിശോധിക്കുക',
-      'disease_mast_first_aid': 'ബാധിച്ച അകിടിൽ നിന്ന് പാൽ കറക്കുന്നത് നിർത്തുക|വീക്കം കുറയ്ക്കാൻ തണുത്ത തുണി വെക്കുക|മൃഗത്തെ വൃത്തിയുള്ളതും ഉണങ്ങിയതുമായ സ്ഥലത്ത് സൂക്ഷിക്കുക|ധാരാളം ശുദ്ധജലം നൽകുക|ആന്റിബയോട്ടിക് ചികിത്സയ്ക്കായി വെറ്ററിനറി ഡോക്ടറുമായി ബന്ധപ്പെടുക|ബാധിച്ച അകിടിൽ നിന്നുള്ള പാൽ കുടിക്കരുത്',
+      'disease_mast_description':
+          'അകിടുവീക്കം, സാധാരണയായി ബാക്ടീരിയ അണുബാധ മൂലമാണ് ഉണ്ടാകുന്നത്.',
+      'disease_mast_symptoms':
+          'അകിടിൽ വീക്കം, ചൂട്, ചുവപ്പ്|അകിടിൽ കാഠിന്യവും വേദനയും|പാലിന്റെ അസാധാരണമായ രൂപം (വെള്ളം പോലെ, കട്ടകൾ)|പാൽ ഉത്പാദനം കുറയുന്നു|ഗുരുതരമായ കേസുകളിൽ പനി|വിശപ്പില്ലായ്മ',
+      'disease_mast_treatment_steps':
+          'ബാധിച്ച അകിടിൽ നിന്ന് ഇടയ്ക്കിടെ പാൽ കറക്കുക (ഓരോ 2-3 മണിക്കൂറിലും)|വീക്കം കുറയ്ക്കാൻ അകിടിൽ ചൂടുള്ള തുണി വെക്കുക|വെറ്ററിനറി ഡോക്ടർ നിർദ്ദേശിച്ച പ്രകാരം ആന്റിബയോട്ടിക്കുകൾ നൽകുക|നിർദ്ദേശാനുസരണം ഇൻട്രാമാമറി ആന്റിബയോട്ടിക് ട്യൂബുകൾ ഉപയോഗിക്കുക|ശരിയായ കറവ ശുചിത്വം ഉറപ്പാക്കുക|ആവശ്യമെങ്കിൽ ആന്റി-ഇൻഫ്ലമേറ്ററി മരുന്ന് നൽകുക|മുഴുവൻ കോഴ്സിനും ചികിത്സ തുടരുക (സാധാരണയായി 5-7 ദിവസം)|ഉപഭോഗം പുനരാരംഭിക്കുന്നതിന് മുമ്പ് പാലിന്റെ ഗുണനിലവാരം പരിശോധിക്കുക',
+      'disease_mast_precautions':
+          'കർശനമായ കറവ ശുചിത്വം പാലിക്കുക|കറവയ്ക്ക് മുമ്പും ശേഷവും അകിട് വൃത്തിയാക്കുക|ഓരോ മൃഗത്തിനും വെവ്വേറെ തുണികൾ ഉപയോഗിക്കുക|കറവ ഉപകരണങ്ങൾ പതിവായി അണുവിമുക്തമാക്കുക|കറവയ്ക്ക് ശേഷം മൃഗങ്ങളെ ശരിയായി ഉണക്കുക|ചികിത്സാ വേളയിൽ രോഗം ബാധിച്ച മൃഗങ്ങളെ വേർതിരിക്കുക|നേരത്തെ കണ്ടെത്തുന്നതിന് പാൽ പതിവായി പരിശോധിക്കുക',
+      'disease_mast_first_aid':
+          'ബാധിച്ച അകിടിൽ നിന്ന് പാൽ കറക്കുന്നത് നിർത്തുക|വീക്കം കുറയ്ക്കാൻ തണുത്ത തുണി വെക്കുക|മൃഗത്തെ വൃത്തിയുള്ളതും ഉണങ്ങിയതുമായ സ്ഥലത്ത് സൂക്ഷിക്കുക|ധാരാളം ശുദ്ധജലം നൽകുക|ആന്റിബയോട്ടിക് ചികിത്സയ്ക്കായി വെറ്ററിനറി ഡോക്ടറുമായി ബന്ധപ്പെടുക|ബാധിച്ച അകിടിൽ നിന്നുള്ള പാൽ കുടിക്കരുത്',
 
       // Disease Details - LSD
-      'disease_lsd_description': 'രക്തം കുടിക്കുന്ന പ്രാണികൾ വഴി പകരുന്ന വൈറൽ രോഗം, ഇത് ചർമ്മത്തിൽ മുഴകൾ ഉണ്ടാക്കുന്നു.',
-      'disease_lsd_symptoms': 'പനി (103-106°F)|ചർമ്മത്തിൽ മുഴകൾ (2-5 സെ.മീ വ്യാസം)|കൈകാലുകളിലും നെഞ്ചിലും വീക്കം|കണ്ണിൽ നിന്ന് വെള്ളം വരിക, മൂക്കൊലിപ്പ്|പാൽ ഉത്പാദനം കുറയുന്നു|വിശപ്പില്ലായ്മ|നടക്കാൻ ബുദ്ധിമുട്ട്',
-      'disease_lsd_treatment_steps': 'രോഗം ബാധിച്ച മൃഗങ്ങളെ ഉടൻ വേർതിരിക്കുക|സഹായകരമായ പരിചരണവും നല്ല പോഷകാഹാരവും നൽകുക|ചർമ്മത്തിലെ മുഴകൾ ആന്റിസെപ്റ്റിക് ലായനി ഉപയോഗിച്ച് വൃത്തിയാക്കുക|ദ്വിതീയ അണുബാധ തടയാൻ ആന്റിബയോട്ടിക് തൈലം പുരട്ടുക|ദ്വിതീയ ബാക്ടീരിയ അണുബാധകൾക്ക് ആന്റിബയോട്ടിക്കുകൾ നൽകുക|വേദന സംഹാരികളും ആന്റി-ഇൻഫ്ലമേറ്ററി മരുന്നുകളും നൽകുക|ആവശ്യത്തിന് ജലാംശം ഉറപ്പാക്കുക|സങ്കീർണതകൾ നിരീക്ഷിക്കുക',
-      'disease_lsd_precautions': 'പ്രാണികളെ നിയന്ത്രിക്കുക (ഈച്ചകൾ, കൊതുകുകൾ, ചെള്ളുകൾ)|പ്രാണി അകറ്റുന്ന മരുന്നുകളും കീടനാശിനികളും ഉപയോഗിക്കുക|ആരോഗ്യമുള്ള മൃഗങ്ങൾക്ക് പ്രതിരോധ കുത്തിവയ്പ്പ് നൽകുക|പുതിയ മൃഗങ്ങളെ ക്വാറന്റൈൻ ചെയ്യുക|നല്ല ശുചിത്വം പാലിക്കുക|മലിനമായ വസ്തുക്കൾ ശരിയായി സംസ്കരിക്കുക|വെറ്ററിനറി അധികാരികളെ അറിയിക്കുക',
-      'disease_lsd_first_aid': 'മൃഗത്തെ കൂട്ടത്തിൽ നിന്ന് വേർതിരിക്കുക|ചർമ്മത്തിലെ മുഴകൾ വീര്യം കുറഞ്ഞ ആന്റിസെപ്റ്റിക് ഉപയോഗിച്ച് വൃത്തിയാക്കുക|മൃഗത്തെ വൃത്തിയുള്ളതും തണലുള്ളതുമായ സ്ഥലത്ത് സൂക്ഷിക്കുക|ശുദ്ധജലവും മൃദുവായ തീറ്റയും നൽകുക|ശരിയായ ചികിത്സയ്ക്കായി വെറ്ററിനറി ഡോക്ടറുമായി ബന്ധപ്പെടുക|താപനിലയും പൊതുവായ അവസ്ഥയും നിരീക്ഷിക്കുക',
+      'disease_lsd_description':
+          'രക്തം കുടിക്കുന്ന പ്രാണികൾ വഴി പകരുന്ന വൈറൽ രോഗം, ഇത് ചർമ്മത്തിൽ മുഴകൾ ഉണ്ടാക്കുന്നു.',
+      'disease_lsd_symptoms':
+          'പനി (103-106°F)|ചർമ്മത്തിൽ മുഴകൾ (2-5 സെ.മീ വ്യാസം)|കൈകാലുകളിലും നെഞ്ചിലും വീക്കം|കണ്ണിൽ നിന്ന് വെള്ളം വരിക, മൂക്കൊലിപ്പ്|പാൽ ഉത്പാദനം കുറയുന്നു|വിശപ്പില്ലായ്മ|നടക്കാൻ ബുദ്ധിമുട്ട്',
+      'disease_lsd_treatment_steps':
+          'രോഗം ബാധിച്ച മൃഗങ്ങളെ ഉടൻ വേർതിരിക്കുക|സഹായകരമായ പരിചരണവും നല്ല പോഷകാഹാരവും നൽകുക|ചർമ്മത്തിലെ മുഴകൾ ആന്റിസെപ്റ്റിക് ലായനി ഉപയോഗിച്ച് വൃത്തിയാക്കുക|ദ്വിതീയ അണുബാധ തടയാൻ ആന്റിബയോട്ടിക് തൈലം പുരട്ടുക|ദ്വിതീയ ബാക്ടീരിയ അണുബാധകൾക്ക് ആന്റിബയോട്ടിക്കുകൾ നൽകുക|വേദന സംഹാരികളും ആന്റി-ഇൻഫ്ലമേറ്ററി മരുന്നുകളും നൽകുക|ആവശ്യത്തിന് ജലാംശം ഉറപ്പാക്കുക|സങ്കീർണതകൾ നിരീക്ഷിക്കുക',
+      'disease_lsd_precautions':
+          'പ്രാണികളെ നിയന്ത്രിക്കുക (ഈച്ചകൾ, കൊതുകുകൾ, ചെള്ളുകൾ)|പ്രാണി അകറ്റുന്ന മരുന്നുകളും കീടനാശിനികളും ഉപയോഗിക്കുക|ആരോഗ്യമുള്ള മൃഗങ്ങൾക്ക് പ്രതിരോധ കുത്തിവയ്പ്പ് നൽകുക|പുതിയ മൃഗങ്ങളെ ക്വാറന്റൈൻ ചെയ്യുക|നല്ല ശുചിത്വം പാലിക്കുക|മലിനമായ വസ്തുക്കൾ ശരിയായി സംസ്കരിക്കുക|വെറ്ററിനറി അധികാരികളെ അറിയിക്കുക',
+      'disease_lsd_first_aid':
+          'മൃഗത്തെ കൂട്ടത്തിൽ നിന്ന് വേർതിരിക്കുക|ചർമ്മത്തിലെ മുഴകൾ വീര്യം കുറഞ്ഞ ആന്റിസെപ്റ്റിക് ഉപയോഗിച്ച് വൃത്തിയാക്കുക|മൃഗത്തെ വൃത്തിയുള്ളതും തണലുള്ളതുമായ സ്ഥലത്ത് സൂക്ഷിക്കുക|ശുദ്ധജലവും മൃദുവായ തീറ്റയും നൽകുക|ശരിയായ ചികിത്സയ്ക്കായി വെറ്ററിനറി ഡോക്ടറുമായി ബന്ധപ്പെടുക|താപനിലയും പൊതുവായ അവസ്ഥയും നിരീക്ഷിക്കുക',
 
       // Disease Details - Brucellosis
-      'disease_bruc_description': 'കന്നുകാലികളിൽ ഗർഭച്ഛിദ്രത്തിന് കാരണമാകുന്ന ബാക്ടീരിയ രോഗം, ഇത് മനുഷ്യരിലേക്കും പകരാം.',
-      'disease_bruc_symptoms': 'വൈകിയുള്ള ഗർഭച്ഛിദ്രം|മറുപിള്ള വീഴാതിരിക്കുക|പാൽ ഉത്പാദനം കുറയുന്നു|വന്ധ്യത|കാളകളിൽ വൃഷണം വീർക്കുക|ദുർബലമായ കിടാക്കൾ',
-      'disease_bruc_treatment_steps': 'ഉടൻ തന്നെ വെറ്ററിനറി ഡോക്ടറുമായി ബന്ധപ്പെടുക|രോഗം ബാധിച്ച മൃഗങ്ങളെ വേർതിരിക്കുക|കൂട്ടത്തിലെ എല്ലാ മൃഗങ്ങളെയും പരിശോധിക്കുക|വെറ്ററിനറി ഉപദേശപ്രകാരം രോഗം ബാധിച്ച മൃഗങ്ങളെ ഒഴിവാക്കുകയോ വേർതിരിക്കുകയോ ചെയ്യുക|ആരോഗ്യമുള്ള മൃഗങ്ങൾക്ക് പ്രതിരോധ കുത്തിവയ്പ്പ് നൽകുക|കർശനമായ ജൈവസുരക്ഷാ നടപടികൾ പാലിക്കുക|മലിനമായ സ്ഥലങ്ങൾ അണുവിമുക്തമാക്കുക',
-      'disease_bruc_precautions': 'പുതിയ മൃഗങ്ങളെ കൊണ്ടുവരുന്നതിന് മുമ്പ് പരിശോധിക്കുക|ആദ്യ പ്രജനനത്തിന് മുമ്പ് കിടാരികൾക്ക് പ്രതിരോധ കുത്തിവയ്പ്പ് നൽകുക|ഗർഭച്ഛിദ്രം സംഭവിച്ച ഭ്രൂണങ്ങളെ കൈകാര്യം ചെയ്യുമ്പോൾ നല്ല ശുചിത്വം പാലിക്കുക|സംരക്ഷണ വസ്ത്രങ്ങൾ ധരിക്കുക|ഗർഭച്ഛിദ്രം സംഭവിച്ച വസ്തുക്കൾ ശരിയായി സംസ്കരിക്കുക|രോഗം ബാധിച്ച മൃഗങ്ങളിൽ നിന്നുള്ള പച്ചപ്പാൽ കുടിക്കുന്നത് ഒഴിവാക്കുക|വെറ്ററിനറി അധികാരികളെ അറിയിക്കുക',
-      'disease_bruc_first_aid': 'മൃഗത്തെ ഉടൻ വേർതിരിക്കുക|കൈകാര്യം ചെയ്യുമ്പോൾ സംരക്ഷണ വസ്ത്രങ്ങൾ ധരിക്കുക|ഗർഭച്ഛിദ്രം സംഭവിച്ച വസ്തുക്കൾ സുരക്ഷിതമായി സംസ്കരിക്കുക|പരിശോധനയ്ക്കും ചികിത്സയ്ക്കുമായി വെറ്ററിനറി ഡോക്ടറുമായി ബന്ധപ്പെടുക|പച്ചപ്പാൽ കുടിക്കരുത്',
+      'disease_bruc_description':
+          'കന്നുകാലികളിൽ ഗർഭച്ഛിദ്രത്തിന് കാരണമാകുന്ന ബാക്ടീരിയ രോഗം, ഇത് മനുഷ്യരിലേക്കും പകരാം.',
+      'disease_bruc_symptoms':
+          'വൈകിയുള്ള ഗർഭച്ഛിദ്രം|മറുപിള്ള വീഴാതിരിക്കുക|പാൽ ഉത്പാദനം കുറയുന്നു|വന്ധ്യത|കാളകളിൽ വൃഷണം വീർക്കുക|ദുർബലമായ കിടാക്കൾ',
+      'disease_bruc_treatment_steps':
+          'ഉടൻ തന്നെ വെറ്ററിനറി ഡോക്ടറുമായി ബന്ധപ്പെടുക|രോഗം ബാധിച്ച മൃഗങ്ങളെ വേർതിരിക്കുക|കൂട്ടത്തിലെ എല്ലാ മൃഗങ്ങളെയും പരിശോധിക്കുക|വെറ്ററിനറി ഉപദേശപ്രകാരം രോഗം ബാധിച്ച മൃഗങ്ങളെ ഒഴിവാക്കുകയോ വേർതിരിക്കുകയോ ചെയ്യുക|ആരോഗ്യമുള്ള മൃഗങ്ങൾക്ക് പ്രതിരോധ കുത്തിവയ്പ്പ് നൽകുക|കർശനമായ ജൈവസുരക്ഷാ നടപടികൾ പാലിക്കുക|മലിനമായ സ്ഥലങ്ങൾ അണുവിമുക്തമാക്കുക',
+      'disease_bruc_precautions':
+          'പുതിയ മൃഗങ്ങളെ കൊണ്ടുവരുന്നതിന് മുമ്പ് പരിശോധിക്കുക|ആദ്യ പ്രജനനത്തിന് മുമ്പ് കിടാരികൾക്ക് പ്രതിരോധ കുത്തിവയ്പ്പ് നൽകുക|ഗർഭച്ഛിദ്രം സംഭവിച്ച ഭ്രൂണങ്ങളെ കൈകാര്യം ചെയ്യുമ്പോൾ നല്ല ശുചിത്വം പാലിക്കുക|സംരക്ഷണ വസ്ത്രങ്ങൾ ധരിക്കുക|ഗർഭച്ഛിദ്രം സംഭവിച്ച വസ്തുക്കൾ ശരിയായി സംസ്കരിക്കുക|രോഗം ബാധിച്ച മൃഗങ്ങളിൽ നിന്നുള്ള പച്ചപ്പാൽ കുടിക്കുന്നത് ഒഴിവാക്കുക|വെറ്ററിനറി അധികാരികളെ അറിയിക്കുക',
+      'disease_bruc_first_aid':
+          'മൃഗത്തെ ഉടൻ വേർതിരിക്കുക|കൈകാര്യം ചെയ്യുമ്പോൾ സംരക്ഷണ വസ്ത്രങ്ങൾ ധരിക്കുക|ഗർഭച്ഛിദ്രം സംഭവിച്ച വസ്തുക്കൾ സുരക്ഷിതമായി സംസ്കരിക്കുക|പരിശോധനയ്ക്കും ചികിത്സയ്ക്കുമായി വെറ്ററിനറി ഡോക്ടറുമായി ബന്ധപ്പെടുക|പച്ചപ്പാൽ കുടിക്കരുത്',
 
       // Disease Details - Anthrax
-      'disease_anth_description': 'മാരകമായേക്കാവുന്ന ഗുരുതരമായ ബാക്ടീരിയ രോഗം, ഇത് മനുഷ്യരിലേക്കും പകരാം.',
-      'disease_anth_symptoms': 'പെട്ടെന്നുള്ള മരണം (പലപ്പോഴും ആദ്യ ലക്ഷണം)|കടുത്ത പനി|ശ്വാസതടസ്സം|കഴുത്തിലും തൊണ്ടയിലും വീക്കം|ശരീരത്തിലെ ദ്വാരങ്ങളിൽ നിന്ന് രക്തസ്രാവം|മരണത്തിന് മുമ്പ് വിറയൽ',
-      'disease_anth_treatment_steps': 'ശവം തുറക്കരുത് - ഉടൻ അധികാരികളെ അറിയിക്കുക|രോഗം ബാധിച്ച മൃഗങ്ങളെ വേർതിരിക്കുക|എല്ലാ ആരോഗ്യമുള്ള മൃഗങ്ങൾക്കും പ്രതിരോധ കുത്തിവയ്പ്പ് നൽകുക|മലിനമായ സ്ഥലങ്ങൾ നന്നായി അണുവിമുക്തമാക്കുക|വെറ്ററിനറി, ആരോഗ്യ വകുപ്പ് നിർദ്ദേശങ്ങൾ പാലിക്കുക|ഉടൻ അധികാരികളെ അറിയിക്കുക',
-      'disease_anth_precautions': 'വർഷം തോറും മൃഗങ്ങൾക്ക് പ്രതിരോധ കുത്തിവയ്പ്പ് നൽകുക|പെട്ടെന്നുള്ള മരണം സംഭവിച്ച ശവങ്ങൾ തുറക്കുന്നത് ഒഴിവാക്കുക|ശവങ്ങൾ ശരിയായി സംസ്കരിക്കുക (കത്തിക്കുകയോ ആഴത്തിൽ കുഴിച്ചിടുകയോ ചെയ്യുക)|മലിനമായ സ്ഥലങ്ങൾ അണുവിമുക്തമാക്കുക|സംരക്ഷണ വസ്ത്രങ്ങൾ ധരിക്കുക|സംശയാസ്പദമായ കേസുകൾ ഉടൻ റിപ്പോർട്ട് ചെയ്യുക|ബാധിച്ച പ്രദേശം ക്വാറന്റൈൻ ചെയ്യുക',
-      'disease_anth_first_aid': 'ശവം തൊടുകയോ തുറക്കുകയോ ചെയ്യരുത്|പ്രദേശം ഉടൻ വേർതിരിക്കുക|വെറ്ററിനറി, ആരോഗ്യ അധികാരികളുമായി ബന്ധപ്പെടുക|ആളുകളെയും മൃഗങ്ങളെയും അകറ്റി നിർത്തുക|ശരിയായ സംസ്കരണ നിർദ്ദേശങ്ങൾക്കായി കാത്തിരിക്കുക',
+      'disease_anth_description':
+          'മാരകമായേക്കാവുന്ന ഗുരുതരമായ ബാക്ടീരിയ രോഗം, ഇത് മനുഷ്യരിലേക്കും പകരാം.',
+      'disease_anth_symptoms':
+          'പെട്ടെന്നുള്ള മരണം (പലപ്പോഴും ആദ്യ ലക്ഷണം)|കടുത്ത പനി|ശ്വാസതടസ്സം|കഴുത്തിലും തൊണ്ടയിലും വീക്കം|ശരീരത്തിലെ ദ്വാരങ്ങളിൽ നിന്ന് രക്തസ്രാവം|മരണത്തിന് മുമ്പ് വിറയൽ',
+      'disease_anth_treatment_steps':
+          'ശവം തുറക്കരുത് - ഉടൻ അധികാരികളെ അറിയിക്കുക|രോഗം ബാധിച്ച മൃഗങ്ങളെ വേർതിരിക്കുക|എല്ലാ ആരോഗ്യമുള്ള മൃഗങ്ങൾക്കും പ്രതിരോധ കുത്തിവയ്പ്പ് നൽകുക|മലിനമായ സ്ഥലങ്ങൾ നന്നായി അണുവിമുക്തമാക്കുക|വെറ്ററിനറി, ആരോഗ്യ വകുപ്പ് നിർദ്ദേശങ്ങൾ പാലിക്കുക|ഉടൻ അധികാരികളെ അറിയിക്കുക',
+      'disease_anth_precautions':
+          'വർഷം തോറും മൃഗങ്ങൾക്ക് പ്രതിരോധ കുത്തിവയ്പ്പ് നൽകുക|പെട്ടെന്നുള്ള മരണം സംഭവിച്ച ശവങ്ങൾ തുറക്കുന്നത് ഒഴിവാക്കുക|ശവങ്ങൾ ശരിയായി സംസ്കരിക്കുക (കത്തിക്കുകയോ ആഴത്തിൽ കുഴിച്ചിടുകയോ ചെയ്യുക)|മലിനമായ സ്ഥലങ്ങൾ അണുവിമുക്തമാക്കുക|സംരക്ഷണ വസ്ത്രങ്ങൾ ധരിക്കുക|സംശയാസ്പദമായ കേസുകൾ ഉടൻ റിപ്പോർട്ട് ചെയ്യുക|ബാധിച്ച പ്രദേശം ക്വാറന്റൈൻ ചെയ്യുക',
+      'disease_anth_first_aid':
+          'ശവം തൊടുകയോ തുറക്കുകയോ ചെയ്യരുത്|പ്രദേശം ഉടൻ വേർതിരിക്കുക|വെറ്ററിനറി, ആരോഗ്യ അധികാരികളുമായി ബന്ധപ്പെടുക|ആളുകളെയും മൃഗങ്ങളെയും അകറ്റി നിർത്തുക|ശരിയായ സംസ്കരണ നിർദ്ദേശങ്ങൾക്കായി കാത്തിരിക്കുക',
     },
     'kn': {
       'app_name': 'ಪಶು ಸ್ವಾಸ್ಥ್ಯ',
       'app_subtitle': 'ಜಾನುವಾರು ಆರೋಗ್ಯ ಸಹಾಯಕ',
       'breed_disease_detection': 'ತಳಿ ಮತ್ತು ರೋಗ ಪತ್ತೆ',
-      'breed_disease_subtitle': 'ಮೊದಲು ತಳಿಯನ್ನು ಗುರುತಿಸಿ, ನಂತರ ರೋಗಗಳನ್ನು ಪತ್ತೆ ಮಾಡಿ.',
+      'breed_disease_subtitle':
+          'ಮೊದಲು ತಳಿಯನ್ನು ಗುರುತಿಸಿ, ನಂತರ ರೋಗಗಳನ್ನು ಪತ್ತೆ ಮಾಡಿ.',
       'treatment_guide': 'ಚಿಕಿತ್ಸಾ ಮಾರ್ಗದರ್ಶಿ',
-      'treatment_guide_subtitle': 'ಸಾಮಾನ್ಯ ಚಿಕಿತ್ಸೆಗಳಿಗಾಗಿ ಆಫ್‌ಲೈನ್ ಮಾರ್ಗದರ್ಶಿಗಳನ್ನು ಬಳಸಿ.',
+      'treatment_guide_subtitle':
+          'ಸಾಮಾನ್ಯ ಚಿಕಿತ್ಸೆಗಳಿಗಾಗಿ ಆಫ್‌ಲೈನ್ ಮಾರ್ಗದರ್ಶಿಗಳನ್ನು ಬಳಸಿ.',
       'vet_help': 'ಪಶುವೈದ್ಯ ಸಹಾಯ',
       'vet_help_subtitle': 'ತಜ್ಞರ ಸಲಹೆಗಾಗಿ ಪ್ರಮಾಣೀಕೃತ ಪಶುವೈದ್ಯರನ್ನು ಸಂಪರ್ಕಿಸಿ.',
       'vet_connect_coming_soon': 'ವೆಟ್ ಕನೆಕ್ಟ್ ವೈಶಿಷ್ಟ್ಯ ಶೀಘ್ರದಲ್ಲೇ ಬರಲಿದೆ!',
@@ -416,13 +553,15 @@ class AppStrings {
       'data_offline': 'ಡೇಟಾ ಮತ್ತು ಆಫ್‌ಲೈನ್',
       'cancel': 'ರದ್ದುಮಾಡಿ',
       'clear': 'ತೆರವುಗೊಳಿಸಿ',
-      'are_you_sure_clear_cache': 'ನೀವು ಖಂಡಿತವಾಗಿಯೂ ಕ್ಯಾಶೆ ತೆರವುಗೊಳಿಸಲು ಬಯಸುವಿರಾ?',
+      'are_you_sure_clear_cache':
+          'ನೀವು ಖಂಡಿತವಾಗಿಯೂ ಕ್ಯಾಶೆ ತೆರವುಗೊಳಿಸಲು ಬಯಸುವಿರಾ?',
       'please_select_language': 'ದಯವಿಟ್ಟು ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ',
       'breed_detection': 'ತಳಿ ಪತ್ತೆ',
       'breed_result': 'ತಳಿ ಫಲಿತಾಂಶ',
       'disease_detection': 'ರೋಗ ಪತ್ತೆ',
       'detection_results': 'ಪತ್ತೆ ಫಲಿತಾಂಶಗಳು',
-      'upload_cattle_image': 'ತಳಿ ಗುರುತಿಸುವಿಕೆಗಾಗಿ ನಿಮ್ಮ ಜಾನುವಾರುಗಳ ಚಿತ್ರವನ್ನು ಅಪ್‌ಲೋಡ್ ಮಾಡಿ',
+      'upload_cattle_image':
+          'ತಳಿ ಗುರುತಿಸುವಿಕೆಗಾಗಿ ನಿಮ್ಮ ಜಾನುವಾರುಗಳ ಚಿತ್ರವನ್ನು ಅಪ್‌ಲೋಡ್ ಮಾಡಿ',
       'detect_breed': 'ತಳಿ ಪತ್ತೆ ಮಾಡಿ',
       'detecting': 'ಪತ್ತೆ ಮಾಡಲಾಗುತ್ತಿದೆ...',
       'breed_identified': 'ಗುರುತಿಸಲಾದ ತಳಿ',
@@ -437,7 +576,8 @@ class AppStrings {
       'view_treatment': 'ಚಿಕಿತ್ಸೆ ವೀಕ್ಷಿಸಿ',
       'start_new_detection': 'ಹೊಸ ಪತ್ತೆ ಪ್ರಾರಂಭಿಸಿ',
       'camera_permission_required': 'ಕ್ಯಾಮೆರಾ ಅನುಮತಿ ಅಗತ್ಯವಿದೆ',
-      'please_capture_image': 'ದಯವಿಟ್ಟು ಮೊದಲು ಚಿತ್ರವನ್ನು ಸೆರೆಹಿಡಿಯಿರಿ ಅಥವಾ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ',
+      'please_capture_image':
+          'ದಯವಿಟ್ಟು ಮೊದಲು ಚಿತ್ರವನ್ನು ಸೆರೆಹಿಡಿಯಿರಿ ಅಥವಾ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ',
       'breed_detection_failed': 'ತಳಿ ಪತ್ತೆ ವಿಫಲವಾಗಿದೆ',
       'disease_detection_failed': 'ರೋಗ ಪತ್ತೆ ವಿಫಲವಾಗಿದೆ',
       'treatment_guides': 'ಚಿಕಿತ್ಸಾ ಮಾರ್ಗದರ್ಶಿಗಳು',
@@ -454,9 +594,11 @@ class AppStrings {
       'disease_brucellosis': 'ಬ್ರೂಸೆಲೋಸಿಸ್',
       'disease_anthrax': 'ಆಂಥ್ರಾಕ್ಸ್',
       'voice_disease_prediction': 'ಧ್ವನಿ ಮೂಲಕ ರೋಗ ಪತ್ತೆ',
-      'listening_describe_symptoms': 'ಆಲಿಸಲಾಗುತ್ತಿದೆ... ನಿಮ್ಮ ಜಾನುವಾರುಗಳ ಲಕ್ಷಣಗಳನ್ನು ವಿವರಿಸಿ',
+      'listening_describe_symptoms':
+          'ಆಲಿಸಲಾಗುತ್ತಿದೆ... ನಿಮ್ಮ ಜಾನುವಾರುಗಳ ಲಕ್ಷಣಗಳನ್ನು ವಿವರಿಸಿ',
       'analyzing_symptoms': 'ಲಕ್ಷಣಗಳನ್ನು ವಿಶ್ಲೇಷಿಸಲಾಗುತ್ತಿದೆ...',
-      'tap_mic_describe': 'ಜಾನುವಾರುಗಳ ಆರೋಗ್ಯವನ್ನು ವಿವರಿಸಲು ಮೈಕ್ರೊಫೋನ್ ಟ್ಯಾಪ್ ಮಾಡಿ',
+      'tap_mic_describe':
+          'ಜಾನುವಾರುಗಳ ಆರೋಗ್ಯವನ್ನು ವಿವರಿಸಲು ಮೈಕ್ರೊಫೋನ್ ಟ್ಯಾಪ್ ಮಾಡಿ',
       'microphone_permission_required': 'ಮೈಕ್ರೊಫೋನ್ ಅನುಮತಿ ಅಗತ್ಯವಿದೆ',
       'error': 'ದೋಷ',
       'speech_recognition_not_available': 'ಮಾತು ಗುರುತಿಸುವಿಕೆ ಲಭ್ಯವಿಲ್ಲ',
@@ -469,19 +611,24 @@ class AppStrings {
       'start': 'ಪ್ರಾರಂಭಿಸಿ',
       'save': 'ಉಳಿಸಿ',
       'description_saved': 'ವಿವರಣೆಯನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಉಳಿಸಲಾಗಿದೆ',
-      'no_disease_identified': 'ಯಾವುದೇ ರೋಗ ಪತ್ತೆಯಾಗಿಲ್ಲ. ದಯವಿಟ್ಟು ಹೆಚ್ಚಿನ ಲಕ್ಷಣಗಳನ್ನು ವಿವರಿಸಿ.',
+      'no_disease_identified':
+          'ಯಾವುದೇ ರೋಗ ಪತ್ತೆಯಾಗಿಲ್ಲ. ದಯವಿಟ್ಟು ಹೆಚ್ಚಿನ ಲಕ್ಷಣಗಳನ್ನು ವಿವರಿಸಿ.',
       'your_description_here': 'ನಿಮ್ಮ ವಿವರಣೆ ಇಲ್ಲಿ ಕಾಣಿಸಿಕೊಳ್ಳುತ್ತದೆ...',
-      'describe_symptoms_info': 'ನಿಮ್ಮ ಜಾನುವಾರುಗಳ ಲಕ್ಷಣಗಳನ್ನು ವಿವರಿಸಿ. ನಾವು ರೋಗವನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಗುರುತಿಸುತ್ತೇವೆ.',
+      'describe_symptoms_info':
+          'ನಿಮ್ಮ ಜಾನುವಾರುಗಳ ಲಕ್ಷಣಗಳನ್ನು ವಿವರಿಸಿ. ನಾವು ರೋಗವನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಗುರುತಿಸುತ್ತೇವೆ.',
     },
     'ta': {
       'app_name': 'பசு ஸ்வாஸ்த்யா',
       'app_subtitle': 'கால்நடை சுகாதார உதவியாளர்',
       'breed_disease_detection': 'இனம் மற்றும் நோய் கண்டறிதல்',
-      'breed_disease_subtitle': 'முதலில் இனத்தை அடையாளம் காணவும், பின்னர் நோய்களைக் கண்டறியவும்.',
+      'breed_disease_subtitle':
+          'முதலில் இனத்தை அடையாளம் காணவும், பின்னர் நோய்களைக் கண்டறியவும்.',
       'treatment_guide': 'சிகிச்சை வழிகாட்டி',
-      'treatment_guide_subtitle': 'பொதுவான சிகிச்சைகளுக்கான ஆஃப்லைன் வழிகாட்டிகளை அணுகவும்.',
+      'treatment_guide_subtitle':
+          'பொதுவான சிகிச்சைகளுக்கான ஆஃப்லைன் வழிகாட்டிகளை அணுகவும்.',
       'vet_help': 'கால்நடை உதவி',
-      'vet_help_subtitle': 'நிபுணர் ஆலோசனைக்கு சான்றிதழ் பெற்ற கால்நடை மருத்துவரை அணுகவும்.',
+      'vet_help_subtitle':
+          'நிபுணர் ஆலோசனைக்கு சான்றிதழ் பெற்ற கால்நடை மருத்துவரை அணுகவும்.',
       'vet_connect_coming_soon': 'வெட் கனெக்ட் வசதி விரைவில் வரும்!',
       'settings': 'அமைப்புகள்',
       'language': 'மொழி',
@@ -508,13 +655,15 @@ class AppStrings {
       'data_offline': 'தரவு & ஆஃப்லைன்',
       'cancel': 'ரத்துசெய்',
       'clear': 'அழி',
-      'are_you_sure_clear_cache': 'நீங்கள் நிச்சயமாக கேச் அழிக்க விரும்புகிறீர்களா?',
+      'are_you_sure_clear_cache':
+          'நீங்கள் நிச்சயமாக கேச் அழிக்க விரும்புகிறீர்களா?',
       'please_select_language': 'தயவுசெய்து ஒரு மொழியைத் தேர்ந்தெடுக்கவும்',
       'breed_detection': 'இனக் கண்டறிதல்',
       'breed_result': 'இன முடிவு',
       'disease_detection': 'நோய் கண்டறிதல்',
       'detection_results': 'கண்டறிதல் முடிவுகள்',
-      'upload_cattle_image': 'இனத்தை அடையாளம் காண உங்கள் கால்நடையின் படத்தை பதிவேற்றவும்',
+      'upload_cattle_image':
+          'இனத்தை அடையாளம் காண உங்கள் கால்நடையின் படத்தை பதிவேற்றவும்',
       'detect_breed': 'இனத்தைக் கண்டறி',
       'detecting': 'கண்டறியப்படுகிறது...',
       'breed_identified': 'அடையாளம் காணப்பட்ட இனம்',
@@ -529,7 +678,8 @@ class AppStrings {
       'view_treatment': 'சிகிச்சையைப் பார்',
       'start_new_detection': 'புதிய கண்டறிதலைத் தொடங்கு',
       'camera_permission_required': 'கேமரா அனுமதி தேவை',
-      'please_capture_image': 'தயவுசெய்து முதலில் படத்தைப் பிடிக்கவும் அல்லது பதிவேற்றவும்',
+      'please_capture_image':
+          'தயவுசெய்து முதலில் படத்தைப் பிடிக்கவும் அல்லது பதிவேற்றவும்',
       'breed_detection_failed': 'இனக் கண்டறிதல் தோல்வியடைந்தது',
       'disease_detection_failed': 'நோய் கண்டறிதல் தோல்வியடைந்தது',
       'treatment_guides': 'சிகிச்சை வழிகாட்டிகள்',
@@ -546,9 +696,11 @@ class AppStrings {
       'disease_brucellosis': 'கருச்சிதைவு நோய்',
       'disease_anthrax': 'அடைப்பான் நோய்',
       'voice_disease_prediction': 'குரல் மூலம் நோய் கணிப்பு',
-      'listening_describe_symptoms': 'கேட்கிறது... உங்கள் கால்நடையின் அறிகுறிகளை விவரிக்கவும்',
+      'listening_describe_symptoms':
+          'கேட்கிறது... உங்கள் கால்நடையின் அறிகுறிகளை விவரிக்கவும்',
       'analyzing_symptoms': 'அறிகுறிகள் பகுப்பாய்வு செய்யப்படுகின்றன...',
-      'tap_mic_describe': 'கால்நடை ஆரோக்கியத்தை விவரிக்க மைக்ரோஃபோனைத் தட்டவும்',
+      'tap_mic_describe':
+          'கால்நடை ஆரோக்கியத்தை விவரிக்க மைக்ரோஃபோனைத் தட்டவும்',
       'microphone_permission_required': 'மைக்ரோஃபோன் அனுமதி தேவை',
       'error': 'பிழை',
       'speech_recognition_not_available': 'பேச்சு அங்கீகாரம் கிடைக்கவில்லை',
@@ -561,9 +713,11 @@ class AppStrings {
       'start': 'தொடங்கு',
       'save': 'சேமி',
       'description_saved': 'விளக்கம் வெற்றிகரமாக சேமிக்கப்பட்டது',
-      'no_disease_identified': 'நோய் எதுவும் அடையாளம் காணப்படவில்லை. தயவுசெய்து கூடுதல் அறிகுறிகளை விவரிக்கவும்.',
+      'no_disease_identified':
+          'நோய் எதுவும் அடையாளம் காணப்படவில்லை. தயவுசெய்து கூடுதல் அறிகுறிகளை விவரிக்கவும்.',
       'your_description_here': 'உங்கள் விளக்கம் இங்கே தோன்றும்...',
-      'describe_symptoms_info': 'உங்கள் கால்நடையின் அறிகுறிகளை விவரிக்கவும். நாங்கள் தானாகவே நோயை அடையாளம் காண்போம்.',
+      'describe_symptoms_info':
+          'உங்கள் கால்நடையின் அறிகுறிகளை விவரிக்கவும். நாங்கள் தானாகவே நோயை அடையாளம் காண்போம்.',
     },
   };
 }

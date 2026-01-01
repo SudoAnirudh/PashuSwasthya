@@ -5,6 +5,8 @@ import 'package:provider/provider.dart';
 import 'package:pashu_swasthya/services/localization_service.dart';
 import 'package:pashu_swasthya/screens/language_screen.dart';
 import 'package:pashu_swasthya/screens/history_screen.dart';
+import 'package:pashu_swasthya/screens/about_screen.dart';
+import 'package:pashu_swasthya/screens/help_support_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -21,38 +23,38 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final localizationService = Provider.of<LocalizationService>(context);
 
     return Scaffold(
-     appBar: AppBar(
-  centerTitle: false,
-  elevation: 0,
-  toolbarHeight: 70,
-  backgroundColor: Colors.transparent,
+      appBar: AppBar(
+        centerTitle: false,
+        elevation: 0,
+        toolbarHeight: 70,
+        backgroundColor: Colors.transparent,
 
-  flexibleSpace: Container(
-    decoration: const BoxDecoration(
-      gradient: LinearGradient(
-        colors: [
-          Color(0xFF6A9C89), // same as home
-          Color(0xFFC1D8C3), // same as home
-        ],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color(0xFF6A9C89), // same as home
+                Color(0xFFC1D8C3), // same as home
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
+
+        title: Text(
+          localizationService.translate('settings'),
+          style: GoogleFonts.poppins(
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+            color: Colors.white,
+          ),
+        ),
+
+        iconTheme: const IconThemeData(
+          color: Colors.white, // back button color
+        ),
       ),
-    ),
-  ),
-
-  title: Text(
-    localizationService.translate('settings'),
-    style: GoogleFonts.poppins(
-      fontSize: 20,
-      fontWeight: FontWeight.w600,
-      color: Colors.white,
-    ),
-  ),
-
-  iconTheme: const IconThemeData(
-    color: Colors.white, // back button color
-  ),
-),
 
       body: SingleChildScrollView(
         padding: AppTheme.getResponsivePadding(context),
@@ -67,16 +69,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (_) => const HistoryScreen(),
-                  ),
+                  MaterialPageRoute(builder: (_) => const HistoryScreen()),
                 );
               },
             ),
             _buildSettingsTile(
               icon: Icons.language,
               title: localizationService.translate('language'),
-              trailing: _getLanguageName(localizationService.locale.languageCode),
+              trailing: _getLanguageName(
+                localizationService.locale.languageCode,
+              ),
               onTap: () {
                 Navigator.push(
                   context,
@@ -119,12 +121,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
             _buildSettingsTile(
               icon: Icons.info,
               title: '${localizationService.translate('about')} ',
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const AboutScreen()),
+                );
+              },
             ),
             _buildSettingsTile(
               icon: Icons.help,
               title: localizationService.translate('help_support'),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const HelpSupportScreen()),
+                );
+              },
             ),
           ],
         ),
@@ -159,25 +171,25 @@ class _SettingsScreenState extends State<SettingsScreen> {
       margin: const EdgeInsets.symmetric(vertical: 8),
       child: ListTile(
         leading: Icon(icon, color: Color(0xFF6A9C89)),
-        title: Text(
-          title,
-          style: Theme.of(context).textTheme.titleMedium,
-        ),
-        subtitle: subtitle != null
-            ? Text(
-                subtitle,
-                style: Theme.of(context).textTheme.bodySmall,
-              )
-            : null,
-        trailing: trailingWidget ??
+        title: Text(title, style: Theme.of(context).textTheme.titleMedium),
+        subtitle:
+            subtitle != null
+                ? Text(subtitle, style: Theme.of(context).textTheme.bodySmall)
+                : null,
+        trailing:
+            trailingWidget ??
             (trailing != null
                 ? Text(
-                    trailing,
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: AppTheme.textSecondary,
-                    ),
-                  )
-                : Icon(Icons.arrow_forward_ios, size: 16, color: AppTheme.textSecondary)),
+                  trailing,
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: AppTheme.textSecondary,
+                  ),
+                )
+                : Icon(
+                  Icons.arrow_forward_ios,
+                  size: 16,
+                  color: AppTheme.textSecondary,
+                )),
         onTap: onTap,
       ),
     );
@@ -196,23 +208,26 @@ class _SettingsScreenState extends State<SettingsScreen> {
   void _showClearCacheDialog(LocalizationService localizationService) {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Text(localizationService.translate('clear_cache')),
-        content: Text(localizationService.translate('are_you_sure_clear_cache')),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text(localizationService.translate('cancel')),
+      builder:
+          (context) => AlertDialog(
+            title: Text(localizationService.translate('clear_cache')),
+            content: Text(
+              localizationService.translate('are_you_sure_clear_cache'),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text(localizationService.translate('cancel')),
+              ),
+              TextButton(
+                onPressed: () {
+                  // TODO: Implement cache clearing logic
+                  Navigator.pop(context);
+                },
+                child: Text(localizationService.translate('clear')),
+              ),
+            ],
           ),
-          TextButton(
-            onPressed: () {
-              // TODO: Implement cache clearing logic
-              Navigator.pop(context);
-            },
-            child: Text(localizationService.translate('clear')),
-          ),
-        ],
-      ),
     );
   }
 }
