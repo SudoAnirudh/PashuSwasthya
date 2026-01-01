@@ -57,13 +57,6 @@ add_subdirectory("runner")
 # them to the application.
 include(flutter/generated_plugins.cmake)
 
-# Force disable warnings as errors for Firebase plugins
-foreach(PLUGIN firebase_auth_plugin firebase_core_plugin)
-  if(TARGET ${PLUGIN})
-    target_compile_options(${PLUGIN} PRIVATE /WX-)
-    target_link_options(${PLUGIN} PRIVATE /WX:NO)
-  endif()
-endforeach()
 
 
 # === Installation ===

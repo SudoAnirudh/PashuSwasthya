@@ -60,6 +60,11 @@ android {
             // This is fine for testing but not for production
         }
     }
+
+    aaptOptions {
+        noCompress("tflite")
+        noCompress("lite")
+    }
 }
 
 flutter {

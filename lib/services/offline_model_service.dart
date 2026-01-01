@@ -13,7 +13,7 @@ class OfflineModelService {
 
   // Model paths
   static const String _breedModelPath = 'Model_New/Breed/breed_classifier.tflite';
-  static const String _diseaseModelPath = 'Model_New/Dieases/disease_classifier.tflite';
+  static const String _diseaseModelPath = 'assets/models/disease_classifier.tflite';
 
   // Model configuration
   static const int _inputSize = 224;
@@ -53,9 +53,8 @@ class OfflineModelService {
     if (_isBreedModelLoaded) return true;
 
     try {
-      final modelData = await rootBundle.load(_breedModelPath);
-      final modelBytes = modelData.buffer.asUint8List();
-      _breedInterpreter = Interpreter.fromBuffer(modelBytes);
+      print('Loading breed model from: $_breedModelPath');
+      _breedInterpreter = await Interpreter.fromAsset(_breedModelPath);
 
       final inputShape = _breedInterpreter!.getInputTensor(0).shape;
       final outputShape = _breedInterpreter!.getOutputTensor(0).shape;
@@ -67,7 +66,7 @@ class OfflineModelService {
       _isBreedModelLoaded = true;
       return true;
     } catch (e) {
-      print('Error loading breed model: $e');
+      print('CRITICAL: Error loading breed model: $e');
       _isBreedModelLoaded = false;
       return false;
     }
@@ -78,9 +77,8 @@ class OfflineModelService {
     if (_isDiseaseModelLoaded) return true;
 
     try {
-      final modelData = await rootBundle.load(_diseaseModelPath);
-      final modelBytes = modelData.buffer.asUint8List();
-      _diseaseInterpreter = Interpreter.fromBuffer(modelBytes);
+      print('Loading disease model from: $_diseaseModelPath');
+      _diseaseInterpreter = await Interpreter.fromAsset(_diseaseModelPath);
 
       final inputShape = _diseaseInterpreter!.getInputTensor(0).shape;
       final outputShape = _diseaseInterpreter!.getOutputTensor(0).shape;
@@ -92,7 +90,7 @@ class OfflineModelService {
       _isDiseaseModelLoaded = true;
       return true;
     } catch (e) {
-      print('Error loading disease model: $e');
+      print('CRITICAL: Error loading disease model: $e');
       _isDiseaseModelLoaded = false;
       return false;
     }
@@ -106,9 +104,10 @@ class OfflineModelService {
 
     try {
       final inputBuffer = await _preprocessImage(imageFile);
-      final outputBuffer = List<List<double>>.filled(
+      final outputShape = _breedInterpreter!.getOutputTensor(0).shape;
+      final outputBuffer = List.generate(
         1,
-        List<double>.filled(_numClasses, 0.0),
+        (_) => List<double>.filled(outputShape[1], 0.0),
       );
 
       _breedInterpreter!.run(inputBuffer, outputBuffer);
@@ -135,9 +134,10 @@ class OfflineModelService {
 
     try {
       final inputBuffer = await _preprocessImage(imageFile);
-      final outputBuffer = List<List<double>>.filled(
+      final outputShape = _diseaseInterpreter!.getOutputTensor(0).shape;
+      final outputBuffer = List.generate(
         1,
-        List<double>.filled(_numClasses, 0.0),
+        (_) => List<double>.filled(outputShape[1], 0.0),
       );
 
       _diseaseInterpreter!.run(inputBuffer, outputBuffer);
@@ -159,26 +159,15 @@ class OfflineModelService {
   /// Preprocess image for model input
   Future<List<List<List<List<double>>>>> _preprocessImage(File imageFile) async {
     final imageBytes = await imageFile.readAsBytes();
-    var image = img.decodeImage(imageBytes);
+    final img.Image? originalImage = img.decodeImage(imageBytes);
 
-    if (image == null) {
+    if (originalImage == null) {
       throw Exception('Failed to decode image');
-    }
-
-    // Resize if too large
-    if (image.width > 1024 || image.height > 1024) {
-      final scaleFactor = 1024 / (image.width > image.height ? image.width : image.height);
-      image = img.copyResize(
-        image,
-        width: (image.width * scaleFactor).round(),
-        height: (image.height * scaleFactor).round(),
-        interpolation: img.Interpolation.linear,
-      );
     }
 
     // Resize to model input size
     final resizedImage = img.copyResize(
-      image,
+      originalImage,
       width: _inputSize,
       height: _inputSize,
       interpolation: img.Interpolation.linear,
@@ -189,22 +178,19 @@ class OfflineModelService {
       1,
       (_) => List.generate(
         _inputSize,
-        (_) => List.generate(
+        (y) => List.generate(
           _inputSize,
-          (_) => List.generate(_numChannels, (_) => 0.0),
+          (x) {
+            final pixel = resizedImage.getPixel(x, y);
+            return [
+              pixel.r / 255.0,
+              pixel.g / 255.0,
+              pixel.b / 255.0,
+            ];
+          },
         ),
       ),
     );
-
-    // Extract pixel values and normalize to [0, 1]
-    for (int y = 0; y < _inputSize; y++) {
-      for (int x = 0; x < _inputSize; x++) {
-        final pixel = resizedImage.getPixel(x, y);
-        inputBuffer[0][y][x][0] = pixel.r / 255.0;
-        inputBuffer[0][y][x][1] = pixel.g / 255.0;
-        inputBuffer[0][y][x][2] = pixel.b / 255.0;
-      }
-    }
 
     return inputBuffer;
   }

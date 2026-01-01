@@ -15,7 +15,6 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   bool _notificationsEnabled = true;
-  bool _saveUserInfo = false;
 
   @override
   Widget build(BuildContext context) {
@@ -100,11 +99,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               onTap: () {},
             ),
-            _buildSettingsTile(
-              icon: Icons.account_circle,
-              title: localizationService.translate('account'),
-              onTap: () {},
-            ),
             const SizedBox(height: 30),
             _buildSectionTitle(localizationService.translate('data_offline')),
             const SizedBox(height: 10),
@@ -112,19 +106,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
               icon: Icons.sync,
               title: localizationService.translate('offline_data_update'),
               subtitle: 'Last sync: 2 hours ago', // TODO: Localize time
-              onTap: () {},
-            ),
-            _buildSettingsTile(
-              icon: Icons.save,
-              title: localizationService.translate('save_user_info'),
-              trailingWidget: Switch(
-                value: _saveUserInfo,
-                onChanged: (value) {
-                  setState(() {
-                    _saveUserInfo = value;
-                  });
-                },
-              ),
               onTap: () {},
             ),
             _buildSettingsTile(

@@ -25,21 +25,13 @@ class _SplashScreenState extends State<SplashScreen> {
     // Wait for at least 3 seconds for splash effect
     await Future.delayed(const Duration(seconds: 3));
     
-    final isLoggedIn = await DatabaseHelper().isUserLoggedIn();
-    
     if (!mounted) return;
 
-    if (isLoggedIn) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => const NavigationScreen()),
-      );
-    } else {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => const LanguageSelectionScreen()),
-      );
-    }
+    // Navigate directly to LanguageSelectionScreen since login is removed
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (_) => const LanguageSelectionScreen()),
+    );
   }
 
   @override
