@@ -45,6 +45,9 @@ class HelpSupportScreen extends StatelessWidget {
             _buildContactSection(context, localizationService),
             const SizedBox(height: 30),
             _buildFAQSection(context, localizationService),
+            const SizedBox(height: 30),
+            _buildFeedbackSection(context, localizationService),
+            const SizedBox(height: 40),
           ],
         ),
       ),
@@ -59,23 +62,23 @@ class HelpSupportScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          localizationService.translate('contact_title'),
+          localizationService.translate('help_contact_support'),
           style: GoogleFonts.poppins(
             fontSize: 18,
             fontWeight: FontWeight.bold,
-            color: AppTheme.primaryColor,
+            color: AppTheme.primaryGreen,
           ),
         ),
         const SizedBox(height: 15),
         _buildContactCard(
           icon: Icons.email_outlined,
-          title: 'Email',
+          title: localizationService.translate('help_email'),
           value: 'support@pashuswasthya.ai',
           onTap: () => _launchURL('mailto:support@pashuswasthya.ai'),
         ),
         _buildContactCard(
           icon: Icons.phone_outlined,
-          title: 'Emergency Vet Helpline',
+          title: localizationService.translate('help_call'),
           value: '+91 1800-456-7890',
           onTap: () => _launchURL('tel:+9118004567890'),
         ),
@@ -92,26 +95,45 @@ class HelpSupportScreen extends StatelessWidget {
     return Card(
       elevation: 2,
       margin: const EdgeInsets.only(bottom: 12),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      child: ListTile(
-        leading: Container(
-          padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            color: const Color(0xFF6A9C89).withOpacity(0.1),
-            shape: BoxShape.circle,
-          ),
-          child: Icon(icon, color: const Color(0xFF6A9C89)),
-        ),
-        title: Text(title, style: GoogleFonts.poppins(fontSize: 14)),
-        subtitle: Text(
-          value,
-          style: GoogleFonts.poppins(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-            color: Colors.black87,
-          ),
-        ),
+      shadowColor: AppTheme.primaryGreen.withOpacity(0.1),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      child: InkWell(
         onTap: onTap,
+        borderRadius: BorderRadius.circular(16),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 4),
+          child: ListTile(
+            leading: Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: const Color(0xFF6A9C89).withOpacity(0.1),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Icon(icon, color: const Color(0xFF6A9C89), size: 24),
+            ),
+            title: Text(
+              title,
+              style: GoogleFonts.poppins(
+                fontSize: 14,
+                color: Colors.black54,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            subtitle: Text(
+              value,
+              style: GoogleFonts.poppins(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: Colors.black87,
+              ),
+            ),
+            trailing: const Icon(
+              Icons.arrow_forward_ios,
+              size: 14,
+              color: Colors.black26,
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -122,24 +144,20 @@ class HelpSupportScreen extends StatelessWidget {
   ) {
     final faqs = [
       {
-        'q': 'How does the breed detection work?',
-        'a':
-            'The app uses offline-ready TensorFlow Lite models to analyze cattle images and identify common breeds with high confidence.',
+        'q': localizationService.translate('help_faq_q1'),
+        'a': localizationService.translate('help_faq_a1'),
       },
       {
-        'q': 'Can I use this app without internet?',
-        'a':
-            'Yes! PashuSwasthya is designed to work fully offline. All models and treatment guides are stored on your device.',
+        'q': localizationService.translate('help_faq_q2'),
+        'a': localizationService.translate('help_faq_a2'),
       },
       {
-        'q': 'What should I do in an emergency?',
-        'a':
-            'If the app detects a severe disease, please contact the emergency helpline immediately or seek help from a local veterinarian.',
+        'q': localizationService.translate('help_faq_q3'),
+        'a': localizationService.translate('help_faq_a3'),
       },
       {
-        'q': 'How do I update the offline data?',
-        'a':
-            'Go to Settings > Data & Offline > Offline Data Update while connected to the internet to download the latest updates.',
+        'q': localizationService.translate('help_faq_q4'),
+        'a': localizationService.translate('help_faq_a4'),
       },
     ];
 
@@ -147,39 +165,155 @@ class HelpSupportScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Frequently Asked Questions',
+          localizationService.translate('help_faq_title'),
           style: GoogleFonts.poppins(
             fontSize: 18,
             fontWeight: FontWeight.bold,
-            color: AppTheme.primaryColor,
+            color: AppTheme.primaryGreen,
           ),
         ),
-        const SizedBox(height: 15),
-        ...faqs.map((faq) => _buildFAQTile(faq['q']!, faq['a']!)).toList(),
+        const SizedBox(height: 10),
+        ListView.separated(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: faqs.length,
+          separatorBuilder: (context, index) => const Divider(height: 1),
+          itemBuilder: (context, index) {
+            return _buildFAQTile(faqs[index]['q']!, faqs[index]['a']!);
+          },
+        ),
       ],
     );
   }
 
   Widget _buildFAQTile(String question, String answer) {
-    return ExpansionTile(
-      title: Text(
-        question,
-        style: GoogleFonts.poppins(fontSize: 15, fontWeight: FontWeight.w600),
-      ),
-      childrenPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      children: [
-        Text(
-          answer,
-          style: GoogleFonts.poppins(fontSize: 14, color: Colors.black54),
+    return Theme(
+      data: ThemeData().copyWith(dividerColor: Colors.transparent),
+      child: ExpansionTile(
+        tilePadding: EdgeInsets.zero,
+        title: Text(
+          question,
+          style: GoogleFonts.poppins(
+            fontSize: 15,
+            fontWeight: FontWeight.w600,
+            color: Colors.black87,
+          ),
         ),
-      ],
+        iconColor: AppTheme.primaryGreen,
+        collapsedIconColor: Colors.black45,
+        childrenPadding: const EdgeInsets.only(bottom: 16),
+        children: [
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: Colors.grey.withOpacity(0.05),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Text(
+              answer,
+              style: GoogleFonts.poppins(
+                fontSize: 14,
+                color: Colors.black87,
+                height: 1.5,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildFeedbackSection(
+    BuildContext context,
+    LocalizationService localizationService,
+  ) {
+    return Container(
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: const Color(0xFF6A9C89).withOpacity(0.08),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: const Color(0xFF6A9C89).withOpacity(0.2)),
+      ),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF6A9C89).withOpacity(0.2),
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(
+                  Icons.feedback_outlined,
+                  color: Color(0xFF6A9C89),
+                ),
+              ),
+              const SizedBox(width: 15),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      localizationService.translate('help_feedback_title'),
+                      style: GoogleFonts.poppins(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black87,
+                      ),
+                    ),
+                    Text(
+                      localizationService.translate('help_feedback_subtitle'),
+                      style: GoogleFonts.poppins(
+                        fontSize: 12,
+                        color: Colors.black54,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 20),
+          ElevatedButton(
+            onPressed: () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(
+                    localizationService.translate('vet_connect_coming_soon'),
+                  ),
+                  behavior: SnackBarBehavior.floating,
+                  backgroundColor: AppTheme.primaryGreen,
+                ),
+              );
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF6A9C89),
+              foregroundColor: Colors.white,
+              minimumSize: const Size(double.infinity, 50),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              elevation: 0,
+            ),
+            child: Text(
+              localizationService.translate('help_report_issue'),
+              style: GoogleFonts.poppins(fontWeight: FontWeight.w600),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
   Future<void> _launchURL(String url) async {
     final Uri uri = Uri.parse(url);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri);
+    try {
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri);
+      }
+    } catch (e) {
+      debugPrint('Could not launch $url: $e');
     }
   }
 }
