@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     name: Build and Release
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     
     steps:
       - uses: actions/checkout@v4
@@ -31,13 +31,13 @@ jobs:
       - name: Build Android APK
         run: flutter build apk --release
 
-      - name: Build Windows
-        run: flutter build windows --release
+      - name: Build Android Bundle (AAB)
+        run: flutter build appbundle --release
 
       - name: Create Release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "build/app/outputs/flutter-apk/app-release.apk,build/windows/x64/runner/Release/*.exe"
+          artifacts: "build/app/outputs/flutter-apk/app-release.apk,build/app/outputs/bundle/release/app-release.aab"
           token: ${{ secrets.GITHUB_TOKEN }}
           generateReleaseNotes: true
           draft: false
