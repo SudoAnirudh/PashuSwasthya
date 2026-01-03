@@ -5,7 +5,6 @@ import 'package:pashu_swasthya/screens/combined_detection_screen.dart';
 import 'package:pashu_swasthya/screens/treatment_guide.dart';
 import 'package:pashu_swasthya/services/localization_service.dart';
 import 'package:pashu_swasthya/utils/app_theme.dart';
-import 'package:pashu_swasthya/services/database_helper.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -17,7 +16,10 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   /// 🌟 Premium Welcome Header with 3D Asset
-  Widget _buildWelcomeHeader(BuildContext context) {
+  Widget _buildWelcomeHeader(
+    LocalizationService localizationService,
+    BuildContext context,
+  ) {
     final isTablet = MediaQuery.of(context).size.width > 600;
     final appBarHeight = AppBar().preferredSize.height;
     final topPadding = MediaQuery.of(context).padding.top;
@@ -66,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "👋 Welcome!",
+                      localizationService.translate('welcome'),
                       style: GoogleFonts.poppins(
                         fontSize: isTablet ? 30 : 26,
                         fontWeight: FontWeight.bold,
@@ -84,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     SizedBox(
                       width: isTablet ? 350 : 220,
                       child: Text(
-                        "Your cattle's health is our priority.",
+                        localizationService.translate('home_subtitle'),
                         style: GoogleFonts.poppins(
                           fontSize: isTablet ? 16 : 14,
                           color: Colors.white.withOpacity(0.95),
@@ -120,10 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(24),
-          border: Border.all(
-            color: const Color(0xFFE8F5E9),
-            width: 1.2,
-          ),
+          border: Border.all(color: const Color(0xFFE8F5E9), width: 1.2),
           boxShadow: [
             BoxShadow(
               color: const Color(0xFF1B5E20).withOpacity(0.06),
@@ -150,10 +149,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: color.withOpacity(0.08),
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: Image.asset(
-                      assetPath,
-                      fit: BoxFit.contain,
-                    ),
+                    child: Image.asset(assetPath, fit: BoxFit.contain),
                   ),
                   const SizedBox(width: 18),
                   Expanded(
@@ -230,12 +226,12 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
-        
+
         SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
-              _buildWelcomeHeader(context),
+              _buildWelcomeHeader(localizationService, context),
               Padding(
                 padding: padding.copyWith(top: 10),
                 child: Column(
@@ -243,7 +239,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     _buildPremiumCard(
                       context: context,
                       assetPath: 'assets/images/scanner_3d.png',
-                      color: const Color(0xFF2E7BB2), 
+                      color: const Color(0xFF2E7BB2),
                       title: localizationService.translate(
                         'breed_disease_detection',
                       ),
@@ -263,7 +259,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     _buildPremiumCard(
                       context: context,
                       assetPath: 'assets/images/guide_3d.png',
-                      color: const Color(0xFF2E7D32), 
+                      color: const Color(0xFF2E7D32),
                       title: localizationService.translate('treatment_guide'),
                       subtitle: localizationService.translate(
                         'treatment_guide_subtitle',
@@ -281,9 +277,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     _buildPremiumCard(
                       context: context,
                       assetPath: 'assets/images/vet_3d.png',
-                      color: const Color(0xFFE53935), 
+                      color: const Color(0xFFE53935),
                       title: localizationService.translate('vet_help'),
-                      subtitle: localizationService.translate('vet_help_subtitle'),
+                      subtitle: localizationService.translate(
+                        'vet_help_subtitle',
+                      ),
                       onTap: () {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
@@ -293,7 +291,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                             behavior: SnackBarBehavior.floating,
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
                             backgroundColor: const Color(0xFF323232),
                           ),
                         );
@@ -318,7 +318,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Consumer<LocalizationService>(
       builder: (context, localizationService, child) {
         return Scaffold(
-          backgroundColor: const Color(0xFFF9FBF9), 
+          backgroundColor: const Color(0xFFF9FBF9),
           extendBodyBehindAppBar: true,
           appBar: AppBar(
             backgroundColor: Colors.transparent,
@@ -336,7 +336,10 @@ class _HomeScreenState extends State<HomeScreen> {
             actions: [
               IconButton(
                 onPressed: () {},
-                icon: const Icon(Icons.notifications_none_rounded, color: Colors.white),
+                icon: const Icon(
+                  Icons.notifications_none_rounded,
+                  color: Colors.white,
+                ),
               ),
               const SizedBox(width: 8),
             ],
@@ -353,17 +356,27 @@ class WaveClipper extends CustomClipper<Path> {
   Path getClip(Size size) {
     var path = Path();
     path.lineTo(0, size.height - 50);
-    
+
     var firstControlPoint = Offset(size.width / 4, size.height);
     var firstEndPoint = Offset(size.width / 2, size.height - 40.0);
-    path.quadraticBezierTo(firstControlPoint.dx, firstControlPoint.dy,
-        firstEndPoint.dx, firstEndPoint.dy);
+    path.quadraticBezierTo(
+      firstControlPoint.dx,
+      firstControlPoint.dy,
+      firstEndPoint.dx,
+      firstEndPoint.dy,
+    );
 
-    var secondControlPoint =
-        Offset(size.width - (size.width / 4), size.height - 80);
+    var secondControlPoint = Offset(
+      size.width - (size.width / 4),
+      size.height - 80,
+    );
     var secondEndPoint = Offset(size.width, size.height - 40);
-    path.quadraticBezierTo(secondControlPoint.dx, secondControlPoint.dy,
-        secondEndPoint.dx, secondEndPoint.dy);
+    path.quadraticBezierTo(
+      secondControlPoint.dx,
+      secondControlPoint.dy,
+      secondEndPoint.dx,
+      secondEndPoint.dy,
+    );
 
     path.lineTo(size.width, size.height - 40);
     path.lineTo(size.width, 0);

@@ -45,7 +45,7 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
     _flutterTts = FlutterTts();
     _storageService.init();
     _initializeTts();
-    
+
     // Defer status message update until after build to access context safely
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _updateStatusMessage();
@@ -60,11 +60,16 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
   }
 
   void _updateStatusMessage() {
-    final localizationService = Provider.of<LocalizationService>(context, listen: false);
-    
+    final localizationService = Provider.of<LocalizationService>(
+      context,
+      listen: false,
+    );
+
     setState(() {
       if (_isListening) {
-        _statusMessage = localizationService.translate('listening_describe_symptoms');
+        _statusMessage = localizationService.translate(
+          'listening_describe_symptoms',
+        );
       } else if (_isAnalyzing) {
         _statusMessage = localizationService.translate('analyzing_symptoms');
       } else {
@@ -76,11 +81,16 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
   Future<void> _requestMicrophonePermission() async {
     final status = await Permission.microphone.request();
     if (status.isDenied) {
-      final localizationService = Provider.of<LocalizationService>(context, listen: false);
+      final localizationService = Provider.of<LocalizationService>(
+        context,
+        listen: false,
+      );
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(localizationService.translate('microphone_permission_required')),
+            content: Text(
+              localizationService.translate('microphone_permission_required'),
+            ),
           ),
         );
       }
@@ -88,9 +98,12 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
   }
 
   String _getSpeechLocale() {
-    final localizationService = Provider.of<LocalizationService>(context, listen: false);
+    final localizationService = Provider.of<LocalizationService>(
+      context,
+      listen: false,
+    );
     final langCode = localizationService.locale.languageCode;
-    
+
     // Map language codes to speech recognition locale IDs
     switch (langCode) {
       case 'hi':
@@ -113,10 +126,10 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
       // _diseaseIdentification = null;
       _transcribedText = '';
     });
-    
+
     final speechLocale = _getSpeechLocale();
     _currentLocaleId = speechLocale;
-    
+
     bool available = await _speech.initialize(
       onStatus: (status) {
         if (status == 'done' || status == 'notListening') {
@@ -127,9 +140,13 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
         }
       },
       onError: (error) {
-        final localizationService = Provider.of<LocalizationService>(context, listen: false);
+        final localizationService = Provider.of<LocalizationService>(
+          context,
+          listen: false,
+        );
         setState(() {
-          _statusMessage = '${localizationService.translate('error')}: ${error.errorMsg}';
+          _statusMessage =
+              '${localizationService.translate('error')}: ${error.errorMsg}';
           _isListening = false;
         });
       },
@@ -140,13 +157,13 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
         _isListening = true;
       });
       _updateStatusMessage();
-      
+
       _speech.listen(
         onResult: (result) {
           setState(() {
             _transcribedText = result.recognizedWords;
           });
-          
+
           // Real-time prediction while speaking (if text is substantial)
           // Analyze symptoms when we have enough text (debounced in _analyzeSymptoms)
           // Lower threshold to 5 characters for faster response
@@ -159,9 +176,14 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
         pauseFor: const Duration(seconds: 3),
       );
     } else {
-      final localizationService = Provider.of<LocalizationService>(context, listen: false);
+      final localizationService = Provider.of<LocalizationService>(
+        context,
+        listen: false,
+      );
       setState(() {
-        _statusMessage = localizationService.translate('speech_recognition_not_available');
+        _statusMessage = localizationService.translate(
+          'speech_recognition_not_available',
+        );
         _isListening = false;
       });
     }
@@ -169,7 +191,7 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
 
   Future<DiseaseIdentification?> _analyzeSymptoms(String text) async {
     if (text.isEmpty) return null;
-    
+
     final normalizedText = await _prepareTextForAnalysis(text);
     if (normalizedText.isEmpty) return null;
 
@@ -178,51 +200,55 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
       await Future.delayed(const Duration(milliseconds: 300));
       if (_isAnalyzing) return null; // Still analyzing, skip this call
     }
-    
+
     setState(() {
       _isAnalyzing = true;
     });
     _updateStatusMessage();
-    
+
     // Small delay to avoid too frequent analysis
     await Future.delayed(const Duration(milliseconds: 300));
-    
+
     print('🔬 Analyzing symptoms: "$normalizedText"');
     final identification = _diseaseService.identifyDisease(normalizedText);
-    
+
     if (identification != null) {
-      print('✅ Disease identified: ${identification.disease.name} (${identification.confidence.toStringAsFixed(1)}%)');
+      print(
+        '✅ Disease identified: ${identification.disease.name} (${identification.confidence.toStringAsFixed(1)}%)',
+      );
       print('✅ Matched keywords: ${identification.matchedKeywords.join(", ")}');
     } else {
       print('❌ No disease identified');
     }
-    
+
     // Update state with the identification result
     if (mounted) {
       setState(() {
         _isAnalyzing = false;
         _diseaseIdentification = identification;
       });
-      print('🔄 State updated. _diseaseIdentification is now: ${_diseaseIdentification != null ? _diseaseIdentification!.disease.name : "null"}');
+      print(
+        '🔄 State updated. _diseaseIdentification is now: ${_diseaseIdentification != null ? _diseaseIdentification!.disease.name : "null"}',
+      );
       _updateStatusMessage();
     }
-    
+
     return identification;
   }
 
   Future<void> _stopListening() async {
     if (!_isListening) return;
     await _speech.stop();
-    
+
     setState(() {
       _isListening = false;
       _isAnalyzing = true;
     });
     _updateStatusMessage();
-    
+
     // Identify disease from transcribed text
     final identification = await _analyzeSymptoms(_transcribedText);
-    
+
     // Save to prediction history if disease identified
     if (identification != null) {
       final history = PredictionHistory(
@@ -235,25 +261,29 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
       );
       await _storageService.savePrediction(history);
     }
-    
+
     setState(() {
       _isAnalyzing = false;
       _diseaseIdentification = identification;
     });
     _updateStatusMessage();
-    
+
     // Provide TTS feedback
     if (identification != null) {
-      final localizationService = Provider.of<LocalizationService>(context, listen: false);
+      final localizationService = Provider.of<LocalizationService>(
+        context,
+        listen: false,
+      );
       final isHindi = localizationService.locale.languageCode == 'hi';
-      
+
       // Note: We are keeping TTS in English/Hindi mixed for now or just simple feedback
       // Ideally TTS should also be localized but flutter_tts needs language setting
-      
-      final ttsMessage = isHindi
-          ? 'रोग पहचाना गया: ${identification.disease.name}.'
-          : 'Disease identified: ${identification.disease.name}.';
-      
+
+      final ttsMessage =
+          isHindi
+              ? 'रोग पहचाना गया: ${identification.disease.name}.'
+              : 'Disease identified: ${identification.disease.name}.';
+
       await _flutterTts.speak(ttsMessage);
     }
   }
@@ -272,8 +302,11 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
     );
     await _storageService.savePrediction(history);
 
-    final localizationService = Provider.of<LocalizationService>(context, listen: false);
-    
+    final localizationService = Provider.of<LocalizationService>(
+      context,
+      listen: false,
+    );
+
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -296,41 +329,37 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
     return Consumer<LocalizationService>(
       builder: (context, localizationService, child) {
         final isHindi = localizationService.locale.languageCode == 'hi';
-        
+
         return Scaffold(
-     appBar: AppBar(
-  centerTitle: true,
-  elevation: 0,
-  toolbarHeight: 70,
-  backgroundColor: Colors.transparent,
+          appBar: AppBar(
+            centerTitle: true,
+            elevation: 0,
+            toolbarHeight: 70,
+            backgroundColor: Colors.transparent,
 
-  flexibleSpace: Container(
-    decoration: const BoxDecoration(
-      gradient: LinearGradient(
-        colors: [
-          Color(0xFF6A9C89), 
-          Color(0xFFC1D8C3), 
-        ],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      ),
-    ),
-  ),
+            flexibleSpace: Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Color(0xFF6A9C89), Color(0xFFC1D8C3)],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+              ),
+            ),
 
-  title: Text(
-    localizationService.translate('voice_disease_prediction'),
-    style: GoogleFonts.poppins(
-      fontSize: 20,
-      fontWeight: FontWeight.w600,
-      color: Colors.white,  // Stands out on this gradient
-    ),
-  ),
+            title: Text(
+              localizationService.translate('voice_disease_prediction'),
+              style: GoogleFonts.poppins(
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+                color: Colors.white, // Stands out on this gradient
+              ),
+            ),
 
-  iconTheme: const IconThemeData(
-    color: Colors.white, // Back arrow visibility
-  ),
-),
-
+            iconTheme: const IconThemeData(
+              color: Colors.white, // Back arrow visibility
+            ),
+          ),
 
           body: Column(
             children: [
@@ -341,141 +370,161 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                // Info card
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: AppTheme.primaryGreen.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: AppTheme.primaryGreen.withOpacity(0.3)),
-                  ),
-                  child: Row(
-                    children: [
-                      Icon(Icons.info_outline, color: AppTheme.primaryGreen),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Text(
-                          localizationService.translate('describe_symptoms_info'),
-                          style: GoogleFonts.poppins(
-                            fontSize: 14,
-                            color: AppTheme.textPrimary,
+                      // Info card
+                      Container(
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: AppTheme.primaryGreen.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(
+                            color: AppTheme.primaryGreen.withOpacity(0.3),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 20),
-                
-                // Status message
-                Container(
-                  padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-                  decoration: BoxDecoration(
-                    color: _isListening 
-                        ? Colors.blue.withOpacity(0.1)
-                        : _isAnalyzing
-                            ? Colors.orange.withOpacity(0.1)
-                            : Colors.grey.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      if (_isListening || _isAnalyzing)
-                        SizedBox(
-                          width: 16,
-                          height: 16,
-                          child: CircularProgressIndicator(
-                            strokeWidth: 2,
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                              _isListening ? Colors.blue : Colors.orange,
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.info_outline,
+                              color: AppTheme.primaryGreen,
                             ),
-                          ),
-                        ),
-                      if (_isListening || _isAnalyzing) const SizedBox(width: 12),
-                      Flexible(
-                        child: Text(
-                          _statusMessage,
-                          style: GoogleFonts.poppins(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                            color: _isListening 
-                                ? Colors.blue
-                                : _isAnalyzing
-                                    ? Colors.orange
-                                    : AppTheme.textPrimary,
-                          ),
-                          textAlign: TextAlign.center,
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Text(
+                                localizationService.translate(
+                                  'describe_symptoms_info',
+                                ),
+                                style: GoogleFonts.poppins(
+                                  fontSize: 14,
+                                  color: AppTheme.textPrimary,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 20),
+                      const SizedBox(height: 20),
 
-                // Live transcription area
-                Container(
-                  width: double.infinity,
-                  constraints: const BoxConstraints(minHeight: 200),
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey.shade400),
-                    borderRadius: BorderRadius.circular(12),
-                    color: Colors.grey.shade50,
-                  ),
-                  child: _transcribedText.isEmpty
-                      ? Center(
-                          child: Text(
-                            localizationService.translate('your_description_here'),
-                            style: GoogleFonts.poppins(
-                              fontSize: 16,
-                              color: Colors.grey,
-                              fontStyle: FontStyle.italic,
-                            ),
-                          ),
-                        )
-                      : Text(
-                          _transcribedText,
-                          style: GoogleFonts.poppins(
-                            fontSize: 18,
-                            color: AppTheme.textPrimary,
-                          ),
+                      // Status message
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 12,
+                          horizontal: 16,
                         ),
-                ),
-                const SizedBox(height: 20),
-                
-                // Disease result card
-                if (_diseaseIdentification != null) ...[
-                  _buildDiseaseInfo(localizationService),
-                ] else if (_transcribedText.isNotEmpty && 
-                    !_isAnalyzing && 
-                    !_isListening) ...[
-                  // Show message if no result but text exists
-                  Container(
-                    padding: const EdgeInsets.all(16),
-                    margin: const EdgeInsets.only(top: 16),
-                    decoration: BoxDecoration(
-                      color: Colors.orange.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: Colors.orange.withOpacity(0.3)),
-                    ),
-                    child: Row(
-                      children: [
-                        Icon(Icons.info_outline, color: Colors.orange),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: Text(
-                            localizationService.translate('no_disease_identified'),
-                            style: GoogleFonts.poppins(
-                              fontSize: 14,
-                              color: Colors.orange.shade700,
+                        decoration: BoxDecoration(
+                          color:
+                              _isListening
+                                  ? Colors.blue.withOpacity(0.1)
+                                  : _isAnalyzing
+                                  ? Colors.orange.withOpacity(0.1)
+                                  : Colors.grey.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            if (_isListening || _isAnalyzing)
+                              SizedBox(
+                                width: 16,
+                                height: 16,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    _isListening ? Colors.blue : Colors.orange,
+                                  ),
+                                ),
+                              ),
+                            if (_isListening || _isAnalyzing)
+                              const SizedBox(width: 12),
+                            Flexible(
+                              child: Text(
+                                _statusMessage,
+                                style: GoogleFonts.poppins(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  color:
+                                      _isListening
+                                          ? Colors.blue
+                                          : _isAnalyzing
+                                          ? Colors.orange
+                                          : AppTheme.textPrimary,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
                             ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+
+                      // Live transcription area
+                      Container(
+                        width: double.infinity,
+                        constraints: const BoxConstraints(minHeight: 200),
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey.shade400),
+                          borderRadius: BorderRadius.circular(12),
+                          color: Colors.grey.shade50,
+                        ),
+                        child:
+                            _transcribedText.isEmpty
+                                ? Center(
+                                  child: Text(
+                                    localizationService.translate(
+                                      'your_description_here',
+                                    ),
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 16,
+                                      color: Colors.grey,
+                                      fontStyle: FontStyle.italic,
+                                    ),
+                                  ),
+                                )
+                                : Text(
+                                  _transcribedText,
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 18,
+                                    color: AppTheme.textPrimary,
+                                  ),
+                                ),
+                      ),
+                      const SizedBox(height: 20),
+
+                      // Disease result card
+                      if (_diseaseIdentification != null) ...[
+                        _buildDiseaseInfo(localizationService),
+                      ] else if (_transcribedText.isNotEmpty &&
+                          !_isAnalyzing &&
+                          !_isListening) ...[
+                        // Show message if no result but text exists
+                        Container(
+                          padding: const EdgeInsets.all(16),
+                          margin: const EdgeInsets.only(top: 16),
+                          decoration: BoxDecoration(
+                            color: Colors.orange.withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(
+                              color: Colors.orange.withOpacity(0.3),
+                            ),
+                          ),
+                          child: Row(
+                            children: [
+                              Icon(Icons.info_outline, color: Colors.orange),
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: Text(
+                                  localizationService.translate(
+                                    'no_disease_identified',
+                                  ),
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 14,
+                                    color: Colors.orange.shade700,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
-                    ),
-                  ),
-                ],
                     ],
                   ),
                 ),
@@ -501,7 +550,9 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
                       ElevatedButton.icon(
                         onPressed: _stopListening,
                         icon: const Icon(Icons.stop),
-                        label: Text(localizationService.translate('stop_recording')),
+                        label: Text(
+                          localizationService.translate('stop_recording'),
+                        ),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.red,
                           padding: const EdgeInsets.symmetric(
@@ -521,24 +572,36 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
                           children: [
                             // Mic button
                             FloatingActionButton.extended(
-                              onPressed: _isListening ? _stopListening : _startListening,
-                              backgroundColor: _isListening ? Colors.red :  Color(0xFF6A9C89),
-                              icon: Icon(_isListening ? Icons.mic_off : Icons.mic),
+                              onPressed:
+                                  _isListening
+                                      ? _stopListening
+                                      : _startListening,
+                              backgroundColor:
+                                  _isListening ? Colors.red : Color(0xFF6A9C89),
+                              icon: Icon(
+                                _isListening ? Icons.mic_off : Icons.mic,
+                              ),
                               label: Text(
-                                _isListening 
+                                _isListening
                                     ? localizationService.translate('stop')
                                     : localizationService.translate('start'),
-                                style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
+                                style: GoogleFonts.poppins(
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
                             const SizedBox(width: 20),
                             // Analyze button (manual trigger)
                             ElevatedButton.icon(
-                              onPressed: (_transcribedText.isEmpty || _isAnalyzing) 
-                                  ? null 
-                                  : () => _analyzeSymptoms(_transcribedText),
+                              onPressed:
+                                  (_transcribedText.isEmpty || _isAnalyzing)
+                                      ? null
+                                      : () =>
+                                          _analyzeSymptoms(_transcribedText),
                               icon: const Icon(Icons.search),
-                              label: Text(localizationService.translate('analyze')),
+                              label: Text(
+                                localizationService.translate('analyze'),
+                              ),
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.orange,
                                 padding: const EdgeInsets.symmetric(
@@ -552,7 +615,10 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
                         const SizedBox(height: 10),
                         // Save button
                         ElevatedButton.icon(
-                          onPressed: _transcribedText.isEmpty ? null : _saveDescription,
+                          onPressed:
+                              _transcribedText.isEmpty
+                                  ? null
+                                  : _saveDescription,
                           icon: const Icon(Icons.save),
                           label: Text(localizationService.translate('save')),
                           style: ElevatedButton.styleFrom(
@@ -576,7 +642,10 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
   }
 
   Future<String> _prepareTextForAnalysis(String text) async {
-    final localizationService = Provider.of<LocalizationService>(context, listen: false);
+    final localizationService = Provider.of<LocalizationService>(
+      context,
+      listen: false,
+    );
     final langCode = localizationService.locale.languageCode;
     if (text.trim().isEmpty) return text;
 
@@ -605,16 +674,19 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
       print('⚠️ _buildDiseaseInfo called but _diseaseIdentification is null');
       return const SizedBox.shrink();
     }
-    
+
     final identification = _diseaseIdentification!;
     print('🎨 Building disease info UI for: ${identification.disease.name}');
-    final treatmentGuide = _treatmentService.getTreatmentGuide(identification.disease.name);
-    final confidenceColor = identification.confidence >= 70
-        ? Colors.green
-        : identification.confidence >= 50
+    final treatmentGuide = _treatmentService.getTreatmentGuide(
+      identification.disease.name,
+    );
+    final confidenceColor =
+        identification.confidence >= 70
+            ? Colors.green
+            : identification.confidence >= 50
             ? Colors.orange
             : Colors.red;
-    
+
     return Container(
       margin: const EdgeInsets.only(top: 16),
       padding: const EdgeInsets.all(16),
@@ -642,7 +714,11 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
                   color: AppTheme.primaryGreen.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: Icon(Icons.medical_services, color: AppTheme.primaryGreen, size: 24),
+                child: Icon(
+                  Icons.medical_services,
+                  color: AppTheme.primaryGreen,
+                  size: 24,
+                ),
               ),
               const SizedBox(width: 12),
               Expanded(
@@ -714,16 +790,24 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
           Wrap(
             spacing: 8,
             runSpacing: 8,
-            children: identification.matchedKeywords.take(5).map(
-              (keyword) => Chip(
-                label: Text(
-                  keyword,
-                  style: GoogleFonts.poppins(fontSize: 12),
-                ),
-                avatar: Icon(Icons.check_circle, size: 16, color: Color(0xFF6A9C89)),
-                backgroundColor: AppTheme.primaryGreen.withOpacity(0.1),
-              ),
-            ).toList(),
+            children:
+                identification.matchedKeywords
+                    .take(5)
+                    .map(
+                      (keyword) => Chip(
+                        label: Text(
+                          keyword,
+                          style: GoogleFonts.poppins(fontSize: 12),
+                        ),
+                        avatar: Icon(
+                          Icons.check_circle,
+                          size: 16,
+                          color: Color(0xFF6A9C89),
+                        ),
+                        backgroundColor: AppTheme.primaryGreen.withOpacity(0.1),
+                      ),
+                    )
+                    .toList(),
           ),
           const SizedBox(height: 16),
           Text(
@@ -759,15 +843,18 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => TreatmentGuidesScreen(
-                      diseaseName: identification.disease.name,
-                      treatmentGuide: treatmentGuide,
-                    ),
+                    builder:
+                        (_) => TreatmentGuidesScreen(
+                          diseaseName: identification.disease.name,
+                          treatmentGuide: treatmentGuide,
+                        ),
                   ),
                 );
               },
               icon: const Icon(Icons.book),
-              label: Text(localizationService.translate('view_treatment_guide')),
+              label: Text(
+                localizationService.translate('view_treatment_guide'),
+              ),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppTheme.primaryGreen,
                 minimumSize: const Size(double.infinity, 48),
@@ -778,5 +865,4 @@ class _VoiceInputScreenState extends State<VoiceInputScreen> {
       ),
     );
   }
-
 }

@@ -10,6 +10,8 @@ import 'package:pashu_swasthya/models/prediction_history.dart';
 import 'package:pashu_swasthya/screens/treatment_guide.dart';
 import 'package:pashu_swasthya/utils/app_theme.dart';
 import 'package:uuid/uuid.dart';
+import 'package:provider/provider.dart';
+import 'package:pashu_swasthya/services/localization_service.dart';
 
 class CameraDiagnosisScreen extends StatefulWidget {
   const CameraDiagnosisScreen({super.key});
@@ -131,7 +133,8 @@ class _CameraDiagnosisScreenState extends State<CameraDiagnosisScreen> {
       if (mounted) {
         setState(() {
           _isAnalyzing = false;
-          _analysisResult = 'Error during analysis: $e\n\nPlease try again or consult a veterinarian.';
+          _analysisResult =
+              'Error during analysis: $e\n\nPlease try again or consult a veterinarian.';
         });
 
         ScaffoldMessenger.of(context).showSnackBar(
@@ -149,17 +152,17 @@ class _CameraDiagnosisScreenState extends State<CameraDiagnosisScreen> {
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth > 600;
     final padding = isTablet ? 40.0 : 20.0;
+    final localizationService = Provider.of<LocalizationService>(context);
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Disease Diagnosis'),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: const Text('Disease Diagnosis'), centerTitle: true),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(padding),
         child: Center(
           child: ConstrainedBox(
-            constraints: BoxConstraints(maxWidth: isTablet ? 800 : double.infinity),
+            constraints: BoxConstraints(
+              maxWidth: isTablet ? 800 : double.infinity,
+            ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -172,33 +175,31 @@ class _CameraDiagnosisScreenState extends State<CameraDiagnosisScreen> {
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(color: AppTheme.accentGreen, width: 2),
                   ),
-                  child: _image == null
-                      ? Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.healing,
-                              size: isTablet ? 120 : 80,
-                              color: AppTheme.textSecondary,
-                            ),
-                            const SizedBox(height: 16),
-                            Text(
-                              'Upload or capture your cattle\'s photo',
-                              style: GoogleFonts.poppins(
-                                fontSize: isTablet ? 18 : 14,
+                  child:
+                      _image == null
+                          ? Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.healing,
+                                size: isTablet ? 120 : 80,
                                 color: AppTheme.textSecondary,
                               ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
-                        )
-                      : ClipRRect(
-                          borderRadius: BorderRadius.circular(14),
-                          child: Image.file(
-                            _image!,
-                            fit: BoxFit.cover,
+                              const SizedBox(height: 16),
+                              Text(
+                                'Upload or capture your cattle\'s photo',
+                                style: GoogleFonts.poppins(
+                                  fontSize: isTablet ? 18 : 14,
+                                  color: AppTheme.textSecondary,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
+                          )
+                          : ClipRRect(
+                            borderRadius: BorderRadius.circular(14),
+                            child: Image.file(_image!, fit: BoxFit.cover),
                           ),
-                        ),
                 ),
                 const SizedBox(height: 30),
 
@@ -211,7 +212,9 @@ class _CameraDiagnosisScreenState extends State<CameraDiagnosisScreen> {
                         icon: const Icon(Icons.camera_alt),
                         label: Text(
                           'Camera',
-                          style: GoogleFonts.poppins(fontSize: isTablet ? 16 : 14),
+                          style: GoogleFonts.poppins(
+                            fontSize: isTablet ? 16 : 14,
+                          ),
                         ),
                         onPressed: () => _pickImage(ImageSource.camera),
                         style: ElevatedButton.styleFrom(
@@ -227,7 +230,9 @@ class _CameraDiagnosisScreenState extends State<CameraDiagnosisScreen> {
                         icon: const Icon(Icons.photo_library),
                         label: Text(
                           'Gallery',
-                          style: GoogleFonts.poppins(fontSize: isTablet ? 16 : 14),
+                          style: GoogleFonts.poppins(
+                            fontSize: isTablet ? 16 : 14,
+                          ),
                         ),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppTheme.primaryGreenLight,
@@ -247,16 +252,19 @@ class _CameraDiagnosisScreenState extends State<CameraDiagnosisScreen> {
                   width: double.infinity,
                   child: ElevatedButton.icon(
                     onPressed: _isAnalyzing ? null : _analyzeImage,
-                    icon: _isAnalyzing
-                        ? const SizedBox(
-                            width: 20,
-                            height: 20,
-                            child: CircularProgressIndicator(
-                              strokeWidth: 2,
-                              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                            ),
-                          )
-                        : const Icon(Icons.analytics),
+                    icon:
+                        _isAnalyzing
+                            ? const SizedBox(
+                              width: 20,
+                              height: 20,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  Colors.white,
+                                ),
+                              ),
+                            )
+                            : const Icon(Icons.analytics),
                     label: Text(
                       _isAnalyzing ? 'Analyzing...' : 'Analyze Disease',
                       style: GoogleFonts.poppins(
@@ -323,7 +331,7 @@ class _CameraDiagnosisScreenState extends State<CameraDiagnosisScreen> {
                             const SizedBox(width: 12),
                             Expanded(
                               child: Text(
-                                'Diagnosis Result',
+                                localizationService.translate('result'),
                                 style: GoogleFonts.poppins(
                                   fontSize: isTablet ? 24 : 20,
                                   fontWeight: FontWeight.bold,
@@ -337,9 +345,10 @@ class _CameraDiagnosisScreenState extends State<CameraDiagnosisScreen> {
                                 vertical: 4,
                               ),
                               decoration: BoxDecoration(
-                                color: _isOnline
-                                    ? AppTheme.primaryGreen
-                                    : AppTheme.textSecondary,
+                                color:
+                                    _isOnline
+                                        ? AppTheme.primaryGreen
+                                        : AppTheme.textSecondary,
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               child: Text(
@@ -362,6 +371,9 @@ class _CameraDiagnosisScreenState extends State<CameraDiagnosisScreen> {
                           ),
                         ),
                         if (_detectedDisease != null &&
+                            _detectedDisease!.toLowerCase() != 'healthy')
+                          _buildFirstAidSummary(context, _detectedDisease!),
+                        if (_detectedDisease != null &&
                             _confidence != null &&
                             _confidence! >= 50.0) ...[
                           const SizedBox(height: 16),
@@ -369,23 +381,25 @@ class _CameraDiagnosisScreenState extends State<CameraDiagnosisScreen> {
                             width: double.infinity,
                             child: ElevatedButton.icon(
                               onPressed: () {
-                                final treatmentGuide =
-                                    _treatmentService.getTreatmentGuide(_detectedDisease!);
+                                final treatmentGuide = _treatmentService
+                                    .getTreatmentGuide(_detectedDisease!);
                                 if (treatmentGuide != null) {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (_) => TreatmentGuidesScreen(
-                                        diseaseName: _detectedDisease!,
-                                        treatmentGuide: treatmentGuide,
-                                      ),
+                                      builder:
+                                          (_) => TreatmentGuidesScreen(
+                                            diseaseName: _detectedDisease!,
+                                            treatmentGuide: treatmentGuide,
+                                          ),
                                     ),
                                   );
                                 } else {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (_) => const TreatmentGuidesScreen(),
+                                      builder:
+                                          (_) => const TreatmentGuidesScreen(),
                                     ),
                                   );
                                 }
@@ -437,6 +451,75 @@ class _CameraDiagnosisScreenState extends State<CameraDiagnosisScreen> {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildFirstAidSummary(BuildContext context, String diseaseName) {
+    final localizationService = Provider.of<LocalizationService>(
+      context,
+      listen: false,
+    );
+    final guide = _treatmentService.getTreatmentGuide(diseaseName);
+
+    if (guide == null || guide.firstAid.isEmpty) return const SizedBox.shrink();
+
+    return Container(
+      margin: const EdgeInsets.only(top: 20, bottom: 10),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: const Color(0xFFFFF8E1),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Colors.orange.withOpacity(0.3)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Icon(Icons.emergency_rounded, color: Colors.orange),
+              const SizedBox(width: 8),
+              Text(
+                localizationService.translate('first_aid'),
+                style: GoogleFonts.poppins(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.orange[900],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          ...guide.firstAid
+              .take(3)
+              .map(
+                (step) => Padding(
+                  padding: const EdgeInsets.only(bottom: 6),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "• ",
+                        style: TextStyle(
+                          color: Colors.orange[900],
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Expanded(
+                        child: Text(
+                          step,
+                          style: GoogleFonts.poppins(
+                            fontSize: 13,
+                            color: Colors.orange[900],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+              .toList(),
+        ],
       ),
     );
   }

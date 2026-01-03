@@ -32,7 +32,8 @@ class CombinedDetectionScreen extends StatefulWidget {
       _CombinedDetectionScreenState();
 }
 
-class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> with TickerProviderStateMixin {
+class _CombinedDetectionScreenState extends State<CombinedDetectionScreen>
+    with TickerProviderStateMixin {
   final ImagePicker _picker = ImagePicker();
   final BreedDetectionService _breedService = BreedDetectionService();
   final DiseaseService _diseaseService = DiseaseService();
@@ -298,9 +299,7 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> with 
             Positioned.fill(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(24),
-                child: Container(
-                  color: Colors.black.withOpacity(0.4),
-                ),
+                child: Container(color: Colors.black.withOpacity(0.4)),
               ),
             ),
             AnimatedBuilder(
@@ -390,7 +389,12 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> with 
                     Expanded(
                       child: Container(
                         height: 4,
-                        color: index == 0 ? Colors.transparent : (isActive ? AppTheme.primaryGreen : Colors.grey[300]),
+                        color:
+                            index == 0
+                                ? Colors.transparent
+                                : (isActive
+                                    ? AppTheme.primaryGreen
+                                    : Colors.grey[300]),
                       ),
                     ),
                     Container(
@@ -400,27 +404,51 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> with 
                         color: isActive ? AppTheme.primaryGreen : Colors.white,
                         shape: BoxShape.circle,
                         border: Border.all(
-                          color: isActive ? AppTheme.primaryGreen : Colors.grey[300]!,
+                          color:
+                              isActive
+                                  ? AppTheme.primaryGreen
+                                  : Colors.grey[300]!,
                           width: 2,
                         ),
-                        boxShadow: isCurrent ? [
-                          BoxShadow(
-                            color: AppTheme.primaryGreen.withOpacity(0.3),
-                            blurRadius: 10,
-                            spreadRadius: 2,
-                          )
-                        ] : null,
+                        boxShadow:
+                            isCurrent
+                                ? [
+                                  BoxShadow(
+                                    color: AppTheme.primaryGreen.withOpacity(
+                                      0.3,
+                                    ),
+                                    blurRadius: 10,
+                                    spreadRadius: 2,
+                                  ),
+                                ]
+                                : null,
                       ),
                       child: Center(
-                        child: isActive 
-                          ? const Icon(Icons.check, size: 16, color: Colors.white)
-                          : Text("${index + 1}", style: TextStyle(color: Colors.grey[400], fontWeight: FontWeight.bold)),
+                        child:
+                            isActive
+                                ? const Icon(
+                                  Icons.check,
+                                  size: 16,
+                                  color: Colors.white,
+                                )
+                                : Text(
+                                  "${index + 1}",
+                                  style: TextStyle(
+                                    color: Colors.grey[400],
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                       ),
                     ),
                     Expanded(
                       child: Container(
                         height: 4,
-                        color: index == steps.length - 1 ? Colors.transparent : (index < activeIndex ? AppTheme.primaryGreen : Colors.grey[300]),
+                        color:
+                            index == steps.length - 1
+                                ? Colors.transparent
+                                : (index < activeIndex
+                                    ? AppTheme.primaryGreen
+                                    : Colors.grey[300]),
                       ),
                     ),
                   ],
@@ -448,6 +476,7 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> with 
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth > 600;
     final padding = isTablet ? 30.0 : 20.0;
+    final localizationService = Provider.of<LocalizationService>(context);
 
     return Scaffold(
       backgroundColor: const Color(0xFFF9FBF9),
@@ -456,11 +485,9 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> with 
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.transparent,
-        flexibleSpace: Container(
-          color: AppTheme.primaryGreen,
-        ),
+        flexibleSpace: Container(color: AppTheme.primaryGreen),
         title: Text(
-          _getAppBarTitle(context),
+          localizationService.translate('disease_detection'),
           style: GoogleFonts.poppins(
             fontSize: 20,
             fontWeight: FontWeight.bold,
@@ -524,9 +551,18 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> with 
             );
           },
           items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.mic_rounded), label: "Voice"),
-            BottomNavigationBarItem(icon: Icon(Icons.home_rounded), label: "Home"),
-            BottomNavigationBarItem(icon: Icon(Icons.settings_rounded), label: "Settings"),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.mic_rounded),
+              label: "Voice",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home_rounded),
+              label: "Home",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.settings_rounded),
+              label: "Settings",
+            ),
           ],
         ),
       ),
@@ -549,10 +585,16 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> with 
 
   Widget _buildCurrentStep(bool isTablet) {
     if (_isDetectingBreed && _breedImage != null) {
-      return _buildScanningOverlay(_breedImage!, "AI is identifying the cattle breed...");
+      return _buildScanningOverlay(
+        _breedImage!,
+        "AI is identifying the cattle breed...",
+      );
     }
     if (_isDetectingDisease && _diseaseImage != null) {
-      return _buildScanningOverlay(_diseaseImage!, "AI is checking for signs of disease...");
+      return _buildScanningOverlay(
+        _diseaseImage!,
+        "AI is checking for signs of disease...",
+      );
     }
 
     switch (_currentStep) {
@@ -599,25 +641,38 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> with 
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: const Color(0xFFF1F5F1),
-                  borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+                  borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(24),
+                  ),
                 ),
-                child: _breedImage == null
-                    ? Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.add_a_photo_rounded, size: 80, color: Colors.grey[400]),
-                          const SizedBox(height: 16),
-                          Text(
-                            localizationService.translate('upload_cattle_image'),
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.poppins(color: Colors.grey[600]),
+                child:
+                    _breedImage == null
+                        ? Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.add_a_photo_rounded,
+                              size: 80,
+                              color: Colors.grey[400],
+                            ),
+                            const SizedBox(height: 16),
+                            Text(
+                              localizationService.translate(
+                                'upload_cattle_image',
+                              ),
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.poppins(
+                                color: Colors.grey[600],
+                              ),
+                            ),
+                          ],
+                        )
+                        : ClipRRect(
+                          borderRadius: const BorderRadius.vertical(
+                            top: Radius.circular(24),
                           ),
-                        ],
-                      )
-                    : ClipRRect(
-                        borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-                        child: Image.file(_breedImage!, fit: BoxFit.cover),
-                      ),
+                          child: Image.file(_breedImage!, fit: BoxFit.cover),
+                        ),
               ),
               Padding(
                 padding: const EdgeInsets.all(20),
@@ -654,12 +709,17 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> with 
             onPressed: _breedImage == null ? null : _detectBreed,
             style: ElevatedButton.styleFrom(
               backgroundColor: AppTheme.primaryGreen,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
               elevation: 4,
             ),
             child: Text(
               localizationService.translate('detect_breed'),
-              style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.bold),
+              style: GoogleFonts.poppins(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ),
@@ -667,7 +727,12 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> with 
     );
   }
 
-  Widget _buildActionButton({required IconData icon, required String label, required VoidCallback onPressed, required Color color}) {
+  Widget _buildActionButton({
+    required IconData icon,
+    required String label,
+    required VoidCallback onPressed,
+    required Color color,
+  }) {
     return OutlinedButton.icon(
       style: OutlinedButton.styleFrom(
         foregroundColor: color,
@@ -676,7 +741,10 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> with 
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
       icon: Icon(icon, size: 20),
-      label: Text(label, style: GoogleFonts.poppins(fontWeight: FontWeight.w600)),
+      label: Text(
+        label,
+        style: GoogleFonts.poppins(fontWeight: FontWeight.w600),
+      ),
       onPressed: onPressed,
     );
   }
@@ -691,27 +759,44 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> with 
             padding: const EdgeInsets.all(24),
             child: Column(
               children: [
-                const Icon(Icons.check_circle_rounded, size: 60, color: Color(0xFF4CAF50)),
+                const Icon(
+                  Icons.check_circle_rounded,
+                  size: 60,
+                  color: Color(0xFF4CAF50),
+                ),
                 const SizedBox(height: 16),
                 Text(
                   localizationService.translate('breed_identified'),
-                  style: GoogleFonts.poppins(fontSize: 16, color: Colors.grey[600]),
+                  style: GoogleFonts.poppins(
+                    fontSize: 16,
+                    color: Colors.grey[600],
+                  ),
                 ),
                 Text(
                   _breedResult?.breedName ?? 'Unknown',
                   textAlign: TextAlign.center,
-                  style: GoogleFonts.poppins(fontSize: 28, fontWeight: FontWeight.bold, color: AppTheme.textPrimary),
+                  style: GoogleFonts.poppins(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: AppTheme.textPrimary,
+                  ),
                 ),
                 const SizedBox(height: 12),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 8,
+                  ),
                   decoration: BoxDecoration(
                     color: AppTheme.primaryGreen.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Text(
                     '${localizationService.translate('confidence')}: ${_breedResult?.confidence.toStringAsFixed(1) ?? '0.0'}%',
-                    style: const TextStyle(color: AppTheme.primaryGreen, fontWeight: FontWeight.w600),
+                    style: const TextStyle(
+                      color: AppTheme.primaryGreen,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
               ],
@@ -725,10 +810,14 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> with 
           child: ElevatedButton.icon(
             onPressed: _proceedToDiseaseInput,
             icon: const Icon(Icons.arrow_forward_rounded),
-            label: Text(localizationService.translate('continue_disease_detection')),
+            label: Text(
+              localizationService.translate('continue_disease_detection'),
+            ),
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFFF9A825),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
             ),
           ),
         ),
@@ -751,23 +840,34 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> with 
                   color: Color(0xFFFFF7E6),
                   borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
                 ),
-                child: _diseaseImage == null
-                    ? Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.healing_rounded, size: 80, color: Colors.orange[200]),
-                          const SizedBox(height: 16),
-                          Text(
-                            localizationService.translate('upload_disease_image'),
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.poppins(color: Colors.orange[700]),
+                child:
+                    _diseaseImage == null
+                        ? Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.healing_rounded,
+                              size: 80,
+                              color: Colors.orange[200],
+                            ),
+                            const SizedBox(height: 16),
+                            Text(
+                              localizationService.translate(
+                                'upload_disease_image',
+                              ),
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.poppins(
+                                color: Colors.orange[700],
+                              ),
+                            ),
+                          ],
+                        )
+                        : ClipRRect(
+                          borderRadius: const BorderRadius.vertical(
+                            top: Radius.circular(24),
                           ),
-                        ],
-                      )
-                    : ClipRRect(
-                        borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-                        child: Image.file(_diseaseImage!, fit: BoxFit.cover),
-                      ),
+                          child: Image.file(_diseaseImage!, fit: BoxFit.cover),
+                        ),
               ),
               Padding(
                 padding: const EdgeInsets.all(20),
@@ -804,11 +904,16 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> with 
             onPressed: _diseaseImage == null ? null : _detectDisease,
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFFF9A825),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
             ),
             child: Text(
               localizationService.translate('analyze_disease'),
-              style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.bold),
+              style: GoogleFonts.poppins(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ),
@@ -834,10 +939,14 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> with 
         const SizedBox(height: 16),
         _buildResultCard(
           title: localizationService.translate('disease_status'),
-          value: diseaseStatus == 'no_disease_detected' 
-             ? localizationService.translate('no_disease_detected') 
-             : diseaseStatus,
-          icon: hasDisease ? Icons.warning_amber_rounded : Icons.health_and_safety_rounded,
+          value:
+              diseaseStatus == 'no_disease_detected'
+                  ? localizationService.translate('no_disease_detected')
+                  : diseaseStatus,
+          icon:
+              hasDisease
+                  ? Icons.warning_amber_rounded
+                  : Icons.health_and_safety_rounded,
           color: hasDisease ? Colors.redAccent : Colors.green[600]!,
         ),
         const SizedBox(height: 16),
@@ -848,7 +957,7 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> with 
             child: Row(
               children: [
                 Stack(
-                alignment: Alignment.center,
+                  alignment: Alignment.center,
                   children: [
                     SizedBox(
                       height: 70,
@@ -862,7 +971,10 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> with 
                     ),
                     Text(
                       "${overallAccuracy.toStringAsFixed(0)}%",
-                      style: GoogleFonts.poppins(fontWeight: FontWeight.bold, color: AppTheme.primaryGreen),
+                      style: GoogleFonts.poppins(
+                        fontWeight: FontWeight.bold,
+                        color: AppTheme.primaryGreen,
+                      ),
                     ),
                   ],
                 ),
@@ -876,8 +988,13 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> with 
                         style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        "Based on dual scanning models",
-                        style: GoogleFonts.poppins(fontSize: 12, color: Colors.grey),
+                        localizationService.translate(
+                          'based_on_dual_scanning_models',
+                        ),
+                        style: GoogleFonts.poppins(
+                          fontSize: 12,
+                          color: Colors.grey,
+                        ),
                       ),
                     ],
                   ),
@@ -886,23 +1003,32 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> with 
             ),
           ),
         ),
+        if (hasDisease) _buildFirstAidSection(localizationService),
         const SizedBox(height: 24),
         if (hasDisease)
-           _buildWideButton(
-            label: "View Treatment Guide",
+          _buildWideButton(
+            label: localizationService.translate('view_treatment_guide'),
             icon: Icons.menu_book_rounded,
             color: AppTheme.primaryGreen,
             onPressed: () {
-               final treatmentGuide = _treatmentService.getTreatmentGuide(_diseaseResult!.diseaseName);
-               Navigator.push(context, MaterialPageRoute(builder: (_) => TreatmentGuidesScreen(
-                 diseaseName: _diseaseResult!.diseaseName,
-                 treatmentGuide: treatmentGuide,
-               )));
+              final treatmentGuide = _treatmentService.getTreatmentGuide(
+                _diseaseResult!.diseaseName,
+              );
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder:
+                      (_) => TreatmentGuidesScreen(
+                        diseaseName: _diseaseResult!.diseaseName,
+                        treatmentGuide: treatmentGuide,
+                      ),
+                ),
+              );
             },
           ),
         const SizedBox(height: 12),
         _buildWideButton(
-          label: "Start New Detection",
+          label: localizationService.translate('start_new_detection'),
           icon: Icons.refresh_rounded,
           color: Colors.grey[700]!,
           onPressed: _startOver,
@@ -919,10 +1045,13 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> with 
             children: [
               Icon(Icons.info_outline_rounded, color: Colors.amber[800]),
               const SizedBox(width: 12),
-              const Expanded(
+              Expanded(
                 child: Text(
-                  "This is an AI-assisted diagnosis. Always consult a vet for final confirmation.",
-                  style: TextStyle(fontSize: 12, color: Color(0xFF7B5A00)),
+                  localizationService.translate('ai_diagnosis_disclaimer'),
+                  style: const TextStyle(
+                    fontSize: 12,
+                    color: Color(0xFF7B5A00),
+                  ),
                 ),
               ),
             ],
@@ -933,7 +1062,84 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> with 
     );
   }
 
-  Widget _buildResultCard({required String title, required String value, required IconData icon, required Color color}) {
+  Widget _buildFirstAidSection(LocalizationService ls) {
+    if (_diseaseResult == null) return const SizedBox.shrink();
+
+    final treatmentGuide = _treatmentService.getTreatmentGuide(
+      _diseaseResult!.diseaseName,
+    );
+    if (treatmentGuide == null || treatmentGuide.firstAid.isEmpty)
+      return const SizedBox.shrink();
+
+    return Padding(
+      padding: const EdgeInsets.only(top: 24),
+      child: _buildGlassCard(
+        color: const Color(0xFFFFF8E1),
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  const Icon(
+                    Icons.emergency_rounded,
+                    color: Colors.orange,
+                    size: 24,
+                  ),
+                  const SizedBox(width: 12),
+                  Text(
+                    ls.translate('first_aid'),
+                    style: GoogleFonts.poppins(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.orange[900],
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 12),
+              ...treatmentGuide.firstAid
+                  .map(
+                    (step) => Padding(
+                      padding: const EdgeInsets.only(bottom: 8),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "• ",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.orange[900],
+                            ),
+                          ),
+                          Expanded(
+                            child: Text(
+                              step,
+                              style: GoogleFonts.poppins(
+                                fontSize: 14,
+                                color: Colors.orange[900],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                  .toList(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildResultCard({
+    required String title,
+    required String value,
+    required IconData icon,
+    required Color color,
+  }) {
     return _buildGlassCard(
       child: Padding(
         padding: const EdgeInsets.all(20),
@@ -952,8 +1158,21 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> with 
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title, style: GoogleFonts.poppins(fontSize: 12, color: Colors.grey[600])),
-                  Text(value, style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.bold, color: AppTheme.textPrimary)),
+                  Text(
+                    title,
+                    style: GoogleFonts.poppins(
+                      fontSize: 12,
+                      color: Colors.grey[600],
+                    ),
+                  ),
+                  Text(
+                    value,
+                    style: GoogleFonts.poppins(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: AppTheme.textPrimary,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -963,14 +1182,21 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen> with 
     );
   }
 
-  Widget _buildWideButton({required String label, required IconData icon, required Color color, required VoidCallback onPressed}) {
+  Widget _buildWideButton({
+    required String label,
+    required IconData icon,
+    required Color color,
+    required VoidCallback onPressed,
+  }) {
     return SizedBox(
       width: double.infinity,
       height: 56,
       child: ElevatedButton.icon(
         style: ElevatedButton.styleFrom(
           backgroundColor: color,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
         ),
         icon: Icon(icon),
         label: Text(label, style: const TextStyle(fontWeight: FontWeight.bold)),
