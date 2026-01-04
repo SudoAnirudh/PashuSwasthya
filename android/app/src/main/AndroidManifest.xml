@@ -11,6 +11,10 @@
     <!-- Internet permission for API calls -->
     <uses-permission android:name="android.permission.INTERNET" />
     
+    <!-- Location permissions -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    
     <!-- Storage permissions for image picker -->
     <!-- For Android 13+ (API 33+) -->
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />

@@ -1,3 +1,4 @@
+import 'package:pashu_swasthya/screens/vet_help_screen.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -106,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   /// ✨ Premium Glassmorphic Card Widget with 3D Asset
   Widget _buildPremiumCard({
-    required String assetPath,
+    required IconData icon,
     required String title,
     required String subtitle,
     required Color color,
@@ -140,7 +141,7 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: EdgeInsets.all(isTablet ? 24 : 16),
               child: Row(
                 children: [
-                  // 3D Asset instead of Icon
+                  // Icon instead of 3D Asset
                   Container(
                     height: isTablet ? 90 : 75,
                     width: isTablet ? 90 : 75,
@@ -149,7 +150,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: color.withOpacity(0.08),
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: Image.asset(assetPath, fit: BoxFit.contain),
+                    child: Icon(icon, color: color, size: isTablet ? 45 : 38),
                   ),
                   const SizedBox(width: 18),
                   Expanded(
@@ -238,7 +239,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     _buildPremiumCard(
                       context: context,
-                      assetPath: 'assets/images/scanner_3d.png',
+                      icon: Icons.qr_code_scanner_rounded,
                       color: const Color(0xFF2E7BB2),
                       title: localizationService.translate(
                         'breed_disease_detection',
@@ -258,7 +259,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                     _buildPremiumCard(
                       context: context,
-                      assetPath: 'assets/images/guide_3d.png',
+                      icon: Icons.auto_stories_rounded,
                       color: const Color(0xFF2E7D32),
                       title: localizationService.translate('treatment_guide'),
                       subtitle: localizationService.translate(
@@ -276,25 +277,17 @@ class _HomeScreenState extends State<HomeScreen> {
 
                     _buildPremiumCard(
                       context: context,
-                      assetPath: 'assets/images/vet_3d.png',
+                      icon: Icons.local_hospital_rounded,
                       color: const Color(0xFFE53935),
                       title: localizationService.translate('vet_help'),
                       subtitle: localizationService.translate(
                         'vet_help_subtitle',
                       ),
                       onTap: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              localizationService.translate(
-                                'vet_connect_coming_soon',
-                              ),
-                            ),
-                            behavior: SnackBarBehavior.floating,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            backgroundColor: const Color(0xFF323232),
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const VetHelpScreen(),
                           ),
                         );
                       },

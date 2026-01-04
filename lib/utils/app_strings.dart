@@ -232,6 +232,15 @@ class AppStrings {
       'get_started': 'Get Started',
       'next': 'Next',
       'skip': 'Skip',
+      'available_vets': 'Available Veterinarians',
+      'govt_resources': 'Government Resources',
+      'govt_resources_desc':
+          'Find contact information for local animal husbandry departments and regional hospitals.',
+      'location_not_available':
+          'Location not available. Showing main hospitals.',
+      'view_official_directory': 'View Official Directory',
+      'call_toll_free': 'Call 1962 (Toll Free)',
+      'km_away': 'km away',
     },
     'hi': {
       'app_name': 'पशु स्वास्थ्य',
@@ -466,6 +475,15 @@ class AppStrings {
       'get_started': 'शुरू करें',
       'next': 'अगला',
       'skip': 'छोड़ें',
+      'available_vets': 'उपलब्ध पशु चिकित्सक',
+      'govt_resources': 'सरकारी संसाधन',
+      'govt_resources_desc':
+          'स्थानीय पशुपालन विभाग और क्षेत्रीय अस्पतालों के लिए संपर्क जानकारी प्राप्त करें।',
+      'location_not_available':
+          'स्थान उपलब्ध नहीं है। मुख्य अस्पताल दिखाए जा रहे हैं।',
+      'view_official_directory': 'आधिकारिक निर्देशिका देखें',
+      'call_toll_free': 'कॉल 1962 (टोल फ्री)',
+      'km_away': 'किमी दूर',
     },
     'ml': {
       'app_name': 'പശു ആരോഗ്യം',
@@ -626,6 +644,15 @@ class AppStrings {
       'get_started': 'തുടങ്ങുക',
       'next': 'അടുത്ത',
       'skip': 'ഒഴിവാക്കുക',
+      'available_vets': 'ലഭ്യമായ മൃഗഡോക്ടർമാർ',
+      'govt_resources': 'സർക്കാർ സേവനങ്ങൾ',
+      'govt_resources_desc':
+          'പ്രാദേശിക മൃഗസംരക്ഷണ വകുപ്പുകളുടെയും റീജിയണൽ ആശുപത്രികളുടെയും വിലാസം കണ്ടെത്തുക.',
+      'location_not_available':
+          'ലൊക്കേഷൻ ലഭ്യമല്ല. പ്രധാന ആശുപത്രികൾ കാണിക്കുന്നു.',
+      'view_official_directory': 'ഔദ്യോഗിക ഡയറക്ടറി കാണുക',
+      'call_toll_free': '1962 എന്ന നമ്പരിലേക്ക് വിളിക്കുക (ടോൾ ഫ്രീ)',
+      'km_away': 'കി.മീ അകലെ',
       'disease_fmd_treatment_steps':
           'രോഗം ബാധിച്ച മൃഗത്തെ ഉടൻ വേർതിരിക്കുക|മൃഗത്തെ വൃത്തിയുള്ളതും ഉണങ്ങിയതും സൗകര്യപ്രദവുമായ അന്തരീക്ഷത്തിൽ സൂക്ഷിക്കുക|മൃദുവായതും രുചികരവുമായ തീറ്റയും ധാരാളം ശുദ്ധജലവും നൽകുക|വീര്യം കുറഞ്ഞ ആന്റിസെപ്റ്റിക് ലായനി (നേർപ്പിച്ച അയഡിൻ) ഉപയോഗിച്ച് കുമിളകൾ വൃത്തിയാക്കുക|ദ്വിതീയ ബാക്ടീരിയ അണുബാധ തടയാൻ ആന്റിബയോട്ടിക് തൈലം പുരട്ടുക|വെറ്ററിനറി ഡോക്ടർ നിർദ്ദേശിച്ച പ്രകാരം വേദന സംഹാരികൾ നൽകുക|ദിവസവും താപനില നിരീക്ഷിക്കുക|വിറ്റാമിൻ സപ്ലിമെന്റുകൾ നൽകി ശരിയായ പോഷകാഹാരം ഉറപ്പാക്കുക',
       'disease_fmd_precautions':
@@ -840,6 +867,15 @@ class AppStrings {
       'get_started': 'ಪ್ರಾರಂಭಿಸಿ',
       'next': 'ಮುಂದೆ',
       'skip': 'ದೂರವಿಡಿ',
+      'available_vets': 'ಲಭ್ಯವಿರುವ ಪಶುವೈದ್ಯರು',
+      'govt_resources': 'ಸರ್ಕಾರಿ ಸಂಪನ್ಮೂಲಗಳು',
+      'govt_resources_desc':
+          'ಸ್ಥಳೀಯ ಪಶುಸಂಗೋಪನಾ ಇಲಾಖೆಗಳು ಮತ್ತು ಪ್ರಾದೇಶಿಕ ಆಸ್ಪತ್ರೆಗಳ ಸಂಪರ್ಕ ಮಾಹಿತಿಯನ್ನು ಇಲ್ಲಿ ಕಾಣಬಹುದು.',
+      'location_not_available':
+          'ಸ್ಥಳ ಲಭ್ಯವಿಲ್ಲ. ಪ್ರಮುಖ ಆಸ್ಪತ್ರೆಗಳನ್ನು ತೋರಿಸಲಾಗುತ್ತಿದೆ.',
+      'view_official_directory': 'ಅಧಿಕೃತ ಡೈರೆಕ್ಟರಿ ವೀಕ್ಷಿಸಿ',
+      'call_toll_free': '1962 ಗೆ ಕರೆ ಮಾಡಿ (ಟೋಲ್ ಫ್ರೀ)',
+      'km_away': 'ಕಿಮೀ ದೂರದಲ್ಲಿದೆ',
     },
     'ta': {
       'app_name': 'பசு ஸ்வாஸ்த்யா',
@@ -1002,6 +1038,15 @@ class AppStrings {
       'get_started': 'தொடங்கவும்',
       'next': 'அடுத்த',
       'skip': 'தவிர்க்க',
+      'available_vets': 'கிடைக்கக்கூடிய கால்நடை மருத்துவர்கள்',
+      'govt_resources': 'அரசு வளங்கள்',
+      'govt_resources_desc':
+          'உள்ளூர் கால்நடை பராமரிப்புத் துறைகள் மற்றும் பிராந்திய மருத்துவமனைகளுக்கான தொடர்புத் தகவலைக் கண்டறியவும்.',
+      'location_not_available':
+          'இருப்பிடம் கிடைக்கவில்லை. முக்கிய மருத்துவமனைகள் காட்டப்படுகின்றன.',
+      'view_official_directory': 'அதிகாரப்பூர்வ கோப்பைப் பார்க்கவும்',
+      'call_toll_free': '1962-க்கு அழைக்கவும் (கட்டணமில்லா எண்)',
+      'km_away': 'கிமீ தொலைவில்',
     },
   };
 }
