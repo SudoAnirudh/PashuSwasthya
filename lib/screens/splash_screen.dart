@@ -1,11 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:pashu_swasthya/utils/app_theme.dart';
-import 'package:pashu_swasthya/services/database_helper.dart';
+import 'package:pashu_swasthya/services/storage_service.dart';
 import 'package:pashu_swasthya/screens/navigation_screen.dart';
-import 'language_screen.dart';
-
+import 'package:pashu_swasthya/screens/language_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -24,21 +22,37 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<void> _checkLoginStatus() async {
     // Wait for at least 3 seconds for splash effect
     await Future.delayed(const Duration(seconds: 3));
-    
+
     if (!mounted) return;
 
-    // Navigate directly to LanguageSelectionScreen since login is removed
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (_) => const LanguageSelectionScreen()),
+    final storageService = StorageService();
+    await storageService.init();
+    final hasSeenTutorial = await storageService.getUserPreference(
+      'has_seen_tutorial',
     );
+
+    if (!mounted) return;
+
+    if (hasSeenTutorial == 'true') {
+      // Returning user, go straight to home
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const NavigationScreen()),
+      );
+    } else {
+      // First time user, go to language selection
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const LanguageSelectionScreen()),
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
-    
+
     return Scaffold(
       backgroundColor: Colors.white, // white background to match logo
       body: SafeArea(

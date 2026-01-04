@@ -199,6 +199,39 @@ class AppStrings {
       'ai_diagnosis_disclaimer':
           'This is an AI-assisted diagnosis. Always consult a qualified veterinarian for final confirmation.',
       'based_on_dual_scanning_models': 'Based on dual scanning models',
+      'voice': 'Voice',
+      'online': 'Online',
+      'offline': 'Offline',
+      'detecting_breed_status': 'AI is identifying the cattle breed...',
+      'detecting_disease_status': 'AI is checking for signs of disease...',
+      'disease_diagnosis': 'Disease Diagnosis',
+      'upload_capture_photo': "Upload or capture your cattle's photo",
+      'analysis_complete': 'Analysis complete',
+      'low_confidence_consult':
+          'Low confidence. Please consult a veterinarian.',
+      'analysis_error':
+          'Error during analysis. Please try again or consult a veterinarian.',
+      'analysis_failed': 'Analysis failed',
+      'offline_model_not_loaded': 'Offline model not loaded',
+      'step_breed_input': 'Breed Input',
+      'step_analyze_breed': 'Analyze Breed',
+      'step_disease_input': 'Disease Input',
+      'step_results': 'Results',
+      'tutorial_welcome_title': 'Welcome to PashuSwasthya',
+      'tutorial_welcome_desc':
+          'Your AI-powered assistant for cattle health and breed identification.',
+      'tutorial_scan_title': 'Smart AI Scanning',
+      'tutorial_scan_desc':
+          'Identify breeds and detect diseases instantly using your camera or gallery.',
+      'tutorial_offline_title': 'Works Offline',
+      'tutorial_offline_desc':
+          'Access AI models and treatment guides even without an internet connection.',
+      'tutorial_vet_title': 'Expert Guidance',
+      'tutorial_vet_desc':
+          'Get detailed treatment steps and connect with certified veterinarians.',
+      'get_started': 'Get Started',
+      'next': 'Next',
+      'skip': 'Skip',
     },
     'hi': {
       'app_name': 'पशु स्वास्थ्य',
@@ -400,6 +433,39 @@ class AppStrings {
       'ai_diagnosis_disclaimer':
           'यह एक एआई-सहायता प्राप्त निदान है। अंतिम पुष्टि के लिए हमेशा एक योग्य पशु चिकित्सक से परामर्श करें।',
       'based_on_dual_scanning_models': 'दोहरी स्कैनिंग मॉडल पर आधारित',
+      'voice': 'आवाज़',
+      'online': 'ऑनलाइन',
+      'offline': 'ऑफ़लाइन',
+      'detecting_breed_status': 'एआई पशु की नस्ल की पहचान कर रहा है...',
+      'detecting_disease_status': 'एआई बीमारी के लक्षणों की जांच कर रहा है...',
+      'disease_diagnosis': 'रोग निदान',
+      'upload_capture_photo': 'अपने पशु की फोटो अपलोड करें या खींचें',
+      'analysis_complete': 'विश्लेषण पूरा हुआ',
+      'low_confidence_consult':
+          'कम आत्मविश्वास। कृपया एक पशु चिकित्सक से परामर्श करें।',
+      'analysis_error':
+          'विश्लेषण के दौरान त्रुटि। कृपया पुन: प्रयास करें या किसी पशु चिकित्सक से परामर्श करें।',
+      'analysis_failed': 'विश्लेषण विफल रहा',
+      'offline_model_not_loaded': 'ऑफ़लाइन मॉडल लोड नहीं हुआ',
+      'step_breed_input': 'नस्ल इनपुट',
+      'step_analyze_breed': 'नस्ल विश्लेषण',
+      'step_disease_input': 'रोग इनपुट',
+      'step_results': 'परिणाम',
+      'tutorial_welcome_title': 'पशु स्वास्थ्य में आपका स्वागत है',
+      'tutorial_welcome_desc':
+          'मवेशियों के स्वास्थ्य और नस्ल की पहचान के लिए आपका एआई-संचालित सहायक।',
+      'tutorial_scan_title': 'स्मार्ट एआई स्कैनिंग',
+      'tutorial_scan_desc':
+          'अपने कैमरे या गैलरी का उपयोग करके तुरंत नस्लों की पहचान करें और रोगों का पता लगाएं।',
+      'tutorial_offline_title': 'ऑफ़लाइन काम करता है',
+      'tutorial_offline_desc':
+          'इंटरनेट कनेक्शन के बिना भी एआई मॉडल और उपचार गाइड तक पहुंचें।',
+      'tutorial_vet_title': 'विशेषज्ञ मार्गदर्शन',
+      'tutorial_vet_desc':
+          'विस्तृत उपचार चरण प्राप्त करें और प्रमाणित पशु चिकित्सकों से जुड़ें।',
+      'get_started': 'शुरू करें',
+      'next': 'अगला',
+      'skip': 'छोड़ें',
     },
     'ml': {
       'app_name': 'പശു ആരോഗ്യം',
@@ -521,11 +587,45 @@ class AppStrings {
       'help_faq_a3':
           'ആപ്പ് ഗുരുതരമായ ഒരു രോഗം കണ്ടെത്തുകയാണെങ്കിൽ, ഉടൻ തന്നെ അത്യാഹിത വിഭാഗവുമായി ബന്ധപ്പെടുക അല്ലെങ്കിൽ ഒരു പ്രാദേശിക മൃഗഡോക്ടറുടെ സഹായം തേടുക.',
       'help_faq_q4': 'ഓഫ്‌ലൈൻ ഡാറ്റ എങ്ങനെ അപ്‌ഡേറ്റ് ചെയ്യാം?',
-      // Disease Details - FMD
-      'disease_fmd_description':
-          'കുളമ്പുള്ള മൃഗങ്ങളെ ബാധിക്കുന്ന വളരെ പകർച്ചവ്യാധിയായ വൈറൽ രോഗം.',
-      'disease_fmd_symptoms':
-          'കടുത്ത പനി (106°F വരെ)|വായയിലും കാലുകളിലും കുമിളകൾ|അമിതമായി ഉമിനീർ ഒലിപ്പിക്കൽ|മുടന്തും നടക്കാൻ വിമുഖതയും|വിശപ്പില്ലായ്മ|പാൽ ഉത്പാദനം കുറയുന്നു',
+      'help_faq_a4':
+          'ഏറ്റവും പുതിയ അപ്‌ഡേറ്റുകൾ ഡൗൺലോഡ് ചെയ്യുന്നതിന് ഇന്റർനെറ്റുമായി ബന്ധിപ്പിച്ചിരിക്കുമ്പോൾ സെറ്റിംഗ്സ് > ഡാറ്റ & ഓഫ്‌ലൈൻ > ഓഫ്‌ലൈൻ ഡാറ്റ അപ്‌ഡേറ്റ് എന്നതിലേക്ക് പോകുക.',
+      'ai_diagnosis_disclaimer':
+          'ഇതൊരു എഐ സഹായത്തോടെയുള്ള രോഗനിർണ്ണയമാണ്. അന്തിമ സ്ഥിരീകരണത്തിനായി എല്ലായ്പ്പോഴും ഒരു മൃഗഡോക്ടറുടെ സഹായം തേടുക.',
+      'based_on_dual_scanning_models':
+          'രണ്ട് സ്കാനിംഗ് മോഡലുകളെ അടിസ്ഥാനമാക്കി',
+      'voice': 'ശബ്ദം',
+      'online': 'ഓൺലൈൻ',
+      'offline': 'ഓഫ്‌ലൈൻ',
+      'detecting_breed_status': 'എഐ പശുവിന്റെ ഇനം തിരിച്ചറിയുന്നു...',
+      'detecting_disease_status': 'എഐ രോഗലക്ഷണങ്ങൾ പരിശോധിക്കുന്നു...',
+      'disease_diagnosis': 'രോഗനിർണ്ണയം',
+      'upload_capture_photo':
+          'നിങ്ങളുടെ പശുവിന്റെ ഫോട്ടോ അപ്‌ലോഡ് ചെയ്യുക അല്ലെങ്കിൽ പകർത്തുക',
+      'analysis_complete': 'വിശകലനം പൂർത്തിയായി',
+      'low_confidence_consult': 'കുറഞ്ഞ കൃത്യത. ദയവായി ഒരു മൃഗഡോക്ടറെ കാണുക.',
+      'analysis_error':
+          'വിശകലനത്തിൽ പിശക്. ദയവായി വീണ്ടും ശ്രമിക്കുക അല്ലെങ്കിൽ ഒരു മൃഗഡോക്ടറെ കാണുക.',
+      'analysis_failed': 'വിശകലനം പരാജയപ്പെട്ടു',
+      'offline_model_not_loaded': 'ഓഫ്‌ലൈൻ മോഡൽ ലോഡ് ചെയ്തിട്ടില്ല',
+      'step_breed_input': 'ഇനം തിരഞ്ഞെടുക്കുക',
+      'step_analyze_breed': 'ഇനം വിശകലനം',
+      'step_disease_input': 'രോഗ വിവരങ്ങൾ',
+      'step_results': 'ഫലങ്ങൾ',
+      'tutorial_welcome_title': 'പശുസ്വസ്ഥ്യയിലേക്ക് സ്വാഗതം',
+      'tutorial_welcome_desc':
+          'കന്നുകാലി ആരോഗ്യം, ഇനം തിരിച്ചറിയൽ എന്നിവയ്ക്കായുള്ള നിങ്ങളുടെ AI-അധിഷ്ഠിത സഹായി.',
+      'tutorial_scan_title': 'സ്മാർട്ട് AI സ്കാനിംഗ്',
+      'tutorial_scan_desc':
+          'നിങ്ങളുടെ ക്യാമറയോ ഗാലറിയോ ഉപയോഗിച്ച് ഇനങ്ങളെ തൽക്ഷണം തിരിച്ചറിയുകയും രോഗങ്ങൾ കണ്ടെത്തുകയും ചെയ്യുക.',
+      'tutorial_offline_title': 'ഓഫ്‌ലൈനിൽ പ്രവർത്തിക്കുന്നു',
+      'tutorial_offline_desc':
+          'ഇന്റർനെറ്റ് കണക്ഷൻ ഇല്ലാതെ പോലും AI മോഡലുകളും ചികിത്സാ വഴികാട്ടികളും ലഭ്യമാക്കുക.',
+      'tutorial_vet_title': 'വിദഗ്ദ്ധ മാർഗ്ഗനിർദ്ദേശം',
+      'tutorial_vet_desc':
+          'വിശദമായ ചികിത്സാ ഘട്ടങ്ങൾ നേടുക, സാക്ഷ്യപ്പെടുത്തിയ വെറ്ററിനറി ഡോക്ടർമാരുമായി ബന്ധപ്പെടുക.',
+      'get_started': 'തുടങ്ങുക',
+      'next': 'അടുത്ത',
+      'skip': 'ഒഴിവാക്കുക',
       'disease_fmd_treatment_steps':
           'രോഗം ബാധിച്ച മൃഗത്തെ ഉടൻ വേർതിരിക്കുക|മൃഗത്തെ വൃത്തിയുള്ളതും ഉണങ്ങിയതും സൗകര്യപ്രദവുമായ അന്തരീക്ഷത്തിൽ സൂക്ഷിക്കുക|മൃദുവായതും രുചികരവുമായ തീറ്റയും ധാരാളം ശുദ്ധജലവും നൽകുക|വീര്യം കുറഞ്ഞ ആന്റിസെപ്റ്റിക് ലായനി (നേർപ്പിച്ച അയഡിൻ) ഉപയോഗിച്ച് കുമിളകൾ വൃത്തിയാക്കുക|ദ്വിതീയ ബാക്ടീരിയ അണുബാധ തടയാൻ ആന്റിബയോട്ടിക് തൈലം പുരട്ടുക|വെറ്ററിനറി ഡോക്ടർ നിർദ്ദേശിച്ച പ്രകാരം വേദന സംഹാരികൾ നൽകുക|ദിവസവും താപനില നിരീക്ഷിക്കുക|വിറ്റാമിൻ സപ്ലിമെന്റുകൾ നൽകി ശരിയായ പോഷകാഹാരം ഉറപ്പാക്കുക',
       'disease_fmd_precautions':
@@ -706,6 +806,40 @@ class AppStrings {
           'ಇದು ಎಐ-ಸಹಾಯದ ರೋಗನಿರ್ಣಯವಾಗಿದೆ. ಅಂತಿಮ ದೃಢೀಕರಣಕ್ಕಾಗಿ ಯಾವಾಗಲೂ ಅರ್ಹ ಪಶುವೈದ್ಯರನ್ನು ಸಂಪರ್ಕಿಸಿ.',
       'based_on_dual_scanning_models':
           'ಡ್ಯುಯಲ್ ಸ್ಕ್ಯಾನಿಂಗ್ ಮಾದರಿಗಳನ್ನು ಆಧರಿಸಿದೆ',
+      'voice': 'ಧ್ವನಿ',
+      'online': 'ಆನ್‌ಲೈನ್',
+      'offline': 'ಆಫ್‌ಲೈನ್',
+      'detecting_breed_status': 'ಎಐ ಜಾನುವಾರು ತಳಿಯನ್ನು ಗುರುತಿಸುತ್ತಿದೆ...',
+      'detecting_disease_status': 'ಎಐ ರೋಗದ ಲಕ್ಷಣಗಳನ್ನು ಪರಿಶೀಲಿಸುತ್ತಿದೆ...',
+      'disease_diagnosis': 'ರೋಗ ರೋಗನಿರ್ಣಯ',
+      'upload_capture_photo':
+          'ನಿಮ್ಮ ಜಾನುವಾರುಗಳ ಫೋಟೋವನ್ನು ಅಪ್‌ಲೋಡ್ ಮಾಡಿ ಅಥವಾ ಸೆರೆಹಿಡಿಯಿರಿ',
+      'analysis_complete': 'ವಿಶ್ಲೇಷಣೆ ಪೂರ್ಣಗೊಂಡಿದೆ',
+      'low_confidence_consult':
+          'ಕಡಿಮೆ ವಿಶ್ವಾಸ. ದಯವಿಟ್ಟು ಪಶುವೈದ್ಯರನ್ನು ಸಂಪರ್ಕಿಸಿ.',
+      'analysis_error':
+          'ವಿಶ್ಲೇಷಣೆಯ ಸಮಯದಲ್ಲಿ ದೋಷ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ ಅಥವಾ ಪಶುವೈದ್ಯರನ್ನು ಸಂಪರ್ಕಿಸಿ.',
+      'analysis_failed': 'ವಿಶ್ಲೇಷಣೆ ವಿಫಲವಾಗಿದೆ',
+      'offline_model_not_loaded': 'ಆಫ್‌ಲೈನ್ ಮಾದರಿ ಲೋಡ್ ಆಗಿಲ್ಲ',
+      'step_breed_input': 'ತಳಿ ಇನ್ಪುಟ್',
+      'step_analyze_breed': 'ತಳಿ ವಿಶ್ಲೇಷಣೆ',
+      'step_disease_input': 'ರೋಗ ಇನ್ಪುட்',
+      'step_results': 'ಫಲಿತಾಂಶಗಳು',
+      'tutorial_welcome_title': 'ಪಶು ಸ್ವಾಸ್ಥ್ಯಕ್ಕೆ ಸುಸ್ವಾಗತ',
+      'tutorial_welcome_desc':
+          'ಜಾನುವಾರುಗಳ ಆರೋಗ್ಯ ಮತ್ತು ತಳಿ ಗುರುತಿಸುವಿಕೆಗಾಗಿ ನಿಮ್ಮ ಎಐ ಸಹಾಯಕ.',
+      'tutorial_scan_title': 'ಸ್ಮಾರ್ಟ್ ಎಐ ಸ್ಕ್ಯಾನಿಂಗ್',
+      'tutorial_scan_desc':
+          'ಕ್ಯಾಮರಾ ಅಥವಾ ಗ್ಯಾಲರಿ ಬಳಸಿ ತಕ್ಷಣ ತಳಿಗಳನ್ನು ಗುರುತಿಸಿ ಮತ್ತು ರೋಗಗಳನ್ನು ಪತ್ತೆ ಮಾಡಿ.',
+      'tutorial_offline_title': 'ಆಫ್‌ಲೈನ್‌ನಲ್ಲಿ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತದೆ',
+      'tutorial_offline_desc':
+          'ಇಂಟರ್ನೆಟ್ ಇಲ್ಲದಿದ್ದರೂ ಎಐ ಮಾದರಿಗಳು ಮತ್ತು ಚಿಕಿತ್ಸಾ ಮಾರ್ಗದರ್ಶಿಗಳನ್ನು ಪಡೆಯಿರಿ.',
+      'tutorial_vet_title': 'ತಜ್ಞರ ಮಾರ್ಗದರ್ಶನ',
+      'tutorial_vet_desc':
+          'ವಿವರವಾದ ಚಿಕಿತ್ಸಾ ಹಂತಗಳನ್ನು ಪಡೆಯಿರಿ ಮತ್ತು ಪಶುವೈದ್ಯರೊಂದಿಗೆ ಸಂಪರ್ಕ ಸಾಧಿಸಿ.',
+      'get_started': 'ಪ್ರಾರಂಭಿಸಿ',
+      'next': 'ಮುಂದೆ',
+      'skip': 'ದೂರವಿಡಿ',
     },
     'ta': {
       'app_name': 'பசு ஸ்வாஸ்த்யா',
@@ -831,9 +965,43 @@ class AppStrings {
       'help_faq_a4':
           'சமீபத்திய புதுப்பிப்புகளைப் பதிவிறக்க இணையத்துடன் இணைக்கப்பட்டிருக்கும் போது அமைப்புகள் > தரவு மற்றும் ஆஃப்லைன் > ஆஃப்லைன் தரவு புதுப்பிப்பு என்பதற்குச் செல்லவும்.',
       'ai_diagnosis_disclaimer':
-          'ಇದು ஒரு ஏஐ-உதவி கண்டறிதல் ஆகும். இறுதி உறுதிப்படுத்தலுக்கு ಯಾವಾಗಲೂ தகுதிவாய்ந்த கால்நடை மருத்துவரை அணுகவும்.',
+          'இது ஒரு ஏஐ-உதவி கண்டறிதல் ஆகும். இறுதி உறுதிப்படுத்தலுக்கு எப்போதும் தகுதி வாய்ந்த கால்நடை மருத்துவரை அணுகவும்.',
       'based_on_dual_scanning_models':
           'இரட்டை ஸ்கேனிங் மாடல்களின் அடிப்படையில்',
+      'voice': 'குரல்',
+      'online': 'ஆன்லைன்',
+      'offline': 'ஆஃப்லைன்',
+      'detecting_breed_status': 'ஏஐ கால்நடை இனத்தை அடையாளப்படுத்துகிறது...',
+      'detecting_disease_status': 'ஏஐ நோய் அறிகுறிகளை ஆய்வு செய்கிறது...',
+      'disease_diagnosis': 'நோய் கண்டறிதல்',
+      'upload_capture_photo':
+          'உங்கள் கால்நடை புகைப்படத்தை பதிவேற்றவும் அல்லது எடுக்கவும்',
+      'analysis_complete': 'ஆய்வு முடிந்தது',
+      'low_confidence_consult':
+          'குறைந்த நம்பிக்கை. தயவுசெய்து கால்நடை மருத்துவரை அணுகவும்.',
+      'analysis_error':
+          'ஆய்வின் போது பிழை. மீண்டும் முயற்சி செய்யவும் அல்லது கால்நடை மருத்துவரை அணுகவும்.',
+      'analysis_failed': 'ஆய்வு தோல்வியடைந்தது',
+      'offline_model_not_loaded': 'ஆஃப்லைன் மாடல் ஏற்றப்படவில்லை',
+      'step_breed_input': 'இன உள்ளீடு',
+      'step_analyze_breed': 'இன ஆய்வு',
+      'step_disease_input': 'நோய் உள்ளீடு',
+      'step_results': 'முடிவுகள்',
+      'tutorial_welcome_title': 'பஷுஸ்வஸ்த்யாவிற்கு வரவேற்கிறோம்',
+      'tutorial_welcome_desc':
+          'கால்நடை ஆரோக்கியம் மற்றும் இன அடையாளத்திற்கான உங்கள் AI-இயக்கப்படும் உதவியாளர்.',
+      'tutorial_scan_title': 'அறிவார்ந்த AI ஸ்கேனிங்',
+      'tutorial_scan_desc':
+          'உங்கள் கேமரா அல்லது கேலரியைப் பயன்படுத்தி இனங்களை அடையாளம் காணவும், நோய்களை உடனடியாகக் கண்டறியவும்.',
+      'tutorial_offline_title': 'ஆஃப்லைனில் வேலை செய்யும்',
+      'tutorial_offline_desc':
+          'இணைய இணைப்பு இல்லாமலேயே AI மாதிரிகள் மற்றும் சிகிச்சை வழிகாட்டிகளை அணுகலாம்.',
+      'tutorial_vet_title': 'நிபுணர் வழிகாட்டுதல்',
+      'tutorial_vet_desc':
+          'விரிவான சிகிச்சை படிகளைப் பெறுங்கள் மற்றும் சான்றளிக்கப்பட்ட கால்நடை மருத்துவர்களுடன் இணையுங்கள்.',
+      'get_started': 'தொடங்கவும்',
+      'next': 'அடுத்த',
+      'skip': 'தவிர்க்க',
     },
   };
 }

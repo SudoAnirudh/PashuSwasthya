@@ -368,12 +368,18 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen>
 
   /// 📊 Premium Step Indicator
   Widget _buildStepIndicator() {
+    final localizationService = Provider.of<LocalizationService>(context);
     int activeIndex = 0;
     if (_currentStep == DetectionStep.breedResult) activeIndex = 1;
     if (_currentStep == DetectionStep.diseaseImageInput) activeIndex = 2;
     if (_currentStep == DetectionStep.finalResult) activeIndex = 3;
 
-    final steps = ['Breed Input', 'Analyze Breed', 'Disease Input', 'Results'];
+    final steps = [
+      localizationService.translate('step_breed_input'),
+      localizationService.translate('step_analyze_breed'),
+      localizationService.translate('step_disease_input'),
+      localizationService.translate('step_results'),
+    ];
 
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
@@ -550,18 +556,18 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen>
               ),
             );
           },
-          items: const [
+          items: [
             BottomNavigationBarItem(
-              icon: Icon(Icons.mic_rounded),
-              label: "Voice",
+              icon: const Icon(Icons.mic_rounded),
+              label: localizationService.translate('voice'),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.home_rounded),
-              label: "Home",
+              icon: const Icon(Icons.home_rounded),
+              label: localizationService.translate('home'),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.settings_rounded),
-              label: "Settings",
+              icon: const Icon(Icons.settings_rounded),
+              label: localizationService.translate('settings'),
             ),
           ],
         ),
@@ -569,31 +575,18 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen>
     );
   }
 
-  String _getAppBarTitle(BuildContext context) {
-    final localizationService = Provider.of<LocalizationService>(context);
-    switch (_currentStep) {
-      case DetectionStep.breedImageInput:
-        return localizationService.translate('breed_detection');
-      case DetectionStep.breedResult:
-        return localizationService.translate('breed_result');
-      case DetectionStep.diseaseImageInput:
-        return localizationService.translate('disease_detection');
-      case DetectionStep.finalResult:
-        return localizationService.translate('detection_results');
-    }
-  }
-
   Widget _buildCurrentStep(bool isTablet) {
+    final localizationService = Provider.of<LocalizationService>(context);
     if (_isDetectingBreed && _breedImage != null) {
       return _buildScanningOverlay(
         _breedImage!,
-        "AI is identifying the cattle breed...",
+        localizationService.translate('detecting_breed_status'),
       );
     }
     if (_isDetectingDisease && _diseaseImage != null) {
       return _buildScanningOverlay(
         _diseaseImage!,
-        "AI is checking for signs of disease...",
+        localizationService.translate('detecting_disease_status'),
       );
     }
 
@@ -932,7 +925,9 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen>
       children: [
         _buildResultCard(
           title: localizationService.translate('breed_identified'),
-          value: _breedResult?.breedName ?? 'Unknown',
+          value:
+              _breedResult?.breedName ??
+              localizationService.translate('unknown'),
           icon: Icons.pets_rounded,
           color: AppTheme.primaryGreen,
         ),

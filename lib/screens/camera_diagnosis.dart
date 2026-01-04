@@ -65,7 +65,14 @@ class _CameraDiagnosisScreenState extends State<CameraDiagnosisScreen> {
     if (status.isDenied) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Camera permission is required')),
+          SnackBar(
+            content: Text(
+              Provider.of<LocalizationService>(
+                context,
+                listen: false,
+              ).translate('camera_permission_required'),
+            ),
+          ),
         );
       }
     }
@@ -85,7 +92,14 @@ class _CameraDiagnosisScreenState extends State<CameraDiagnosisScreen> {
   Future<void> _analyzeImage() async {
     if (_image == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please capture or upload image first')),
+        SnackBar(
+          content: Text(
+            Provider.of<LocalizationService>(
+              context,
+              listen: false,
+            ).translate('please_capture_image'),
+          ),
+        ),
       );
       return;
     }
@@ -122,8 +136,8 @@ class _CameraDiagnosisScreenState extends State<CameraDiagnosisScreen> {
           SnackBar(
             content: Text(
               prediction.confidence >= 50.0
-                  ? 'Analysis complete'
-                  : 'Low confidence. Please consult a veterinarian.',
+                  ? localizationService.translate('analysis_complete')
+                  : localizationService.translate('low_confidence_consult'),
             ),
             duration: const Duration(seconds: 2),
           ),
@@ -134,12 +148,14 @@ class _CameraDiagnosisScreenState extends State<CameraDiagnosisScreen> {
         setState(() {
           _isAnalyzing = false;
           _analysisResult =
-              'Error during analysis: $e\n\nPlease try again or consult a veterinarian.';
+              '${localizationService.translate('analysis_error')}: $e';
         });
 
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Analysis failed: $e'),
+            content: Text(
+              '${localizationService.translate('analysis_failed')}: $e',
+            ),
             duration: const Duration(seconds: 3),
           ),
         );
@@ -155,7 +171,10 @@ class _CameraDiagnosisScreenState extends State<CameraDiagnosisScreen> {
     final localizationService = Provider.of<LocalizationService>(context);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Disease Diagnosis'), centerTitle: true),
+      appBar: AppBar(
+        title: Text(localizationService.translate('disease_diagnosis')),
+        centerTitle: true,
+      ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(padding),
         child: Center(
@@ -187,7 +206,9 @@ class _CameraDiagnosisScreenState extends State<CameraDiagnosisScreen> {
                               ),
                               const SizedBox(height: 16),
                               Text(
-                                'Upload or capture your cattle\'s photo',
+                                localizationService.translate(
+                                  'upload_capture_photo',
+                                ),
                                 style: GoogleFonts.poppins(
                                   fontSize: isTablet ? 18 : 14,
                                   color: AppTheme.textSecondary,
@@ -211,7 +232,7 @@ class _CameraDiagnosisScreenState extends State<CameraDiagnosisScreen> {
                       child: ElevatedButton.icon(
                         icon: const Icon(Icons.camera_alt),
                         label: Text(
-                          'Camera',
+                          localizationService.translate('camera'),
                           style: GoogleFonts.poppins(
                             fontSize: isTablet ? 16 : 14,
                           ),
@@ -229,7 +250,7 @@ class _CameraDiagnosisScreenState extends State<CameraDiagnosisScreen> {
                       child: ElevatedButton.icon(
                         icon: const Icon(Icons.photo_library),
                         label: Text(
-                          'Gallery',
+                          localizationService.translate('gallery'),
                           style: GoogleFonts.poppins(
                             fontSize: isTablet ? 16 : 14,
                           ),
@@ -266,7 +287,9 @@ class _CameraDiagnosisScreenState extends State<CameraDiagnosisScreen> {
                             )
                             : const Icon(Icons.analytics),
                     label: Text(
-                      _isAnalyzing ? 'Analyzing...' : 'Analyze Disease',
+                      _isAnalyzing
+                          ? localizationService.translate('analyzing')
+                          : localizationService.translate('analyze_disease'),
                       style: GoogleFonts.poppins(
                         fontSize: isTablet ? 18 : 16,
                         fontWeight: FontWeight.w600,
@@ -296,7 +319,9 @@ class _CameraDiagnosisScreenState extends State<CameraDiagnosisScreen> {
                         ),
                         const SizedBox(width: 8),
                         Text(
-                          'Offline model not loaded',
+                          localizationService.translate(
+                            'offline_model_not_loaded',
+                          ),
                           style: GoogleFonts.poppins(
                             fontSize: isTablet ? 14 : 12,
                             color: AppTheme.warningOrange,
@@ -352,7 +377,9 @@ class _CameraDiagnosisScreenState extends State<CameraDiagnosisScreen> {
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               child: Text(
-                                _isOnline ? 'Online' : 'Offline',
+                                _isOnline
+                                    ? localizationService.translate('online')
+                                    : localizationService.translate('offline'),
                                 style: GoogleFonts.poppins(
                                   fontSize: 10,
                                   color: Colors.white,
@@ -405,7 +432,11 @@ class _CameraDiagnosisScreenState extends State<CameraDiagnosisScreen> {
                                 }
                               },
                               icon: const Icon(Icons.book),
-                              label: const Text('View Treatment Guide'),
+                              label: Text(
+                                localizationService.translate(
+                                  'view_treatment_guide',
+                                ),
+                              ),
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: AppTheme.primaryGreen,
                                 padding: EdgeInsets.symmetric(
@@ -433,7 +464,9 @@ class _CameraDiagnosisScreenState extends State<CameraDiagnosisScreen> {
                               const SizedBox(width: 8),
                               Expanded(
                                 child: Text(
-                                  'This is an AI-assisted diagnosis. Always consult a qualified veterinarian for confirmation.',
+                                  localizationService.translate(
+                                    'ai_diagnosis_disclaimer',
+                                  ),
                                   style: GoogleFonts.poppins(
                                     fontSize: isTablet ? 14 : 12,
                                     color: AppTheme.warningOrange,

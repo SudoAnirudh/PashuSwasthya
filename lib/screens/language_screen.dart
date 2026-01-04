@@ -4,6 +4,8 @@ import 'package:pashu_swasthya/utils/app_theme.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pashu_swasthya/screens/navigation_screen.dart';
+import 'package:pashu_swasthya/screens/tutorial_screen.dart';
+import 'package:pashu_swasthya/services/storage_service.dart';
 
 class LanguageSelectionScreen extends StatefulWidget {
   const LanguageSelectionScreen({super.key});
@@ -22,11 +24,25 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
     {'name': 'Tamil', 'native': 'தமிழ்', 'code': 'ta'},
   ];
 
-  void _continue() {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (_) => const NavigationScreen()),
+  Future<void> _continue() async {
+    final storageService = StorageService();
+    final hasSeenTutorial = await storageService.getUserPreference(
+      'has_seen_tutorial',
     );
+
+    if (!mounted) return;
+
+    if (hasSeenTutorial != 'true') {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const TutorialScreen()),
+      );
+    } else {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const NavigationScreen()),
+      );
+    }
   }
 
   void _onLanguageSelected(String code) {
