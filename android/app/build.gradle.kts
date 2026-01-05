@@ -52,12 +52,12 @@ android {
     buildTypes {
         release {
             // Signing config will be used if key.properties exists
-            // If no key.properties exists, Android will use debug signing automatically
-            if (keyPropertiesFile.exists()) {
-                signingConfig = signingConfigs.getByName("release")
+            // If no key.properties exists, fall back to debug signing so the APK is installable
+            signingConfig = if (keyPropertiesFile.exists()) {
+                signingConfigs.getByName("release")
+            } else {
+                signingConfigs.getByName("debug")
             }
-            // Note: Without explicit signing config, Android uses debug signing
-            // This is fine for testing but not for production
         }
     }
 

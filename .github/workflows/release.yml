@@ -43,7 +43,7 @@ jobs:
       - name: Create Release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "build/app/outputs/flutter-apk/app-release.apk,build/app/outputs/flutter-apk/app-release-v7a.apk,build/app/outputs/flutter-apk/app-release-v8a.apk,build/app/outputs/flutter-apk/app-release-x86_64.apk,build/app/outputs/flutter-apk/app-debug.apk,build/app/outputs/bundle/release/app-release.aab"
+          artifacts: "build/app/outputs/flutter-apk/*.apk,build/app/outputs/bundle/release/*.aab"
           token: ${{ secrets.GITHUB_TOKEN }}
           generateReleaseNotes: true
           draft: false
