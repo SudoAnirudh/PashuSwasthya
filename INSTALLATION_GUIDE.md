@@ -26,12 +26,13 @@ The APK file might be corrupted during transfer.
 - Re-download/transfer the APK file
 - Use ADB to install directly (see below)
 
-### 4. **Device Architecture Mismatch**
-The APK might not be compatible with your device's CPU.
+### 4. **Device Architecture Mismatch or Unsigned Package**
+The APK on GitHub might be unsigned or not compatible with your device's CPU.
 
 **Solution:**
-- Use the debug APK for testing (includes all architectures)
-- Or build a split APK for your specific device architecture
+- **Recommended:** Download `app-debug.apk` from the GitHub Release. It is automatically signed and includes all architectures, making it the most reliable for testing.
+- If you use `app-release.apk`, ensure you have uninstalled any previous versions of the app first.
+- If your device is older, try the specific architecture versions (e.g., `v7a` or `v8a`).
 
 ## Installation Methods
 

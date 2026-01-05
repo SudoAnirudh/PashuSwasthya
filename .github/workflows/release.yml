@@ -32,7 +32,10 @@ jobs:
         run: flutter pub get
 
       - name: Build Android APK
-        run: flutter build apk --release
+        run: |
+          flutter build apk --release
+          flutter build apk --release --split-per-abi
+          flutter build apk --debug
 
       - name: Build Android Bundle (AAB)
         run: flutter build appbundle --release
@@ -40,7 +43,7 @@ jobs:
       - name: Create Release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "build/app/outputs/flutter-apk/app-release.apk,build/app/outputs/bundle/release/app-release.aab"
+          artifacts: "build/app/outputs/flutter-apk/app-release.apk,build/app/outputs/flutter-apk/app-release-v7a.apk,build/app/outputs/flutter-apk/app-release-v8a.apk,build/app/outputs/flutter-apk/app-release-x86_64.apk,build/app/outputs/flutter-apk/app-debug.apk,build/app/outputs/bundle/release/app-release.aab"
           token: ${{ secrets.GITHUB_TOKEN }}
           generateReleaseNotes: true
           draft: false
