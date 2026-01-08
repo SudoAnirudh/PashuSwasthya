@@ -158,18 +158,26 @@ class AppStrings {
           'Vaccinate animals annually|Avoid opening carcasses of sudden death|Dispose of carcasses properly (burning or deep burial)|Disinfect contaminated areas|Wear protective clothing|Report suspected cases immediately|Quarantine affected area',
       'disease_anth_first_aid':
           'DO NOT TOUCH OR OPEN THE CARCASS|Isolate the area immediately|Contact veterinary and health authorities|Keep people and animals away|Wait for proper disposal instructions',
-      'dev1_name': 'Anirudh',
-      'dev1_role': 'Project Lead',
-      'dev1_contact': 'anirudh@pashuswasthya.ai',
-      'dev2_name': 'Team Member 2',
-      'dev2_role': 'Developer',
-      'dev2_contact': 'member2@pashuswasthya.ai',
-      'dev3_name': 'Team Member 3',
-      'dev3_role': 'Designer',
-      'dev3_contact': 'member3@pashuswasthya.ai',
-      'dev4_name': 'Team Member 4',
-      'dev4_role': 'Quality Assurance',
-      'dev4_contact': 'member4@pashuswasthya.ai',
+      'dev1_name': 'Anagha K T P',
+      'dev1_role': 'ML Model Developer',
+      'dev1_contact': 'anaghaktp@gmail.com',
+      'dev1_bio':
+          'Anagha K T P is a student of Artificial Intelligence and Machine Learning (AIML) at Srinivas Institute of Technology, Mangalore. She has a strong interest in machine learning, artificial intelligence, and front-end development. In this project, she primarily worked on developing and improving the machine learning models. She also actively contributed to the model training and evaluation process, helping achieve accurate and reliable system performance.',
+      'dev2_name': 'Anirudh S',
+      'dev2_role': 'ML & Backend Developer',
+      'dev2_contact': 'anirudhsudheer@gmail.com',
+      'dev2_bio':
+          'Anirudh S is a student of Artificial Intelligence and Machine Learning (AIML) with a strong interest in building practical, real-world AI systems. In this project, he worked extensively on developing and optimizing machine learning models, handling data preparation, training, and performance evaluation to ensure reliable predictions. Alongside the ML work, he also contributed to the backend system design and implementation, integrating the models with application logic and ensuring smooth data flow, stability, and scalability of the overall system.',
+      'dev3_name': 'Athul Rajesh A',
+      'dev3_role': 'UI/UX & Flutter Developer',
+      'dev3_contact': 'athulrajesh6777@gmail.com',
+      'dev3_bio':
+          'Athul Rajesh A, a student of Artificial Intelligence & Machine Learning (AIML) at Srinivas Institute of Technology. He contributed to the project through UI design and research, focusing on structuring user-friendly interfaces and analyzing system requirements. He worked with Flutter to design and implement the application interface and supported the research aspects of the system development.',
+      'dev4_name': 'Karthik A P',
+      'dev4_role': 'UI/UX & Flutter Developer',
+      'dev4_contact': 'contactkarthikap@gmail.com',
+      'dev4_bio':
+          'Karthik A P is pursuing Artificial Intelligence and Machine Learning (AIML) at Srinivas Institute of Technology. As part of this project, he was involved in designing the application’s user interface and carrying out background research to understand user needs and system functionality. He developed intuitive and accessible screens using Flutter and assisted in shaping the overall system through requirement analysis and research support.',
       'about_project_title': 'About the Project',
       'about_project_description':
           'PashuSwasthya is an offline‑ready, multilingual cattle health assistant built to empower field veterinarians and farmers with AI-assisted breed & disease insights.',
@@ -402,18 +410,26 @@ class AppStrings {
           'प्रतिवर्ष जानवरों का टीकाकरण करें|अचानक मृत्यु वाले शवों को खोलने से बचें|शवों का उचित निपटान करें (जलाना या गहरा दफनाना)|दूषित क्षेत्रों को कीटाणुरहित करें|सुरक्षात्मक कपड़े पहनें|संदिग्ध मामलों की तुरंत रिपोर्ट करें|प्रभावित क्षेत्र को अलग रखें',
       'disease_anth_first_aid':
           'शव को न छुएं और न ही खोलें|क्षेत्र को तुरंत अलग करें|पशु चिकित्सा और स्वास्थ्य अधिकारियों से संपर्क करें|लोगों और जानवरों को दूर रखें|उचित निपटान निर्देशों की प्रतीक्षा करें',
-      'dev1_name': 'अनिरुद्ध',
-      'dev1_role': 'परियोजना प्रमुख',
-      'dev1_contact': 'anirudh@pashuswasthya.ai',
-      'dev2_name': 'टीम सदस्य 2',
-      'dev2_role': 'डेवलपर',
-      'dev2_contact': 'member2@pashuswasthya.ai',
-      'dev3_name': 'टीम सदस्य 3',
-      'dev3_role': 'डिजाइनर',
-      'dev3_contact': 'member3@pashuswasthya.ai',
-      'dev4_name': 'टीम सदस्य 4',
-      'dev4_role': 'गुणवत्ता आश्वासन',
-      'dev4_contact': 'member4@pashuswasthya.ai',
+      'dev1_name': 'अनघा के टी पी',
+      'dev1_role': 'एमएल मॉडल डेवलपर',
+      'dev1_contact': 'anaghaktp@gmail.com',
+      'dev1_bio':
+          'Anagha K T P is a student of Artificial Intelligence and Machine Learning (AIML) at Srinivas Institute of Technology, Mangalore. She has a strong interest in machine learning, artificial intelligence, and front-end development. In this project, she primarily worked on developing and improving the machine learning models. She also actively contributed to the model training and evaluation process, helping achieve accurate and reliable system performance.',
+      'dev2_name': 'अनिरुद्ध एस',
+      'dev2_role': 'एमएल और बैकएंड डेवलपर',
+      'dev2_contact': 'anirudhsudheer@gmail.com',
+      'dev2_bio':
+          'Anirudh S is a student of Artificial Intelligence and Machine Learning (AIML) with a strong interest in building practical, real-world AI systems. In this project, he worked extensively on developing and optimizing machine learning models, handling data preparation, training, and performance evaluation to ensure reliable predictions. Alongside the ML work, he also contributed to the backend system design and implementation, integrating the models with application logic and ensuring smooth data flow, stability, and scalability of the overall system.',
+      'dev3_name': 'अतुल राजेश ए',
+      'dev3_role': 'यूआई/यूएक्स और फ़्लटर डेवलपर',
+      'dev3_contact': 'athulrajesh6777@gmail.com',
+      'dev3_bio':
+          'Athul Rajesh A, a student of Artificial Intelligence & Machine Learning (AIML) at Srinivas Institute of Technology. He contributed to the project through UI design and research, focusing on structuring user-friendly interfaces and analyzing system requirements. He worked with Flutter to design and implement the application interface and supported the research aspects of the system development.',
+      'dev4_name': 'कार्तिक ए पी',
+      'dev4_role': 'यूआई/यूएक्स और फ़्लटर डेवलपर',
+      'dev4_contact': 'contactkarthikap@gmail.com',
+      'dev4_bio':
+          'Karthik A P is pursuing Artificial Intelligence and Machine Learning (AIML) at Srinivas Institute of Technology. As part of this project, he was involved in designing the application’s user interface and carrying out background research to understand user needs and system functionality. He developed intuitive and accessible screens using Flutter and assisted in shaping the overall system through requirement analysis and research support.',
       'about_project_title': 'परियोजना के बारे में',
       'about_project_description':
           'पशु स्वास्थ्य एक ऑफ़लाइन-तैयार, बहुभाषी पशु स्वास्थ्य सहायक है जिसे एआई-सहायता प्राप्त नस्ल और रोग अंतर्दृष्टि के साथ क्षेत्र के पशु चिकित्सकों और किसानों को सशक्त बनाने के लिए बनाया गया है।',
@@ -713,6 +729,30 @@ class AppStrings {
           'വർഷം തോറും മൃഗങ്ങൾക്ക് പ്രതിരോധ കുത്തിവയ്പ്പ് നൽകുക|പെട്ടെന്നുള്ള മരണം സംഭവിച്ച ശവങ്ങൾ തുറക്കുന്നത് ഒഴിവാക്കുക|ശവങ്ങൾ ശരിയായി സംസ്കരിക്കുക (കത്തിക്കുകയോ ആഴത്തിൽ കുഴിച്ചിടുകയോ ചെയ്യുക)|മലിനമായ സ്ഥലങ്ങൾ അണുവിമുക്തമാക്കുക|സംരക്ഷണ വസ്ത്രങ്ങൾ ധരിക്കുക|സംശയാസ്പദമായ കേസുകൾ ഉടൻ റിപ്പോർട്ട് ചെയ്യുക|ബാധിച്ച പ്രദേശം ക്വാറന്റൈൻ ചെയ്യുക',
       'disease_anth_first_aid':
           'ശവം തൊടുകയോ തുറക്കുകയോ ചെയ്യരുത്|പ്രദേശം ഉടൻ വേർതിരിക്കുക|വെറ്ററിനറി, ആരോഗ്യ അധികാരികളുമായി ബന്ധപ്പെടുക|ആളുകളെയും മൃഗങ്ങളെയും അകറ്റി നിർത്തുക|ശരിയായ സംസ്കരണ നിർദ്ദേശങ്ങൾക്കായി കാത്തിരിക്കുക',
+      'dev1_name': 'അനഘ കെ ടി പി',
+      'dev1_role': 'എംഎൽ മോഡൽ ഡെവലപ്പർ',
+      'dev1_contact': 'anaghaktp@gmail.com',
+      'dev1_bio':
+          'Anagha K T P is a student of Artificial Intelligence and Machine Learning (AIML) at Srinivas Institute of Technology, Mangalore. She has a strong interest in machine learning, artificial intelligence, and front-end development. In this project, she primarily worked on developing and improving the machine learning models. She also actively contributed to the model training and evaluation process, helping achieve accurate and reliable system performance.',
+      'dev2_name': 'അനിരുദ്ധ് എസ്',
+      'dev2_role': 'എംഎൽ & ബാക്കെൻഡ് ഡെവലപ്പർ',
+      'dev2_contact': 'anirudhsudheer@gmail.com',
+      'dev2_bio':
+          'Anirudh S is a student of Artificial Intelligence and Machine Learning (AIML) with a strong interest in building practical, real-world AI systems. In this project, he worked extensively on developing and optimizing machine learning models, handling data preparation, training, and performance evaluation to ensure reliable predictions. Alongside the ML work, he also contributed to the backend system design and implementation, integrating the models with application logic and ensuring smooth data flow, stability, and scalability of the overall system.',
+      'dev3_name': 'അതുൽ രാജേഷ് എ',
+      'dev3_role': 'യുഐ/യുഎക്സ് & ഫ്ലട്ടർ ഡെവലപ്പർ',
+      'dev3_contact': 'athulrajesh6777@gmail.com',
+      'dev3_bio':
+          'Athul Rajesh A, a student of Artificial Intelligence & Machine Learning (AIML) at Srinivas Institute of Technology. He contributed to the project through UI design and research, focusing on structuring user-friendly interfaces and analyzing system requirements. He worked with Flutter to design and implement the application interface and supported the research aspects of the system development.',
+      'dev4_name': 'കാർത്തിക് എ പി',
+      'dev4_role': 'യുഐ/യുഎക്സ് & ഫ്ലട്ടർ ഡെവലപ്പർ',
+      'dev4_contact': 'contactkarthikap@gmail.com',
+      'dev4_bio':
+          'Karthik A P is pursuing Artificial Intelligence and Machine Learning (AIML) at Srinivas Institute of Technology. As part of this project, he was involved in designing the application’s user interface and carrying out background research to understand user needs and system functionality. He developed intuitive and accessible screens using Flutter and assisted in shaping the overall system through requirement analysis and research support.',
+      'about_project_title': 'പദ്ധതിയെക്കുറിച്ച്',
+      'about_project_description':
+          'പശു ആരോഗ്യം എന്നത് എഐ സഹായത്തോടെയുള്ള ഇനം, രോഗ നിർണ്ണയങ്ങൾ എന്നിവയിലൂടെ മൃഗഡോക്ടർമാരെയും കർഷകരെയും ശാക്തീകരിക്കുന്നതിനായി നിർമ്മിച്ച ഓഫ്‌ലൈൻ സൗകര്യമുള്ള, ബഹുഭാഷാ കന്നുകാലി ആരോഗ്യ സഹായിയാണ്.',
+      'developers_title': 'വികസിപ്പിച്ചത്',
     },
     'kn': {
       'welcome': 'ಸ್ವಾಗತ!',
@@ -884,6 +924,30 @@ class AppStrings {
       'view_official_directory': 'ಅಧಿಕೃತ ಡೈರೆಕ್ಟರಿ ವೀಕ್ಷಿಸಿ',
       'call_toll_free': '1962 ಗೆ ಕರೆ ಮಾಡಿ (ಟೋಲ್ ಫ್ರೀ)',
       'km_away': 'ಕಿಮೀ ದೂರದಲ್ಲಿದೆ',
+      'dev1_name': 'ಅನಘ ಫೆ ಕ್ ಟಿ ಪಿ',
+      'dev1_role': 'ಎಂಎಲ್ ಮಾಡೆಲ್ ಡೆವಲಪರ್',
+      'dev1_contact': 'anaghaktp@gmail.com',
+      'dev1_bio':
+          'Anagha K T P is a student of Artificial Intelligence and Machine Learning (AIML) at Srinivas Institute of Technology, Mangalore. She has a strong interest in machine learning, artificial intelligence, and front-end development. In this project, she primarily worked on developing and improving the machine learning models. She also actively contributed to the model training and evaluation process, helping achieve accurate and reliable system performance.',
+      'dev2_name': 'ಅನಿರುದ್ಧ ಸ್',
+      'dev2_role': 'ಎಂಎಲ್ ಮತ್ತು ಬ್ಯಾಕೆಂಡ್ ಡೆವಲಪರ್',
+      'dev2_contact': 'anirudhsudheer@gmail.com',
+      'dev2_bio':
+          'Anirudh S is a student of Artificial Intelligence and Machine Learning (AIML) with a strong interest in building practical, real-world AI systems. In this project, he worked extensively on developing and optimizing machine learning models, handling data preparation, training, and performance evaluation to ensure reliable predictions. Alongside the ML work, he also contributed to the backend system design and implementation, integrating the models with application logic and ensuring smooth data flow, stability, and scalability of the overall system.',
+      'dev3_name': 'ಅತುಲ್ ರಾಜೇಶ್ ಎ',
+      'dev3_role': 'ಯುಐ/ಯುಎಕ್ಸ್ ಮತ್ತು ಫ್ಲಟ್ಟರ್ ಡೆವಲಪರ್',
+      'dev3_contact': 'athulrajesh6777@gmail.com',
+      'dev3_bio':
+          'Athul Rajesh A, a student of Artificial Intelligence & Machine Learning (AIML) at Srinivas Institute of Technology. He contributed to the project through UI design and research, focusing on structuring user-friendly interfaces and analyzing system requirements. He worked with Flutter to design and implement the application interface and supported the research aspects of the system development.',
+      'dev4_name': 'ಕಾರ್ತಿಕ್ ಎ ಪಿ',
+      'dev4_role': 'ಯುಐ/ಯುಎಕ್ಸ್ ಮತ್ತು ಫ್ಲಟ್ಟರ್ ಡೆವಲಪರ್',
+      'dev4_contact': 'contactkarthikap@gmail.com',
+      'dev4_bio':
+          'Karthik A P is pursuing Artificial Intelligence and Machine Learning (AIML) at Srinivas Institute of Technology. As part of this project, he was involved in designing the application’s user interface and carrying out background research to understand user needs and system functionality. He developed intuitive and accessible screens using Flutter and assisted in shaping the overall system through requirement analysis and research support.',
+      'about_project_title': 'ಯೋಜನೆಯ ಬಗ್ಗೆ',
+      'about_project_description':
+          'ಪಶು ಸ್ವಾಸ್ಥ್ಯವು ಆಫ್‌ಲೈನ್-ಸಿದ್ಧ, ಬಹುಭಾಷಾ ಜಾನುವಾರು ಆರೋಗ್ಯ ಸಹಾಯಕವಾಗಿದ್ದು, ಎಐ-ಸಹಾಯದ ತಳಿ ಮತ್ತು ರೋಗ ಒಳನೋಟಗಳೊಂದಿಗೆ ಕ್ಷೇತ್ರ ಪಶುವೈದ್ಯರು ಮತ್ತು ರೈತರನ್ನು ಸಬಲೀಕರಣಗೊಳಿಸಲು ನಿರ್ಮಿಸಲಾಗಿದೆ.',
+      'developers_title': 'ಅಭಿವೃದ್ಧಿಪಡಿಸಿದವರು',
     },
     'ta': {
       'welcome': 'வரவேற்கிறோம்!',
@@ -1057,6 +1121,30 @@ class AppStrings {
       'view_official_directory': 'அதிகாரப்பூர்வ கோப்பைப் பார்க்கவும்',
       'call_toll_free': '1962-க்கு அழைக்கவும் (கட்டணமில்லா எண்)',
       'km_away': 'கிமீ தொலைவில்',
+      'dev1_name': 'அனகா கே டி பி',
+      'dev1_role': 'எம்எல் மாடல் டெவலப்பர்',
+      'dev1_contact': 'anaghaktp@gmail.com',
+      'dev1_bio':
+          'Anagha K T P is a student of Artificial Intelligence and Machine Learning (AIML) at Srinivas Institute of Technology, Mangalore. She has a strong interest in machine learning, artificial intelligence, and front-end development. In this project, she primarily worked on developing and improving the machine learning models. She also actively contributed to the model training and evaluation process, helping achieve accurate and reliable system performance.',
+      'dev2_name': 'அனிருத் எஸ்',
+      'dev2_role': 'எம்எல் மற்றும் பின்தள டெவலப்பர்',
+      'dev2_contact': 'anirudhsudheer@gmail.com',
+      'dev2_bio':
+          'Anirudh S is a student of Artificial Intelligence and Machine Learning (AIML) with a strong interest in building practical, real-world AI systems. In this project, he worked extensively on developing and optimizing machine learning models, handling data preparation, training, and performance evaluation to ensure reliable predictions. Alongside the ML work, he also contributed to the backend system design and implementation, integrating the models with application logic and ensuring smooth data flow, stability, and scalability of the overall system.',
+      'dev3_name': 'அதுல் ராஜேஷ் ஏ',
+      'dev3_role': 'யுஐ/யுஎக்ஸ் மற்றும் பிளட்டர் டெவலப்பர்',
+      'dev3_contact': 'athulrajesh6777@gmail.com',
+      'dev3_bio':
+          'Athul Rajesh A, a student of Artificial Intelligence & Machine Learning (AIML) at Srinivas Institute of Technology. He contributed to the project through UI design and research, focusing on structuring user-friendly interfaces and analyzing system requirements. He worked with Flutter to design and implement the application interface and supported the research aspects of the system development.',
+      'dev4_name': 'கார்த்திக் ஏ பி',
+      'dev4_role': 'யுஐ/யுஎக்ஸ் மற்றும் பிளட்டர் டெவலப்பர்',
+      'dev4_contact': 'contactkarthikap@gmail.com',
+      'dev4_bio':
+          'Karthik A P is pursuing Artificial Intelligence and Machine Learning (AIML) at Srinivas Institute of Technology. As part of this project, he was involved in designing the application’s user interface and carrying out background research to understand user needs and system functionality. He developed intuitive and accessible screens using Flutter and assisted in shaping the overall system through requirement analysis and research support.',
+      'about_project_title': 'திட்டத்தைப் பற்றி',
+      'about_project_description':
+          'பசு ஸ்வாஸ்த்யா என்பது ஒரு ஆஃப்லைன்-தயார், பன்மொழி கால்நடை சுகாதார உதவியாளர் ஆகும், இது AI- உதவியுடன் இனம் மற்றும் நோய் நுண்ணறிவுகளுடன் கள கால்நடை மருத்துவர்கள் மற்றும் விவசாயிகளுக்கு அதிகாரம் அளிக்க உருவாக்கப்பட்டது.',
+      'developers_title': 'உருவாக்கியவர்கள்',
     },
   };
 }

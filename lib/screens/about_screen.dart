@@ -180,6 +180,7 @@ class AboutScreen extends StatelessWidget {
           ls.translate('dev1_name'),
           ls.translate('dev1_role'),
           ls.translate('dev1_contact'),
+          ls.translate('dev1_bio'),
           'assets/images/dev1.png',
         ),
         _buildDeveloperCard(
@@ -187,6 +188,7 @@ class AboutScreen extends StatelessWidget {
           ls.translate('dev2_name'),
           ls.translate('dev2_role'),
           ls.translate('dev2_contact'),
+          ls.translate('dev2_bio'),
           'assets/images/dev2.png',
         ),
         _buildDeveloperCard(
@@ -194,6 +196,7 @@ class AboutScreen extends StatelessWidget {
           ls.translate('dev3_name'),
           ls.translate('dev3_role'),
           ls.translate('dev3_contact'),
+          ls.translate('dev3_bio'),
           'assets/images/dev3.png',
         ),
         _buildDeveloperCard(
@@ -201,6 +204,7 @@ class AboutScreen extends StatelessWidget {
           ls.translate('dev4_name'),
           ls.translate('dev4_role'),
           ls.translate('dev4_contact'),
+          ls.translate('dev4_bio'),
           'assets/images/dev4.png',
         ),
       ],
@@ -212,77 +216,176 @@ class AboutScreen extends StatelessWidget {
     String name,
     String role,
     String contact,
+    String bio,
     String imagePath,
   ) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
+    return GestureDetector(
+      onTap:
+          () => _showDeveloperBio(context, name, role, bio, imagePath, contact),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 10,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CircleAvatar(
+              radius: 35,
+              backgroundColor: const Color(0xFFC1D8C3),
+              backgroundImage: AssetImage(imagePath),
+              onBackgroundImageError: (exception, stackTrace) {
+                // Fallback if image not found
+              },
+              child:
+                  name.isNotEmpty
+                      ? Text(
+                        name[0],
+                        style: GoogleFonts.poppins(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: const Color(0xFF1B5E20),
+                        ),
+                      )
+                      : null,
+            ),
+            const SizedBox(height: 12),
+            Text(
+              name,
+              textAlign: TextAlign.center,
+              style: GoogleFonts.poppins(
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+                color: const Color(0xFF2E3E5C),
+              ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+            Text(
+              role,
+              style: GoogleFonts.poppins(
+                fontSize: 12,
+                color: const Color(0xFF6A9C89),
+                fontWeight: FontWeight.w500,
+              ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+            const SizedBox(height: 8),
+            Icon(Icons.info_outline, size: 18, color: Colors.grey[400]),
+          ],
+        ),
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          CircleAvatar(
-            radius: 35,
-            backgroundColor: const Color(0xFFC1D8C3),
-            backgroundImage: AssetImage(imagePath),
-            onBackgroundImageError: (exception, stackTrace) {
-              // Fallback if image not found
-            },
-            child:
-                name.isNotEmpty
-                    ? Text(
-                      name[0],
-                      style: GoogleFonts.poppins(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: const Color(0xFF1B5E20),
-                      ),
-                    )
-                    : null,
+    );
+  }
+
+  void _showDeveloperBio(
+    BuildContext context,
+    String name,
+    String role,
+    String bio,
+    String imagePath,
+    String contact,
+  ) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        return Container(
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
           ),
-          const SizedBox(height: 12),
-          Text(
-            name,
-            textAlign: TextAlign.center,
-            style: GoogleFonts.poppins(
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-              color: const Color(0xFF2E3E5C),
-            ),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: 40,
+                height: 4,
+                decoration: BoxDecoration(
+                  color: Colors.grey[300],
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              ),
+              const SizedBox(height: 24),
+              CircleAvatar(
+                radius: 50,
+                backgroundColor: const Color(0xFFC1D8C3),
+                backgroundImage: AssetImage(imagePath),
+                onBackgroundImageError: (exception, stackTrace) {},
+                child:
+                    name.isNotEmpty
+                        ? Text(
+                          name[0],
+                          style: GoogleFonts.poppins(
+                            fontSize: 32,
+                            fontWeight: FontWeight.bold,
+                            color: const Color(0xFF1B5E20),
+                          ),
+                        )
+                        : null,
+              ),
+              const SizedBox(height: 16),
+              Text(
+                name,
+                style: GoogleFonts.poppins(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: const Color(0xFF2E3E5C),
+                ),
+              ),
+              Text(
+                role,
+                style: GoogleFonts.poppins(
+                  fontSize: 16,
+                  color: const Color(0xFF6A9C89),
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const SizedBox(height: 24),
+              Text(
+                bio,
+                textAlign: TextAlign.center,
+                style: GoogleFonts.poppins(
+                  fontSize: 14,
+                  color: Colors.grey[700],
+                  height: 1.6,
+                ),
+              ),
+              const SizedBox(height: 32),
+              ElevatedButton.icon(
+                onPressed: () => _launchEmail(contact),
+                icon: const Icon(Icons.email_outlined),
+                label: Text(
+                  'Contact Developer',
+                  style: GoogleFonts.poppins(fontWeight: FontWeight.w600),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF6A9C89),
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 12,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+            ],
           ),
-          Text(
-            role,
-            style: GoogleFonts.poppins(
-              fontSize: 12,
-              color: const Color(0xFF6A9C89),
-              fontWeight: FontWeight.w500,
-            ),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
-          const SizedBox(height: 8),
-          IconButton(
-            icon: const Icon(
-              Icons.email_outlined,
-              size: 20,
-              color: Colors.blue,
-            ),
-            onPressed: () => _launchEmail(contact),
-            constraints: const BoxConstraints(),
-            padding: EdgeInsets.zero,
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 
