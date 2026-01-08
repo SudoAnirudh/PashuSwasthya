@@ -716,6 +716,18 @@ class _CombinedDetectionScreenState extends State<CombinedDetectionScreen>
             ),
           ),
         ),
+        const SizedBox(height: 12),
+        TextButton(
+          onPressed: _proceedToDiseaseInput,
+          child: Text(
+            localizationService.translate('skip'),
+            style: GoogleFonts.poppins(
+              color: Colors.grey[600],
+              fontWeight: FontWeight.w600,
+              fontSize: 16,
+            ),
+          ),
+        ),
       ],
     );
   }

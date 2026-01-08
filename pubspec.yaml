@@ -89,8 +89,9 @@ flutter:
     - assets/
     - assets/images/
     - assets/animations/
+    - assets/models/
     - Model_New/Breed/
-    - Model_New/Dieases/
+    - Model_New/Diseases/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

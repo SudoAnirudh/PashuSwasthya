@@ -12,8 +12,10 @@ class OfflineModelService {
   bool _isDiseaseModelLoaded = false;
 
   // Model paths
-  static const String _breedModelPath = 'Model_New/Breed/breed_classifier.tflite';
-  static const String _diseaseModelPath = 'assets/models/disease_classifier.tflite';
+  static const String _breedModelPath =
+      'Model_New/Breed/breed_classifier.tflite';
+  static const String _diseaseModelPath =
+      'Model_New/Diseases/disease_classifier.tflite';
 
   // Model configuration
   static const int _inputSize = 224;
@@ -99,7 +101,9 @@ class OfflineModelService {
   /// Detect breed from image (offline)
   Future<OfflinePrediction> detectBreed(File imageFile) async {
     if (!_isBreedModelLoaded || _breedInterpreter == null) {
-      throw Exception('Breed model not loaded. Call initializeBreedModel() first.');
+      throw Exception(
+        'Breed model not loaded. Call initializeBreedModel() first.',
+      );
     }
 
     try {
@@ -129,7 +133,9 @@ class OfflineModelService {
   /// Classify disease from image (offline)
   Future<OfflinePrediction> classifyDisease(File imageFile) async {
     if (!_isDiseaseModelLoaded || _diseaseInterpreter == null) {
-      throw Exception('Disease model not loaded. Call initializeDiseaseModel() first.');
+      throw Exception(
+        'Disease model not loaded. Call initializeDiseaseModel() first.',
+      );
     }
 
     try {
@@ -157,7 +163,9 @@ class OfflineModelService {
   }
 
   /// Preprocess image for model input
-  Future<List<List<List<List<double>>>>> _preprocessImage(File imageFile) async {
+  Future<List<List<List<List<double>>>>> _preprocessImage(
+    File imageFile,
+  ) async {
     final imageBytes = await imageFile.readAsBytes();
     final img.Image? originalImage = img.decodeImage(imageBytes);
 
@@ -178,17 +186,10 @@ class OfflineModelService {
       1,
       (_) => List.generate(
         _inputSize,
-        (y) => List.generate(
-          _inputSize,
-          (x) {
-            final pixel = resizedImage.getPixel(x, y);
-            return [
-              pixel.r / 255.0,
-              pixel.g / 255.0,
-              pixel.b / 255.0,
-            ];
-          },
-        ),
+        (y) => List.generate(_inputSize, (x) {
+          final pixel = resizedImage.getPixel(x, y);
+          return [pixel.r / 255.0, pixel.g / 255.0, pixel.b / 255.0];
+        }),
       ),
     );
 
@@ -256,9 +257,5 @@ class PredictionItem {
   final String label;
   final double confidence;
 
-  PredictionItem({
-    required this.label,
-    required this.confidence,
-  });
+  PredictionItem({required this.label, required this.confidence});
 }
-

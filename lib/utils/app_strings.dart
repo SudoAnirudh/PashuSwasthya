@@ -1,6 +1,8 @@
 class AppStrings {
   static const Map<String, Map<String, String>> translations = {
     'en': {
+      'welcome': 'Welcome!',
+      'home_subtitle': 'Smart Health Companion for Cattle',
       'app_name': 'PashuSwasthya',
       'app_subtitle': 'Cattle Health Assistant',
       'breed_disease_detection': 'Scan Cattle',
@@ -243,6 +245,8 @@ class AppStrings {
       'km_away': 'km away',
     },
     'hi': {
+      'welcome': 'नमस्ते!',
+      'home_subtitle': 'पशुओं के लिए स्मार्ट स्वास्थ्य साथी',
       'app_name': 'पशु स्वास्थ्य',
       'app_subtitle': 'पशु स्वास्थ्य सहायक',
       'breed_disease_detection': 'पशु को स्कैन करें',
@@ -486,6 +490,8 @@ class AppStrings {
       'km_away': 'किमी दूर',
     },
     'ml': {
+      'welcome': 'സ്വാഗതം!',
+      'home_subtitle': 'കന്നുകാലികൾക്കുള്ള സ്മാർട്ട് ഹെൽത്ത് സേവനം',
       'app_name': 'പശു ആരോഗ്യം',
       'app_subtitle': 'കന്നുകാലി ആരോഗ്യ സഹായി',
       'breed_disease_detection': 'കന്നുകാലിയെ സ്കാൻ ചെയ്യുക',
@@ -709,6 +715,8 @@ class AppStrings {
           'ശവം തൊടുകയോ തുറക്കുകയോ ചെയ്യരുത്|പ്രദേശം ഉടൻ വേർതിരിക്കുക|വെറ്ററിനറി, ആരോഗ്യ അധികാരികളുമായി ബന്ധപ്പെടുക|ആളുകളെയും മൃഗങ്ങളെയും അകറ്റി നിർത്തുക|ശരിയായ സംസ്കരണ നിർദ്ദേശങ്ങൾക്കായി കാത്തിരിക്കുക',
     },
     'kn': {
+      'welcome': 'ಸ್ವಾಗತ!',
+      'home_subtitle': 'ಜಾನುವಾರುಗಳಿಗಾಗಿ ಸ್ಮಾರ್ಟ್ ಆರೋಗ್ಯ ಸೇವೆ',
       'app_name': 'ಪಶು ಸ್ವಾಸ್ಥ್ಯ',
       'app_subtitle': 'ಜಾನುವಾರು ಆರೋಗ್ಯ ಸಹಾಯಕ',
       'breed_disease_detection': 'ತಳಿ ಮತ್ತು ರೋಗ ಪತ್ತೆ',
@@ -878,6 +886,8 @@ class AppStrings {
       'km_away': 'ಕಿಮೀ ದೂರದಲ್ಲಿದೆ',
     },
     'ta': {
+      'welcome': 'வரவேற்கிறோம்!',
+      'home_subtitle': 'கால்நடைகளுக்கான ஸ்மார்ட் சுகாதார சேவை',
       'app_name': 'பசு ஸ்வாஸ்த்யா',
       'app_subtitle': 'கால்நடை சுகாதார உதவியாளர்',
       'breed_disease_detection': 'இனம் மற்றும் நோய் கண்டறிதல்',

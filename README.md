@@ -68,7 +68,7 @@
 
 ## 🧠 Models & Data
 - **Breed models:** `Model_New/Breed/*.tflite`
-- **Disease models:** `Model_New/Dieases/*.tflite`
+- **Disease models:** `Model_New/Diseases/*.tflite`
 - **Default legacy model:** `assets/models/disease_classifier.tflite`
 
 Models are loaded once at screen init (`CombinedDetectionScreen`) and disposed when the view exits. You can swap in updated `.tflite` files without code changes—just keep the filename & tensor specs consistent.
