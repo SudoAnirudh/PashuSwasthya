@@ -1,0 +1,5 @@
+targets:
+  $default:
+    builders:
+      dart_build|dart_assets:
+        enabled: true
